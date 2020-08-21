@@ -1,0 +1,114 @@
+/*
+ * I add this to html files generated with pandoc.
+*/
+
+/* 页面全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 1.5;
+  box-sizing: border-box;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* 不显示页面一级标题 */
+h1.title {
+  display: none;
+}
+
+/* 设置页面主承载框架样式 */
+div#divbox {
+  width: 640px;
+  background: #333;
+  color: #f5f5f5;
+  overflow: hidden;
+}
+
+/* 设置顶部图片样式 */
+div#divbox figure {
+  position: relative;
+}
+
+div#divbox figure img,
+div#divbox figure embed {
+  width: 640px;
+  height: 250px;
+  filter: blur(10px);
+  overflow: hidden;
+}
+
+div#divbox figure figcaption {
+  width: 380px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 40px;
+  background: rgba(128, 128, 128, 0.2);
+  border-radius: 6px;
+}
+
+/* 设置主要内容区域样式-内边距 */
+div#divbox section.main-text {
+  padding: 20px;
+}
+
+/* 强制居中当前时间标题和节气文本 */
+div#divbox section.main-text h2, div#divbox section.main-text p#jieqi {
+  text-align: center !important;
+}
+
+/* 新闻内容文本样式 */
+div#divbox section.main-text h2 {
+  font-weight: 700;
+}
+
+div#divbox section.main-text p, div#divbox section.main-text #text {
+  font-size: 18px;
+  padding: 16px 0;
+  text-align: justify;
+  border-bottom: 1px solid rgba(128, 128, 128);
+}
+
+/* 新闻内容标志开头设置 */
+div#divbox section.main-text p::before, div#divbox section.main-text #text {
+  content: "🔴 ";
+}
+
+div#divbox section.main-text p#jieqi::before {
+  content: "" !important;
+}
+
+div#divbox section.main-text p#jieqi {
+  border-bottom: none !important;
+}
+
+/* 底部版权页样式 */
+div#divbox footer {
+  background: #222;
+  padding: 0 20px 20px 20px;
+}
+
+div#divbox footer a {
+  color: #fff;
+  vertical-align: text-bottom;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+div#divbox footer p {
+  font-size: 18px;
+  padding: 16px 0;
+  text-align: justify;
+}
+
+div#divbox blockquote {
+  padding-right: 12px;
+  border-left: 0.5em #EEE solid;
+}
+
+div#divbox blockquote p {
+  padding: 0 12px;
+}
