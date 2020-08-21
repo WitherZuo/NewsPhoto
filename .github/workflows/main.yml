@@ -10,6 +10,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: master
+      
+      - name: Get current time
+        uses: 1466587594/current-time@v1
+        id: current-time
+        with:
+          format: YYYYMMDD_HHmmss
+          utcOffset: "+08:00"
 
       - name: Use Pandoc    
         uses: docker://pandoc/core:2.9
@@ -25,5 +32,5 @@ jobs:
       - name: Upload files
         uses: actions/upload-artifact@v2
         with:
-          name: newsphoto
-          path: newsphoto
+          name: NewsPhoto-${{ steps.current-time.outputs.formattedTime }}
+          path: NewsPhoto/index.html
