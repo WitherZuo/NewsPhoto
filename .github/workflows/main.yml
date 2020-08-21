@@ -1,4 +1,4 @@
-name: Simple Usage
+name: PandocTask
 
 on: push
 
@@ -6,6 +6,13 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
     steps:
+      - run: pandoc  
       - uses: docker://pandoc/core:2.9
         with:
-          args: "--help" # gets appended to pandoc command
+          args: |>  # allows you to break string into multiple lines
+            --metadata title="thenews"
+            --self-contained
+            --standalone
+            --css=index.css
+            --output=index.html
+            news.md
