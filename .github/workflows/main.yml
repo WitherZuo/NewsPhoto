@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get files
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           ref: master
 
@@ -23,7 +23,7 @@ jobs:
             news.md
       
       - name: Upload files
-        uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v2
         with:
           name: newsphoto
           path: newsphoto
