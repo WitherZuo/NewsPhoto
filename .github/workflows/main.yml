@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get files
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
           ref: master
 
       - name: Use Pandoc    
-      - uses: docker://pandoc/core:2.9
+        uses: docker://pandoc/core:2.9
         with:
           args: >-  # allows you to break string into multiple lines
             --metadata title="thenews"
@@ -23,7 +23,7 @@ jobs:
             news.md
       
       - name: Upload files
-      - uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: newsphoto
           path: newsphoto
