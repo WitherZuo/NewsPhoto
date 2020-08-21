@@ -6,8 +6,8 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
     steps:
-      - run: pandoc  
       - uses: docker://pandoc/core:2.9
+      - run: pandoc
         with:
           args: >-  # allows you to break string into multiple lines
             --metadata title="thenews"
