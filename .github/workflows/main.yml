@@ -22,15 +22,15 @@ jobs:
         uses: docker://pandoc/core:2.9
         with:
           args: >-  # allows you to break string into multiple lines
+            news.md
             --metadata title="thenews"
             --self-contained
             --standalone
             --css=index.css
             --output=index.html
-            news.md
       
       - name: Upload files
         uses: actions/upload-artifact@v2
         with:
           name: NewsPhoto-${{ steps.current-time.outputs.formattedTime }}
-          path: NewsPhoto/index.html
+          path: index.html
