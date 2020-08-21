@@ -6,6 +6,12 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
     steps:
+      - name: Get files
+        uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - name: Use Pandoc    
       - uses: docker://pandoc/core:2.9
         with:
           args: >-  # allows you to break string into multiple lines
@@ -15,3 +21,9 @@ jobs:
             --css=index.css
             --output=index.html
             news.md
+      
+      - name: Upload files
+        uses: actions/upload-artifact@v2
+        with:
+          name: newsphoto
+          path: newsphoto
