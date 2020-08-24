@@ -33,7 +33,7 @@ div#divbox figure {
 div#divbox figure img,
 div#divbox figure embed {
   width: 640px;
-  height: 242px;
+  height: 246px;
   filter: blur(10px);
   overflow: hidden;
 }
