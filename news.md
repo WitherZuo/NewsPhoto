@@ -1,9 +1,14 @@
-<div id="divbox">
+<header>  
+
 ![News Photo | 半日刊](https://api.sunweihu.com/api/bing1/api.php)  
 
-<section class="main-text">
+</header>
+
+<section>  
+
 ## 2020 年 8 月 24 日 · 星期一 · 七月初六  
-<p id="jieqi">【News Photo NG - Early Access】</p>  
+
+【News Photo NG - Early Access】  
 
 战斗升级：Epic 新诉讼文件指责苹果威胁游戏开发者社区公平性，称 “苹果报复的广度本身就是一种非法的努力”  
 
@@ -43,14 +48,17 @@ Facebook 同意向法国补缴 1.23 亿美元税款，其中包括一部分罚�
 
 </section>  
 
-<footer>
+<footer>  
+
 **您正在查看的是尚处于 “抢先体验” 中的『News Photo』**。  
 访问此链接下载源数据：[https://dwz.date/cgG2](https://dwz.date/cgG2)  
 
 **卡雷纳山脉中的卡诺克里斯塔尔斯河，哥伦比亚**  
 **—— by: Jorge Iván Vásquez Cuartas / Getty Images** 
 
-> 最后更新: 2020-08-24 21:59:07/UTC+8  
-> 最后修订: 2020-08-24 21:59:07/UTC+8  
-</footer>
-</div>
+> 最后更新: 2020-08-24 21:59:07 / UTC+8  
+> 最后修订: 2020-08-24 21:59:07 / UTC+8  
+
+![watermark](ref/avatar-normal-new.png "watermark")  
+
+</footer>  

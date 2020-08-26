@@ -1,7 +1,3 @@
-/*
- * I add this to html files generated with pandoc.
-*/
-
 /* 页面全局样式 */
 * {
   margin: 0;
@@ -18,27 +14,30 @@ h1.title {
 }
 
 /* 设置页面主承载框架样式 */
-div#divbox {
+body {
   width: 640px;
-  background: #333;
   color: #f5f5f5;
+  overflow-x: hidden;
+}
+
+header {
   overflow: hidden;
+  background: #333;
 }
 
 /* 设置顶部图片样式 */
-div#divbox figure {
+header figure {
   position: relative;
 }
 
-div#divbox figure img,
-div#divbox figure embed {
+header figure img,
+header figure embed {
   width: 640px;
   height: 246px;
   filter: blur(10px);
-  overflow: hidden;
 }
 
-div#divbox figure figcaption {
+header figure figcaption {
   width: 640px;
   position: absolute;
   top: 50%;
@@ -51,21 +50,22 @@ div#divbox figure figcaption {
 }
 
 /* 设置主要内容区域样式-内边距 */
-div#divbox section.main-text {
+section {
   padding: 20px;
+  background: #333;
 }
 
 /* 强制居中当前时间标题和节气文本 */
-div#divbox section.main-text h2, div#divbox section.main-text p#jieqi {
+section h2, section p:nth-of-type(1) {
   text-align: center !important;
 }
 
 /* 新闻内容文本样式 */
-div#divbox section.main-text h2 {
+section h2 {
   font-weight: 700;
 }
 
-div#divbox section.main-text p, div#divbox section.main-text #text {
+section p {
   font-size: 18px;
   padding: 16px 0;
   text-align: justify;
@@ -73,42 +73,54 @@ div#divbox section.main-text p, div#divbox section.main-text #text {
 }
 
 /* 新闻内容标志开头设置 */
-div#divbox section.main-text p::before, div#divbox section.main-text #text {
+section p::before {
   content: "🔴 ";
 }
 
-div#divbox section.main-text p#jieqi::before {
+section p:nth-of-type(1)::before {
   content: "" !important;
 }
 
-div#divbox section.main-text p#jieqi {
+section p:nth-of-type(1) {
   border-bottom: none !important;
 }
 
 /* 底部版权页样式 */
-div#divbox footer {
+footer {
+  position: relative;
   background: #222;
   padding: 0 20px 20px 20px;
 }
 
-div#divbox footer a {
+footer a {
   color: #fff;
   vertical-align: text-bottom;
   font-size: 20px;
   font-weight: 700;
 }
 
-div#divbox footer p {
+footer p {
   font-size: 18px;
   padding: 16px 0;
   text-align: justify;
 }
 
-div#divbox blockquote {
+footer blockquote {
   padding-right: 12px;
   border-left: 0.5em #EEE solid;
 }
 
-div#divbox blockquote p {
+footer blockquote p {
   padding: 0 12px;
+}
+
+footer figure figcaption {
+  display: none;
+} 
+
+footer figure img[alt="watermark"] {
+  position: absolute;
+  zoom: 10%;
+  right: 160px;
+  bottom: 150px;
 }

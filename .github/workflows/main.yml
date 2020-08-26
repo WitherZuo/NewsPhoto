@@ -24,7 +24,6 @@ jobs:
           args: >-  # allows you to break string into multiple lines
             news.md
             --metadata title="thenews"
-            --self-contained
             --standalone
             --css=index.css
             --output=index.html
@@ -33,4 +32,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: NewsPhoto-${{ steps.current-time.outputs.formattedTime }}
-          path: index.html
+          path: |
+            news.md
+            index.html
+            index.css
+            ref/
