@@ -1,6 +1,6 @@
 <header>  
 
-![News Photo | 半日刊](https://api.sunweihu.com/api/bing1/api.php)  
+![News Photo | 半日刊](ref/photo.jpeg)  
 
 </header>
 
@@ -62,3 +62,5 @@ Facebook 同意向法国补缴 1.23 亿美元税款，其中包括一部分罚�
 ![watermark](ref/avatar-normal-new.png "watermark")  
 
 </footer>  
+
+<script src="ref/bundle.js"></script>
