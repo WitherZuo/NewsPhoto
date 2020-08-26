@@ -118,7 +118,7 @@ footer figure figcaption {
   display: none;
 } 
 
-footer figure img[alt="watermark"] {
+footer figure img[title="watermark"] {
   position: absolute;
   zoom: 10%;
   right: 160px;
