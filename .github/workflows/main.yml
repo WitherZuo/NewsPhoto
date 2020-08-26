@@ -27,6 +27,11 @@ jobs:
             --standalone
             --css=index.css
             --output=index.html
+
+      - name: Create exec scripts
+        run: |
+          echo "browser-sync start --server 'G:\NewsPhoto' --config bs-config.js" > run.cmd
+          echo "browser-sync start --server --config bs-config.js" > run.sh
       
       - name: Upload files
         uses: actions/upload-artifact@v2
@@ -36,4 +41,7 @@ jobs:
             news.md
             index.html
             index.css
+            bs-config.js
+            run.cmd
+            run.sh
             ref/
