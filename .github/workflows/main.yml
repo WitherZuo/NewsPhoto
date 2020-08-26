@@ -25,7 +25,7 @@ jobs:
             news.md
             --metadata title="thenews"
             --standalone
-            --css=index.css
+            --css=ref/index.css
             --output=index.html
 
       - name: Create exec scripts
@@ -40,7 +40,6 @@ jobs:
           path: |
             news.md
             index.html
-            index.css
             bs-config.js
             run.cmd
             run.sh
