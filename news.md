@@ -6,9 +6,9 @@
 
 <section>  
 
-## 2020 年 8 月 27 日 · 星期四 · 七月初九  
+## 2020 年 8 月 28 日 · 星期五 · 七月初十  
 
-【 TEST: CI WORKFLOW CONFIG 23 】  
+【 TEST: CI WORKFLOW CONFIG 24 】  
 
 因抗议 “黑人被枪击” 事件，NBA 雄鹿队拒绝出场比赛：比赛因雄鹿队拒绝出场比赛而暂停  
 
@@ -55,8 +55,8 @@ TikTok 首席执行官凯文・梅耶尔宣布辞任，张一鸣：正在制定�
 **您正在查看的是尚处于 “抢先体验” 中的『News Photo』**。  
 访问此链接下载源数据：[https://dwz.date/cktx](https://dwz.date/cktx)  
 
-**死亡谷国家公园跑道湖的迷踪石，加利福尼亚**  
-**—— by: Patrick Walsh / Getty Images** 
+**伊夫城堡，法国马赛**  
+**—— by: Boris Stroujko / Shutterstock** 
 
 > 最后更新: 2020-08-27 18:02:47 / UTC+8  
 > 最后修订: 2020-08-27 18:04:22 / UTC+8  
