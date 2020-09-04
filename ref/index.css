@@ -95,7 +95,6 @@ section p:nth-of-type(2) {
   border-bottom: none;
   background: red;
   color: #fff !important;
-  font-weight: 700;
 }
 
 section p:nth-of-type(2)::before {
