@@ -1,14 +1,11 @@
 /* 页面全局样式 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
-
 * {
   margin: 0;
   padding: 0;
   list-style: none;
   line-height: 1.5;
   box-sizing: border-box;
-  /* font-family: 'Times New Roman', Times, serif; */
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 /* 不显示页面一级标题 */
