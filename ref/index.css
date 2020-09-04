@@ -93,7 +93,7 @@ section p:nth-of-type(2) {
   padding: 6px;
   border-radius: 6px;
   border-bottom: none;
-  background: red;
+  background: #e81224;
   color: #fff !important;
 }
 
