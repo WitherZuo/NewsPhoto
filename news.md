@@ -8,7 +8,7 @@
 
 ## 2020 年 10 月 11 日 · 星期日 · 八月廿五  
 
-【 DEV: WORKFLOW TEST PREVIEW 】  
+【 DEV: NEWS PHOTO SOURCES UPDATE 】  
 
 ⚪ 10 日，国务院教育督导委员会办公室提示：个别地方和学校出现要求学生 “浪费一粒米做一道选择题” 等形式主义做法。制止校园餐饮浪费工作要防止走偏  
 
@@ -52,7 +52,7 @@ Windows 10 将再次迎来复制和粘贴功能跨平台支持：微软正在为
 <footer>  
 
 **您正在查看的是尚处于 “抢先体验” 中的『News Photo』**。  
-访问此链接下载源数据：[https://dwz.date/cMjz](https://dwz.date/cMjz)  
+访问此链接查看源数据：[https://dwz.date/cMqT](https://dwz.date/cMqT)  
 
 **格加尔德修道院，亚美尼亚**  
 **—— by: traumlichtfabrik / Getty Images** 
