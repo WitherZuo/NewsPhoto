@@ -38,8 +38,8 @@ News Photo every day.
 |       `bs-config.js`        |           用于 Browser-Sync 插件的调试预览配置文件           |
 |        `index.html`         | 必需资源：经由 Pandoc 和 GitHub Actions 工作流生成的最终成品文件 |
 |          `news.md`          |             必需资源：经过整合的 Markdown 源文件             |
-|          `run.cmd`          |              运行整个成品的执行脚本（Windows）               |
-|          `run.sh`           |            运行整个成品的执行脚本（macOS、Linux）            |
+|          `run.cmd`          |            用于运行整个成品的执行脚本（Windows）             |
+|          `run.sh`           |          用于运行整个成品的执行脚本（macOS、Linux）          |
 
 ## 注意事项：
 
