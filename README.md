@@ -1,6 +1,6 @@
 # News Photo  
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/WitherZuo/NewsPhoto/PandocTask?style=for-the-badge&logo=github-actions&logoColor=white)![I-Love-GitHubActions](https://img.shields.io/badge/I%20%E2%9D%A4%20YOU-GITHUB%20ACTIONS-blue?style=for-the-badge)![Use-Pandoc](https://img.shields.io/badge/USE-Pandoc-red?style=for-the-badge)  
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/WitherZuo/NewsPhoto/PandocTask?style=for-the-badge&logo=github-actions&logoColor=white)  ![I-Love-GitHubActions](https://img.shields.io/badge/I%20%E2%9D%A4%20YOU-GITHUB%20ACTIONS-blue?style=for-the-badge)  ![Use-Pandoc](https://img.shields.io/badge/USE-Pandoc-red?style=for-the-badge)  
 
 News Photo every day.  
 
@@ -59,7 +59,3 @@ News Photo every day.
 - GitHub Actions：[GitHub Actions](https://github.com/features/actions)  
 - Browser-Sync：[Browsersync - Time-saving synchronised browser testing](https://www.browsersync.io/)
 - html-to-image：[bubkoo/html-to-image: ✂️ Generates an image from a DOM node using HTML5 canvas and SVG. (github.com)](https://github.com/bubkoo/html-to-image)  
-
-<style>
-	img {margin-right:20px}
-</style>
