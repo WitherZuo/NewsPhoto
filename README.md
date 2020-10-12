@@ -1,9 +1,10 @@
-# News Photo
+# News Photo  
+
+![PandocTask](https://github.com/WitherZuo/NewsPhoto/workflows/PandocTask/badge.svg)  
+
 News Photo every day.  
 
 这是一个生成新闻长图片的小项目，使用 Pandoc 作为转换核心。
-
-![PandocTask-GitHubActionsStatus](https://img.shields.io/github/workflow/status/WitherZuo/NewsPhoto/PandocTask?label=PandocTask&logo=github&logoColor=white&style=for-the-badge)  
 
 ## 项目文件结构：
 
