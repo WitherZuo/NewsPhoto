@@ -1,6 +1,6 @@
 # News Photo  
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/WitherZuo/NewsPhoto/PandocTask?style=for-the-badge&logo=github-actions&logoColor=white)  ![I-Love-GitHubActions](https://img.shields.io/badge/I%20%E2%9D%A4%20YOU-GITHUB%20ACTIONS-blue?style=for-the-badge)  ![Use-Pandoc](https://img.shields.io/badge/USE-Pandoc-red?style=for-the-badge)  
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/WitherZuo/NewsPhoto/PandocTask?style=for-the-badge&logo=github-actions&logoColor=white)    ![I-Love-GitHubActions](https://img.shields.io/badge/I%20%E2%9D%A4%20YOU-GITHUB%20ACTIONS-blue?style=for-the-badge)    ![Use-Pandoc](https://img.shields.io/badge/USE-Pandoc-red?style=for-the-badge)  
 
 News Photo every day.  
 
