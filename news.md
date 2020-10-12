@@ -52,7 +52,7 @@ Windows 10 将再次迎来复制和粘贴功能跨平台支持：微软正在为
 <footer>  
 
 **您正在查看的是尚处于 “抢先体验” 中的『News Photo』**。  
-访问此链接查看源数据：[https://dwz.date/cMqT](https://dwz.date/cMqT)  
+访问此链接查看源数据：[https://tinyurl.com/y5mv37w4](https://tinyurl.com/y5mv37w4)  
 
 **格加尔德修道院，亚美尼亚**  
 **—— by: traumlichtfabrik / Getty Images** 
