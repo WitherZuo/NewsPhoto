@@ -58,4 +58,8 @@ News Photo every day.
 - Pandoc with GitHub Actions：https://github.com/pandoc/pandoc-action-example  
 - GitHub Actions：[GitHub Actions](https://github.com/features/actions)  
 - Browser-Sync：[Browsersync - Time-saving synchronised browser testing](https://www.browsersync.io/)
-- html-to-image：[bubkoo/html-to-image: ✂️ Generates an image from a DOM node using HTML5 canvas and SVG. (github.com)](https://github.com/bubkoo/html-to-image)
+- html-to-image：[bubkoo/html-to-image: ✂️ Generates an image from a DOM node using HTML5 canvas and SVG. (github.com)](https://github.com/bubkoo/html-to-image)  
+
+<style>
+	img {margin-right:20px}
+</style>
