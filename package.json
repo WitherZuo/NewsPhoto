@@ -1,32 +1,31 @@
 {
-  "name": "newsphoto",
-  "version": "1.0.0",
-  "description": "News Photo every day.",
-  "main": "bs-config.js",
-  "scripts": {
-    "update": "pandoc --metadata title='thenews' --standalone --css ref/index.css news.md --output index.html",
-    "test": "pandoc --metadata title='thenews' --standalone --css ref/index.css news.md --output index.html && browser-sync start --server --config bs-config.js",
-
-    "push": "run-script-os",
-    "push:win32": ".\\push\\publish.bat",
-    "push:nix": "sh ./push/publish.sh"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/WitherZuo/NewsPhoto.git"
-  },
-  "keywords": [
-    "News",
-    "Photo"
-  ],
-  "author": "WitherZuo",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/WitherZuo/NewsPhoto/issues"
-  },
-  "homepage": "https://github.com/WitherZuo/NewsPhoto#readme",
-  "dependencies": {
-    "browser-sync": "^2.26.14",
-    "run-script-os": "^1.1.5"
-  }
+	"name": "newsphoto",
+	"version": "1.0.0",
+	"description": "News Photo every day.",
+	"main": "bs-config.js",
+	"scripts": {
+		"update": "pandoc --metadata title='thenews' --standalone --css ref/index.css news.md --output index.html",
+		"test": "pandoc --metadata title='thenews' --standalone --css ref/index.css news.md --output index.html && browser-sync start --server --config bs-config.js",
+		"push": "run-script-os",
+		"push:win32": ".\\push\\publish.bat",
+		"push:nix": "sh ./push/publish.sh"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/WitherZuo/NewsPhoto.git"
+	},
+	"keywords": [
+		"News",
+		"Photo"
+	],
+	"author": "WitherZuo",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/WitherZuo/NewsPhoto/issues"
+	},
+	"homepage": "https://github.com/WitherZuo/NewsPhoto#readme",
+	"dependencies": {
+		"browser-sync": "^2.27.5",
+		"run-script-os": "^1.1.6"
+	}
 }

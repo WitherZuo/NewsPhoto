@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "update",
+			"problemMatcher": [],
+			"label": "npm: update",
+			"detail": "pandoc --metadata title='thenews' --standalone --css ref/index.css news.md --output index.html"
+		},
+		{
+			"type": "npm",
+			"script": "push",
+			"problemMatcher": [],
+			"label": "npm: push",
+			"detail": "run-script-os"
+		}
+	]
+}
