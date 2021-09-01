@@ -86,6 +86,7 @@ section p:nth-of-type(1)::before {
 
 section p:nth-of-type(1) {
 	border-bottom: none !important;
+	font-size: 18px !important;
 }
 
 /* “置顶新闻”样式 */
