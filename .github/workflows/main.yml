@@ -7,18 +7,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get files
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: master
-      
+
       - name: Get current time
-        uses: 1466587594/current-time@v1
+        uses: josStorer/get-current-time@v2.0.2
         id: current-time
         with:
-          format: YYYYMMDD_HHmmss
           utcOffset: "+08:00"
+          format: YYYYMMDD_HHmmss
 
-      - name: Use Pandoc    
+      - name: Use Pandoc
         uses: docker://pandoc/core:2.9
         with:
           args: >-  # allows you to break string into multiple lines
@@ -32,9 +32,9 @@ jobs:
         run: |
           echo "browser-sync start --server --config bs-config.js" > run.cmd
           echo "browser-sync start --server --config bs-config.js" > run.sh
-      
+
       - name: Upload files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: NewsPhoto-${{ steps.current-time.outputs.formattedTime }}
           path: |
