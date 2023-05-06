@@ -39,19 +39,15 @@ jobs:
       run: |
         pip install -r requirements.txt
         playwright install --with-deps chromium
+        choco install -y pandoc
 
     - name: Create markdown sources
       run: |
         python main.py
-        tree ./sources/
+        Get-ChildItem -Path .\sources\ -Recurse
 
     - name: Convert to HTML with pandoc
-      uses: docker://pandoc/core:3.1
-      with:
-        args: >-
-          --metadata title='NewsPhoto'
-          --embed-resources
-          --standalone
-          --css sources/styles/index.css
-          sources/index.md
-          --output sources/index.html
+      run: |
+        pandoc --version
+        pandoc --metadata title='NewsPhoto' --embed-resources --standalone --css sources/styles/index.css sources/index.md --output sources/index.html
+        Get-ChildItem -Path .\sources\ -Recurse
