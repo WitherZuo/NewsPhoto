@@ -41,10 +41,12 @@ jobs:
         playwright install --with-deps chromium
 
     - name: Create markdown sources
-      run: python main.py
+      run: |
+        python main.py
+        tree ./sources/
 
     - name: Convert to HTML with pandoc
-      uses: docker://pandoc/core:latest
+      uses: docker://pandoc/core:3.1
       with:
         args: >-
           --metadata title='NewsPhoto'
