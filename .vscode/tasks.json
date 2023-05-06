@@ -1,19 +1,21 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "npm",
-			"script": "update",
-			"problemMatcher": [],
-			"label": "npm: update",
-			"detail": "pandoc --metadata title='thenews' --standalone --css ref/index.css news.md --output index.html"
-		},
-		{
-			"type": "npm",
-			"script": "push",
-			"problemMatcher": [],
-			"label": "npm: push",
-			"detail": "run-script-os"
-		}
-	]
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Generate markdown source.",
+            "detail": "Generate markdown source for post-processing with Pandoc.",
+            "type": "shell",
+            "command": "python main.py",
+            "problemMatcher": []
+        },
+        {
+            "label": "Pandoc: Convert to HTML.",
+            "detail": "Coverting to HTML with Pandoc.",
+            "type": "shell",
+            "command": "pandoc --metadata title='NewsPhoto' --embed-resources --standalone --css sources/styles/index.css sources/index.md --output sources/index.html",
+            "problemMatcher": []
+        }
+    ]
 }
