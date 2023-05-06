@@ -35,3 +35,21 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
+  
+  create-pandoc-sources:
+    name: Create pandoc sources
+    runs-on: windows-latest
+    steps:
+    - name: Create markdown sources
+      run: python main.py
+    
+    - name: Convert to HTML with pandoc
+      uses: docker://pandoc/core:latest
+      with: >-
+         --metadata title='NewsPhoto'
+         --embed-resources
+         --standalone
+         --css sources/styles/index.css
+         sources/index.md
+         --output sources/index.html
+      
