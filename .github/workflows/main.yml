@@ -51,3 +51,9 @@ jobs:
         pandoc --version
         pandoc --metadata title='NewsPhoto' --embed-resources --standalone --css sources/styles/index.css sources/index.md --output sources/index.html
         Get-ChildItem -Path .\sources\ -Recurse
+
+    - name: Upload
+      uses: actions/upload-artifact@v3
+      with:
+        name: NewsPhoto_sourcecode
+        path: sources/
