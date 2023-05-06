@@ -2,13 +2,25 @@
 /* @import "springfestival.css"; */
 
 /* 页面全局样式 */
+@font-face {
+	font-family: 'Noto Sans SC';
+	src: url('../fonts/SourceHanSansCN-Regular.otf');
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: 'Noto Sans SC';
+	src: url('../fonts/SourceHanSansCN-Bold.otf');
+	font-weight: bold;
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 	line-height: 1.5;
 	box-sizing: border-box;
-	font-family: 'Noto Sans SC', 'Source Han Sans SC', sans;
+	font-family: 'Noto Sans SC', sans;
 }
 
 /* 不显示页面一级标题 */

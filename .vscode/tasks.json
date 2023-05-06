@@ -14,7 +14,7 @@
             "label": "Pandoc: Convert to HTML.",
             "detail": "Coverting to HTML with Pandoc.",
             "type": "shell",
-            "command": "pandoc --metadata title='NewsPhoto' --embed-resources --standalone --css sources/styles/index.css sources/index.md --output sources/index.html",
+            "command": "pandoc --metadata title='NewsPhoto' --embed-resources --standalone --template='template/newsphoto.html5' --css sources/styles/index.css sources/index.md --output sources/index.html",
             "problemMatcher": []
         }
     ]

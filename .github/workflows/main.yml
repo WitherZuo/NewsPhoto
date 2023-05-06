@@ -18,6 +18,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: WitherZuo/NewsPhoto
+        lfs: true
 
     - name: Setup Python
       uses: actions/setup-python@v4
@@ -49,7 +50,7 @@ jobs:
     - name: Convert to HTML with pandoc
       run: |
         pandoc --version
-        pandoc --metadata title='NewsPhoto' --embed-resources --standalone --css sources/styles/index.css sources/index.md --output sources/index.html
+        pandoc --metadata title='NewsPhoto' --embed-resources --standalone --template='template/newsphoto.html5' --css sources/styles/index.css sources/index.md --output sources/index.html
         Get-ChildItem -Path .\sources\ -Recurse
 
     - name: Generate screenshout
@@ -61,9 +62,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: NewsPhoto_sourcecode
-        path: |
-          sources/
-          sources/NewsPhoto.png
+        path: sources/
 
     - name: Upload NewsPhoto
       uses: actions/upload-artifact@v3
