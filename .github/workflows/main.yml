@@ -52,8 +52,15 @@ jobs:
         pandoc --metadata title='NewsPhoto' --embed-resources --standalone --css sources/styles/index.css sources/index.md --output sources/index.html
         Get-ChildItem -Path .\sources\ -Recurse
 
+    - name: Generate screenshout
+      run: |
+        python browser-autotest.py
+        Get-ChildItem -Path .\sources\
+
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
         name: NewsPhoto_sourcecode
-        path: sources/
+        path: |
+          sources/
+          sources/NewsPhoto.png
