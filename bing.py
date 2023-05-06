@@ -1,4 +1,8 @@
 import requests
+import locale
+
+# 修改语言符号为中文
+locale.setlocale(locale.LC_CTYPE, 'chinese')
 
 # 获取必应图片的 JSON 文件
 def getBingJSON():

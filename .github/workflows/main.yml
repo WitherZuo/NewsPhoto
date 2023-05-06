@@ -1,9 +1,12 @@
 name: Create NewsPhoto
-on: push
+on:
+  push:
+    paths-ignore:
+      - "README.md"
 
 jobs:
   preparing-works:
-    name: Prepare environment
+    name: Generate resources
     runs-on: windows-latest
     steps:
     - name: Set up timezone to Asia/Shanghai
@@ -20,7 +23,7 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-    
+
     - name: Cache dependencies
       uses: actions/cache@v3
       with:
@@ -36,13 +39,13 @@ jobs:
       run: |
         pip install -r requirements.txt
         playwright install --with-deps chromium
-  
+
     - name: Create markdown sources
       run: python main.py
-    
+
     - name: Convert to HTML with pandoc
       uses: docker://pandoc/core:latest
-      with: 
+      with:
         args: >-
           --metadata title='NewsPhoto'
           --embed-resources
@@ -50,4 +53,3 @@ jobs:
           --css sources/styles/index.css
           sources/index.md
           --output sources/index.html
-      

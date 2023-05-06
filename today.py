@@ -1,6 +1,10 @@
 import time
+import locale
 from datetime import datetime
 from zhdate import ZhDate
+
+# 修改语言符号为中文
+locale.setlocale(locale.LC_CTYPE, 'chinese')
 
 # 函数：简短日期
 def getSimpleDate():

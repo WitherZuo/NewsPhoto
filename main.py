@@ -3,6 +3,10 @@ from bing import getBingJSON, getBingTitle, getBingImage
 import os
 import pangu
 import re
+import locale
+
+# 修改语言符号为中文
+locale.setlocale(locale.LC_CTYPE, 'chinese')
 
 # 清理过时文件
 outdated_files = ["sources/header.md", "sources/content.md", "sources/index.md",
