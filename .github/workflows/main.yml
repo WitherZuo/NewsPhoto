@@ -42,6 +42,11 @@ jobs:
     needs: preparing-works
     runs-on: windows-latest
     steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+      with:
+        repository: WitherZuo/NewsPhoto
+    
     - name: Create markdown sources
       run: python main.py
     
