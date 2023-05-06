@@ -2,11 +2,25 @@ name: Create NewsPhoto
 on: push
 
 jobs:
-  timezone-setup:
+  preparing-works:
     name: Setting up timezone
     runs-on: windows-latest
     steps:
-    - name: Setting up timezone to Asia/Shanghai
+    - name: Set up timezone to Asia/Shanghai
       uses: szenius/set-timezone@v1.2
       with:
-       timezoneWindows: "China Standard Time"
+        timezoneWindows: "China Standard Time"
+
+    - name: Check out repository
+      uses: actions/checkout@v3
+      with:
+        repository: WitherZuo/NewsPhoto
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run:
+        pip install -r requirements.txt
