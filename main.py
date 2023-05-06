@@ -63,7 +63,8 @@ c.writelines("**图片版权: "+bing_title[1]+"**  \n\n")
 c.writelines("> 最后更新: "+today_full_date+" / UTC+8<br>")
 c.writelines("最后修订: "+today_full_date+" / UTC+8  \n\n")
 c.writelines('![watermark](sources/images/logo.png "watermark")  \n\n')
-c.writelines("</footer>")
+c.writelines("</footer>\n")
+c.writelines("<link href='https://fonts.loli.net/css?family=Noto+Sans+SC' rel='stylesheet'>")
 c.close()
 
 # 汇总后综合写入 index.md

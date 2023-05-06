@@ -57,10 +57,16 @@ jobs:
         python browser-autotest.py
         Get-ChildItem -Path .\sources\
 
-    - name: Upload
+    - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
         name: NewsPhoto_sourcecode
         path: |
           sources/
           sources/NewsPhoto.png
+
+    - name: Upload NewsPhoto
+      uses: actions/upload-artifact@v3
+      with:
+        name: NewsPhoto
+        path: sources/NewsPhoto.png

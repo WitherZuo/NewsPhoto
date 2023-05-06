@@ -8,7 +8,7 @@
 	list-style: none;
 	line-height: 1.5;
 	box-sizing: border-box;
-	font-family: 'Source Han Sans SC', sans;
+	font-family: 'Noto Sans SC', 'Source Han Sans SC', sans;
 }
 
 /* 不显示页面一级标题 */
