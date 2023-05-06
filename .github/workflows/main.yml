@@ -45,11 +45,12 @@ jobs:
     
     - name: Convert to HTML with pandoc
       uses: docker://pandoc/core:latest
-      with: >-
-         --metadata title='NewsPhoto'
-         --embed-resources
-         --standalone
-         --css sources/styles/index.css
-         sources/index.md
-         --output sources/index.html
+      with: 
+        args: >-
+          --metadata title='NewsPhoto'
+          --embed-resources
+          --standalone
+          --css sources/styles/index.css
+          sources/index.md
+          --output sources/index.html
       
