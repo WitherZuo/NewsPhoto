@@ -22,16 +22,15 @@ jobs:
         python-version: '3.11'
 
     - name: Install dependencies
-      run:
+      run: |
         pip install -r requirements.txt
-
-    - name: Install playwright dependencies
-      run:
         playwright install --with-deps chromium
 
     - uses: actions/cache@v3
       with:
-        path: ~\AppData\Local\pip\Cache
+        path: |
+          ~\AppData\Local\pip\Cache
+          ~\AppData\Local\ms-playwright
         key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
