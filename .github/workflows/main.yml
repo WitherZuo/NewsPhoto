@@ -1,0 +1,12 @@
+name: Create NewsPhoto
+on: push
+
+jobs:
+  timezone-setup:
+    name: Setting up timezone
+    runs-on: windows-latest
+    steps:
+    - name: Setting up timezone to Asia/Shanghai
+      uses: szenius/set-timezone@v1.2
+      with:
+       timezoneWindows: "China Standard Time"
