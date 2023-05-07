@@ -1,7 +1,8 @@
 $current_datetime = Get-Date -UFormat "%Y%m%d-%H%M%S"
 
 Write-Host $current_datetime
-$commit = Read-Host "PLEASE INPUT COMMIT TEXT: "
+$commit = Read-Host "PLEASE INPUT COMMIT TEXT"
+Write-Output $commit
 
 git status
 git add -A
