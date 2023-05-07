@@ -12,7 +12,7 @@ def getBingJSON():
 
     # 获取必应图片的 json 数据
     r = requests.get(
-        "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1", headers=headers)
+        "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN", headers=headers)
     bingimage_fulldata = r.json()
 
     # 解析 json 对象
