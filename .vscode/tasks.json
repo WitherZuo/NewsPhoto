@@ -16,6 +16,13 @@
             "type": "shell",
             "command": "pandoc --metadata title='NewsPhoto' --embed-resources --standalone --template='template/newsphoto.html5' --css sources/styles/index.css sources/index.md --output sources/index.html",
             "problemMatcher": []
+        },
+        {
+            "label": "Git: Push all commits and tags.",
+            "detail": "Push all commits and tags to remote.",
+            "type": "shell",
+            "command": "./push/publish.ps1",
+            "problemMatcher": []
         }
     ]
 }

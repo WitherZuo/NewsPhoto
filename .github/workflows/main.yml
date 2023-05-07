@@ -33,8 +33,7 @@ jobs:
           ~\AppData\Local\ms-playwright
         key: ${{ runner.os }}-build-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
-          ${{ runner.os }}-pip-
-          ${{ runner.os }}-
+          ${{ runner.os }}-build-
 
     - name: Install dependencies
       run: |
@@ -69,3 +68,11 @@ jobs:
       with:
         name: NewsPhoto
         path: sources/NewsPhoto.png
+
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            sources/index.html
+            sources/NewsPhoto.png
