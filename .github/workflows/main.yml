@@ -62,7 +62,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: NewsPhoto_sourcecode
-        path: sources/
+        path: sources/index.html
 
     - name: Upload NewsPhoto
       uses: actions/upload-artifact@v3
