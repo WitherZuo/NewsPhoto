@@ -3,7 +3,7 @@ $current_datetime = Get-Date -UFormat "%Y%m%d-%H%M%S"
 
 # Input commit text
 Write-Host $current_datetime
-$commit = Read-Host "PLEASE INPUT COMMIT TEXT"
+$commit = Read-Host "PLEASE ENTER COMMIT INFO"
 Write-Output $commit
 
 # Check files that will be uploaded
