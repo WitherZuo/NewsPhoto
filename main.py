@@ -62,7 +62,7 @@ c.writelines("**"+bing_title[0]+"**<br>")
 c.writelines("**图片版权: "+bing_title[1]+"**  \n\n")
 c.writelines("> 最后更新: "+today_full_date+" / UTC+8<br>")
 c.writelines("最后修订: "+today_full_date+" / UTC+8  \n\n")
-c.writelines('![watermark](sources/images/logo.png "watermark")  \n\n')
+c.writelines('![qrcode](sources/images/qrcode.png "qrcode")  \n\n')
 c.writelines("</footer>")
 c.close()
 

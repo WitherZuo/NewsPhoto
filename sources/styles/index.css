@@ -152,11 +152,12 @@ footer figure figcaption {
 	display: none;
 }
 
-footer figure img[title="watermark"] {
+footer figure img[title="qrcode"] {
 	position: absolute;
-	zoom: 10%;
-	right: 160px;
-	bottom: 150px;
+	width: 80px;
+	height: 80px;
+	right: 14px;
+	bottom: 14px;
 }
 
 a#save_href {
