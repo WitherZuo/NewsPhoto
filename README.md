@@ -33,7 +33,6 @@ News Photo every day.
 ## 感谢：
 
 - Pandoc：[Pandoc - About pandoc](https://pandoc.org/index.html)
-- Pandoc with GitHub Actions：https://github.com/pandoc/pandoc-action-example
 - GitHub Actions：[GitHub Actions](https://github.com/features/actions)
 - Playwright：[Playwright Python](https://playwright.dev/python/)
 - 项目依赖的其它第三方项目：pangu、zhdate
