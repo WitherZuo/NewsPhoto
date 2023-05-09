@@ -4,14 +4,7 @@
 /* 页面全局样式 */
 @font-face {
 	font-family: 'Noto Sans SC';
-	src: url('../fonts/SourceHanSansCN-Regular.otf');
-	font-weight: normal;
-}
-
-@font-face {
-	font-family: 'Noto Sans SC';
-	src: url('../fonts/SourceHanSansCN-Bold.otf');
-	font-weight: bold;
+	src: url('../fonts/SourceHanSansCN.woff2');
 }
 
 * {
