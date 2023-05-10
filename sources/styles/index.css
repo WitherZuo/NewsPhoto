@@ -148,8 +148,8 @@ footer figure figcaption {
 footer figure img[title="qrcode"] {
 	position: absolute;
 	width: 60px;
-	right: 18px;
-	bottom: 18px;
+	right: 20px;
+	bottom: 20px;
 }
 
 a#save_href {

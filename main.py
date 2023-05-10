@@ -27,7 +27,7 @@ bing_title = getBingTitle(json_data)
 getBingImage(json_data)
 
 # 祝贺文本
-greeting = "测试一下"
+greeting = "不是由 ChatGPT 生成的"
 
 # 写入头文件：header.md
 f = open("sources/header.md", "w", encoding="utf_8")
