@@ -47,3 +47,5 @@ sources/NewsPhoto.png
 sources/index.md
 sources/index.html
 sources/images/photo.jpg
+
+*.swp
