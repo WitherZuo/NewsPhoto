@@ -9,8 +9,9 @@ import locale
 locale.setlocale(locale.LC_CTYPE, 'chinese')
 
 # 清理过时文件
-outdated_files = ["sources/header.md", "sources/content.md", "sources/index.md",
-                  "sources/footer.md", "sources/images/photo.jpg", "sources/index.html"]
+outdated_files = ["sources/header.md", "sources/content.md",
+                  "sources/index.md", "sources/footer.md",
+                  "sources/images/photo.jpg", "sources/index.html"]
 for outdated_file in outdated_files:
     if os.path.exists(outdated_file):
         os.unlink(outdated_file)
