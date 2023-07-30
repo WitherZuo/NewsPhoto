@@ -4,22 +4,30 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Generate markdown source.",
-            "detail": "Generate markdown source for post-processing with Pandoc.",
+            "label": "预览生成结果 / Preview generated result.",
+            "detail": "一键预览生成的图片 / Preview generated image in one-click.",
+            "type": "shell",
+            "args": [],
+            "command": "pwsh.exe ./push/preview.ps1",
+            "problemMatcher": []
+        },
+        {
+            "label": "生成 Markdown 资源 / Generate markdown source.",
+            "detail": "生成需要使用 Pandoc 后处理所需的 Markdown 资源 / Generate markdown source for post-processing with Pandoc.",
             "type": "shell",
             "command": "python main.py",
             "problemMatcher": []
         },
         {
-            "label": "Pandoc: Convert to HTML.",
-            "detail": "Coverting to HTML with Pandoc.",
+            "label": "Pandoc：转换为 HTML / Pandoc: Convert to HTML.",
+            "detail": "使用 Pandoc 转换为 HTML / Coverting to HTML with Pandoc.",
             "type": "shell",
             "command": "pandoc --metadata title='NewsPhoto' --embed-resources --standalone --template='template/newsphoto.html5' --css sources/styles/index.css sources/index.md --output sources/index.html",
             "problemMatcher": []
         },
         {
-            "label": "Git: Push all commits and tags.",
-            "detail": "Push all commits and tags to remote.",
+            "label": "Git：上传所有提交和标签 / Git: Push all commits and tags.",
+            "detail": "上传所有提交和标签到远端仓库 / Push all commits and tags to remote.",
             "type": "shell",
             "command": "pwsh.exe ./push/publish.ps1",
             "problemMatcher": []
