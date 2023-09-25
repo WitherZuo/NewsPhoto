@@ -1,15 +1,13 @@
+# coding=utf-8
 import time
-import locale
 from datetime import datetime
 from zhdate import ZhDate
-
-# 修改语言符号为中文
-locale.setlocale(locale.LC_CTYPE, 'chinese')
 
 # 函数：简短日期
 def getSimpleDate():
     # 获取当前日期时间，并格式化
-    simple_date = time.strftime("%Y 年 %#m 月 %#d 日")
+    simple_date = time.strftime(
+        "%Y {Y} %#m {M} %#d {D}").format(Y="年", M="月", D="日")
     return simple_date
 
 # 函数：完整日期带时区（UTC+8）
