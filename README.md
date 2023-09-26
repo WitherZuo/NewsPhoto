@@ -7,38 +7,46 @@ News Photo every day.
 这是一个生成新闻长图片的小项目，使用 Pandoc 作为转换核心。
 
 ## 项目文件结构：
+<details>
+<summary>点击此处显示</summary>
 
 |           文件名称           |                           对应描述                           |
 | :--------------------------: | :----------------------------------------------------------: |
 | `.github\workflows\main.yml` |     GitHub Actions 工作流文件，用于 Actions 生成最终成品     |
 | `souurces\`  |                      所需要的资源：图片、字体、文本 等                      |
+| `template\`  |                      Pandoc 转换所需模板                      |
 |        `news.txt`        |                      必需资源：新闻源稿                      |
 |         `.gitignore`         |     Git 忽略列表：告知 Git 应当被忽略且无需被上传的文件      |
 |          `LICENSE`           |                   该项目遵守的相关开源协议                   |
 |         `README.md`          |                         项目自述文件                         |
+</details>
 
 ## 本地预览：
 
 ### 1. 准备环境
 
-在测试项目、运行成品文件之前，请先安装并配置好 `Git`、`Python`、`Playwright`、`Git LFS` 以及 `Pandoc`，执行如下命令来安装并配置所需要的环境，建议使用如 `venv` 这样的虚拟环境模块。
+在测试项目、运行成品文件之前，请先安装并配置好**最新版本**的 `Git`、`Python`、`Playwright`、`Git LFS` 以及 `Pandoc`，执行如下命令来安装并配置所需要的环境，建议使用如 `venv` 这样的虚拟环境模块。
 
+- [Git](https://git-scm.com/downloads)
+- [Git LFS](https://github.com/git-lfs/git-lfs#installing)
+- [Python](https://www.python.org/downloads/)
+- [Pandoc](https://pandoc.org/installing.html)
+- [Playwright](https://playwright.dev/python/docs/intro#installing-playwright)
+    ```
+    # 安装并配置 Playwright 和 Chromium
+    playwright install chromium --with-deps
+    ```
+
+### 2. 克隆项目
 ```bash
-# 安装 Git LFS（以 Ubuntu 为例）
-sudo apt install git-lfs
-git lfs install
-
 # 克隆项目到本地
 git clone https://github.com/WitherZuo/NewsPhoto.git
 
 # 安装所需第三方库
 pip install -r requirements.txt
-
-# 安装并配置 Playwright 和 Chromium
-playwright install chromium --with-deps
 ```
 
-### 2. 生成源文件
+### 3. 生成源文件
 
 确保处于项目根目录中，然后在终端中输入
 
@@ -48,7 +56,7 @@ python main.py
 
 生成需要的源文件 `index.md`。`index.md` 位于 `sources` 目录下。
 
-### 3. 生成网页
+### 4. 生成网页
 
 完成上一步后，在终端中输入
 
@@ -58,7 +66,7 @@ pandoc --metadata title='NewsPhoto' --embed-resources --standalone --template='t
 
 生成 `index.html` 文件。该文件同样位于 `sources` 目录下。
 
-### 4. 生成图片
+### 5. 生成图片
 
 在终端中输入
 
