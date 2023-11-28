@@ -75,11 +75,12 @@ section p:nth-of-type(1) {
 
 /* 新闻内容文本样式 */
 section h2 {
+	font-size: 1.8em;
 	font-weight: 700;
 }
 
 section p {
-	font-size: 20px;
+	font-size: 25px;
 	padding: 16px 0;
 	text-align: justify;
 	border-bottom: 1px solid rgba(128, 128, 128);
@@ -96,14 +97,14 @@ section p:nth-of-type(1)::before {
 
 section p:nth-of-type(1) {
 	border-bottom: none !important;
-	font-size: 18px !important;
+	font-size: 24px !important;
 }
 
 /* “置顶新闻”样式 */
 section p:nth-of-type(2) {
 	margin: 10px auto;
 	padding: 0;
-	border-radius: 6px;
+	border-radius: 2px;
 	border-bottom: none;
 	background: #e81224;
 	color: #fff !important;
@@ -122,9 +123,8 @@ footer {
 }
 
 footer p {
-	font-size: 18px;
+	font-size: 25px;
 	padding-bottom: 20px;
-	text-align: justify;
 }
 
 footer blockquote {
@@ -142,7 +142,7 @@ footer figure figcaption {
 
 footer figure img[title="qrcode"] {
 	position: absolute;
-	width: 54px;
+	width: 75px;
 	right: 20px;
 	bottom: 20px;
 }
