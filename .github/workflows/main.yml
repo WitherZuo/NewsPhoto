@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Set up timezone to Asia/Shanghai
-      uses: WitherZuo/set-timezone@v1
+      uses: WitherZuo/set-timezone@v1.0.0
       with:
         timezoneWindows: "China Standard Time"
 
