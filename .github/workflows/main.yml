@@ -10,23 +10,23 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Set up timezone to Asia/Shanghai
-      uses: szenius/set-timezone@v1.2
+      uses: WitherZuo/set-timezone@v1
       with:
         timezoneWindows: "China Standard Time"
 
     - name: Check out repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: WitherZuo/NewsPhoto
         lfs: true
 
     - name: Setup Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
     - name: Cache dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           ~\AppData\Local\pip\Cache
@@ -64,7 +64,7 @@ jobs:
         path: sources/index.html
 
     - name: Upload NewsPhoto
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: NewsPhoto
         path: sources/NewsPhoto.png
