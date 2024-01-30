@@ -2,18 +2,13 @@
 /* @import "springfestival.css"; */
 
 /* 页面全局样式 */
-@font-face {
-	font-family: 'NewsPhoto Global Font';
-	src: url('../fonts/SourceHanSansCN.woff2');
-}
-
 * {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 	line-height: 1.5;
 	box-sizing: border-box;
-	font-family: 'NewsPhoto Global Font';
+	font-family: sans-serif;
 	text-rendering: geometricPrecision;
 }
 
@@ -28,6 +23,7 @@ body {
 	color: #f5f5f5;
 	overflow-x: hidden;
 	background: #000;
+	counter-reset: list-item 0;
 }
 
 header {
@@ -88,11 +84,19 @@ section p {
 
 /* 新闻内容标志开头设置 */
 section p::before {
-	content: "🔴 ";
+	counter-increment: list-item;
+	content: counter(list-item, decimal-leading-zero);
+	background: #e81224;
+	margin-right: 6px;
+	font-weight: 700;
+	padding: 4px;
+	font-size: 22px;
+	border-radius: 6px;
 }
 
 section p:nth-of-type(1)::before {
-	content: "" !important;
+	counter-increment: none;
+	display: none;
 }
 
 section p:nth-of-type(1) {
@@ -112,7 +116,8 @@ section p:nth-of-type(2) {
 }
 
 section p:nth-of-type(2)::before {
-	content: "⚪ " !important;
+	background: #fff;
+	color: #e81224;
 }
 
 /* 底部版权页样式 */
