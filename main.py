@@ -90,7 +90,7 @@ for sources_file in source_files:
     sources_file.close()
 
 # 清理不需要的文件
-unused_files = [header_md, content_md, footer_md]
+unused_files = ["sources/header.md", "sources/content.md", "sources/footer.md"]
 for unused_file in unused_files:
     if os.path.exists(unused_file):
         os.unlink(unused_file)
