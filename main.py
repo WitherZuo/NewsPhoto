@@ -41,7 +41,6 @@ header_text = [
     "## " + today_simple_date + " · " + today_weekday + " · " + today_zhdate + "\n\n",
     "【 " + greeting + " 】" + "  \n\n",
 ]
-
 f = open("sources/header.md", "w", encoding="utf_8")
 f.writelines(header_text)
 f.close()
@@ -69,7 +68,6 @@ footer_text = [
     '![qrcode](sources/images/qrcode.png "qrcode")  \n\n',
     "</footer>",
 ]
-
 c = open("sources/footer.md", "w", encoding="utf_8")
 c.writelines(footer_text)
 c.close()
@@ -77,23 +75,22 @@ c.close()
 # 汇总后综合写入 index.md
 index_md = open("sources/index.md", "a", encoding="utf_8")
 
-header_source = open("sources/header.md", "r", encoding="utf_8").read()
-content_source = open("sources/content.md", "r", encoding="utf_8").read()
-footer_source = open("sources/footer.md", "r", encoding="utf_8").read()
+header_md = open("sources/header.md", "r", encoding="utf_8")
+content_md = open("sources/content.md", "r", encoding="utf_8")
+footer_md = open("sources/footer.md", "r", encoding="utf_8")
+
+header_source = header_md.read()
+content_source = content_md.read()
+footer_source = footer_md.read()
 
 index_md.write(header_source + content_source + footer_source)
 
-source_files = [
-    "sources/header.md",
-    "sources/content.md",
-    "sources/footer.md",
-    index_md,
-]
+source_files = [header_md, content_md, footer_md, index_md]
 for sources_file in source_files:
     sources_file.close()
 
 # 清理不需要的文件
-unused_files = ["sources/header.md", "sources/content.md", "sources/footer.md"]
+unused_files = [header_md, content_md, footer_md]
 for unused_file in unused_files:
     if os.path.exists(unused_file):
         os.unlink(unused_file)
