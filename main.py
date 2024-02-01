@@ -6,9 +6,14 @@ import pangu
 import re
 
 # 清理过时文件
-outdated_files = ["sources/header.md", "sources/content.md",
-                  "sources/index.md", "sources/footer.md",
-                  "sources/images/photo.jpg", "sources/index.html"]
+outdated_files = [
+    "sources/header.md",
+    "sources/content.md",
+    "sources/index.md",
+    "sources/footer.md",
+    "sources/images/photo.jpg",
+    "sources/index.html",
+]
 for outdated_file in outdated_files:
     if os.path.exists(outdated_file):
         os.unlink(outdated_file)
@@ -28,14 +33,17 @@ getBingImage(json_data)
 greeting = "不是由 ChatGPT 生成的"
 
 # 写入头文件：header.md
+header_text = [
+    "<header>  \n\n",
+    "![News Photo · 半日刊](sources/images/photo.jpg)  \n\n",
+    "</header>  \n\n",
+    "<section>  \n\n",
+    "## " + today_simple_date + " · " + today_weekday + " · " + today_zhdate + "\n\n",
+    "【 " + greeting + " 】" + "  \n\n",
+]
+
 f = open("sources/header.md", "w", encoding="utf_8")
-f.writelines("<header>  \n\n")
-f.writelines("![News Photo · 半日刊](sources/images/photo.jpg)  \n\n")
-f.writelines("</header>  \n\n")
-f.writelines("<section>  \n\n")
-f.writelines("## "+today_simple_date+" · " +
-             today_weekday+" · "+today_zhdate+"\n\n")
-f.writelines("【 "+greeting+" 】"+"  \n\n")
+f.writelines(header_text)
 f.close()
 
 # 处理正文文本 news.txt，写入到新的正文文件：content.md
@@ -45,39 +53,42 @@ text_with_space = pangu.spacing(text)
 text_new = re.sub("\n", "  \n\n", text_with_space)
 
 b = open("sources/content.md", "w", encoding="utf_8")
-b.write(text_new+"\n\n")
+b.write(text_new + "\n\n")
 
 b.close()
 a.close()
 
 # 写入底部文件：footer.md
+footer_text = [
+    "</section>  \n\n",
+    "<footer>  \n\n",
+    "**" + bing_title[0] + "**<br>",
+    "**" + bing_title[1] + "**  \n\n",
+    "> 最后更新: " + today_full_date + " / UTC+8<br>",
+    "最后修订: " + today_full_date + " / UTC+8  \n\n",
+    '![qrcode](sources/images/qrcode.png "qrcode")  \n\n',
+    "</footer>",
+]
+
 c = open("sources/footer.md", "w", encoding="utf_8")
-c.writelines("</section>  \n\n")
-c.writelines("<footer>  \n\n")
-c.writelines("**"+bing_title[0]+"**<br>")
-c.writelines("**"+bing_title[1]+"**  \n\n")
-c.writelines("> 最后更新: "+today_full_date+" / UTC+8<br>")
-c.writelines("最后修订: "+today_full_date+" / UTC+8  \n\n")
-c.writelines('![qrcode](sources/images/qrcode.png "qrcode")  \n\n')
-c.writelines("</footer>")
+c.writelines(footer_text)
 c.close()
 
 # 汇总后综合写入 index.md
 index_md = open("sources/index.md", "a", encoding="utf_8")
 
-header = open("sources/header.md", "r", encoding="utf_8")
-content = open("sources/content.md", "r", encoding="utf_8")
-footer = open("sources/footer.md", "r", encoding="utf_8")
+header_source = open("sources/header.md", "r", encoding="utf_8").read()
+content_source = open("sources/content.md", "r", encoding="utf_8").read()
+footer_source = open("sources/footer.md", "r", encoding="utf_8").read()
 
-header_source = header.read()
-content_source = content.read()
-footer_source = footer.read()
+index_md.write(header_source + content_source + footer_source)
 
-index_md.write(header_source)
-index_md.write(content_source)
-index_md.write(footer_source)
-
-source_files = [header, content, footer, index_md]
+source_files = [
+    "sources/header.md",
+    "sources/content.md",
+    "sources/footer.md",
+    index_md,
+]
 for sources_file in source_files:
     sources_file.close()
 
