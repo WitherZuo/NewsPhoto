@@ -2,13 +2,25 @@
 /* @import "springfestival.css"; */
 
 /* 页面全局样式 */
+@font-face {
+	font-family: 'NewsPhoto Font';
+	src: url('../fonts/NewsPhotoFont-Regular.woff2');
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: 'NewsPhoto Font';
+	src: url('../fonts/NewsPhotoFont-Bold.woff2');
+	font-weight: bold;
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 	line-height: 1.5;
 	box-sizing: border-box;
-	font-family: sans-serif;
+	font-family: 'NewsPhoto Font';
 	text-rendering: geometricPrecision;
 }
 
