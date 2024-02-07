@@ -3,14 +3,14 @@
 
 /* 页面全局样式 */
 @font-face {
-	font-family: 'NewsPhoto Font';
-	src: url('../fonts/NewsPhotoFont-Regular.woff2');
+	font-family: 'Mi Sans';
+	src: url('../fonts/MiSans-Regular.woff2');
 	font-weight: normal;
 }
 
 @font-face {
-	font-family: 'NewsPhoto Font';
-	src: url('../fonts/NewsPhotoFont-Bold.woff2');
+	font-family: 'Mi Sans';
+	src: url('../fonts/MiSans-Semibold.woff2');
 	font-weight: bold;
 }
 
@@ -20,8 +20,7 @@
 	list-style: none;
 	line-height: 1.5;
 	box-sizing: border-box;
-	font-family: 'NewsPhoto Font';
-	text-rendering: geometricPrecision;
+	font-family: 'Mi Sans';
 }
 
 /* 不显示页面一级标题 */
@@ -97,14 +96,19 @@ section p {
 
 /* 新闻内容标志开头设置 */
 section p::before {
+	display: inline-block;
 	counter-increment: list-item;
 	content: counter(list-item, decimal-leading-zero);
 	background: #e81224;
 	margin-right: 6px;
 	font-weight: 700;
-	padding: 4px;
-	font-size: 22px;
+	color: #fff;
+	font-size: 24px;
 	border-radius: 6px;
+	line-height: 1;
+	width: 36px;
+	padding: 4px;
+	text-align: center;
 }
 
 section p:nth-of-type(1)::before {
