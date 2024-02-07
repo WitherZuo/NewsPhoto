@@ -1,0 +1,68 @@
+/* 设置主要内容区域样式-内边距 */
+section {
+    padding: 20px;
+    background: #333;
+}
+
+/* 强制居中当前时间标题和节气文本 */
+section h2,
+section p:nth-of-type(1) {
+    text-align: center !important;
+}
+
+/* 新闻内容文本样式 */
+section h2 {
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+section p {
+    font-size: 25px;
+    padding: 16px 0;
+    text-align: justify;
+    border-bottom: 1px solid rgba(128, 128, 128);
+}
+
+/* 新闻内容标志开头设置 */
+section p::before {
+    display: inline-block;
+    counter-increment: list-item;
+    content: counter(list-item, decimal-leading-zero);
+    background: #e81224;
+    margin-right: 6px;
+    font-weight: 700;
+    color: #fff;
+    font-size: 24px;
+    border-radius: 6px;
+    line-height: 1;
+    width: 36px;
+    padding: 4px;
+    text-align: center;
+}
+
+section p:nth-of-type(1) {
+    border-bottom: none !important;
+    font-size: 24px !important;
+}
+
+section p:nth-of-type(1)::before {
+    counter-increment: none;
+    display: none;
+}
+
+
+/* “置顶新闻”样式 */
+section p:nth-of-type(2) {
+    margin: 10px auto;
+    padding: 0;
+    border-radius: 2px;
+    border-bottom: none;
+    background: #e81224;
+    color: #fff !important;
+    outline: 8px solid #e81224;
+}
+
+section p:nth-of-type(2)::before {
+    background: #fff;
+    color: #e81224;
+}
