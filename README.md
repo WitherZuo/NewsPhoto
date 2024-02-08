@@ -10,15 +10,58 @@ News Photo every day.
 <details>
 <summary>点击此处显示</summary>
 
-|           文件名称           |                           对应描述                           |
-| :--------------------------: | :----------------------------------------------------------: |
-| `.github\workflows\main.yml` |     GitHub Actions 工作流文件，用于 Actions 生成最终成品     |
-| `souurces\`  |                      所需要的资源：图片、字体、文本 等                      |
-| `template\`  |                      Pandoc 转换所需模板                      |
-|        `news.txt`        |                      必需资源：新闻源稿                      |
-|         `.gitignore`         |     Git 忽略列表：告知 Git 应当被忽略且无需被上传的文件      |
-|          `LICENSE`           |                   该项目遵守的相关开源协议                   |
-|         `README.md`          |                         项目自述文件                         |
+```
+./NewsPhoto
+│   .gitattributes（用于控制 Git LFS 大文件存储特性的设置）
+│   .gitignore（配置应被 Git 忽略追踪的文件）
+│   bing.py（获取必应每日图片的数据，包括描述和图片自身）
+│   browser-autotest.py（浏览器自动化，从生成的页面截图）
+│   LICENSE（项目许可）
+│   main.py（项目主入口，生成所需的源文件：index.md）
+│   news.txt（初始的新闻源稿，必需）
+│   NewsPhoto.code-workspace（VS Code 工作区配置）
+│   README.md（项目自述）
+│   requirements.txt（项目的依赖项配置文件）
+│   today.py（获取和当前日期时间有关的信息，包括农历日期）
+│
+├───.github（GitHub 相关）
+│   └───workflows（GitHub Actions 工作流）
+│           main.yml（工作流任务配置）
+│
+├───.vscode（VS Code 项目配置）
+│       tasks.json（项目中的可执行任务）
+│
+├───push（可重用的任务）
+│       preview.ps1（用于一键生成 NewsPhoto 并预览）
+│       publish.ps1（用于一键上传 NewsPhoto 成品并生成 Release）
+│
+├───sources（项目源文件）
+│   │   index.html（NewsPhoto 页面，默认不存在）
+│   │   index.md（Markdown 版 NewsPhoto 文档，用于生成 index.html，默认不存在）
+│   │   NewsPhoto.png（生成的 NewsPhoto 图片，默认不存在）
+│   │
+│   ├───fonts（字体）
+│   │       .gitkeep（缺省文件）
+│   │       MiSans-Regular.woff2（Mi Sans 字体，Regular 字重）
+│   │       MiSans-Semibold.woff2（Mi Sans 字体，Semibold 字重）
+│   │
+│   ├───images（图片）
+│   │       photo.jpg（当日的必应图片，默认不存在）
+│   │       qrcode-springfestival.png（二维码，春节风格）
+│   │       qrcode.png（二维码，正常风格）
+│   │
+│   └───styles（样式表）
+│           footer.css（底部栏样式）
+│           global.css（全局样式）
+│           header.css（顶部栏样式）
+│           index.css（样式主入口）
+│           section.css（主要内容样式）
+│           springfestival.css（春节特殊样式）
+│
+└───template（模板）
+        newsphoto.html5（Pandoc 生成 HTML 文件时所需模板）
+```
+
 </details>
 
 ## 本地预览：
