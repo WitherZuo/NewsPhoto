@@ -3,10 +3,15 @@ on:
   push:
     paths-ignore:
       - "README.md"
+      - "LICENSE"
+      - ".github/project-structure.txt"
+      - ".vscode/**"
+      - "push/**"
+      - "NewsPhoto.code-workspace"
 
 jobs:
-  preparing-works:
-    name: Generate resources
+  generate_newsphoto:
+    name: Generate NewsPhoto
     runs-on: windows-latest
     steps:
     - name: Set up timezone to Asia/Shanghai
@@ -49,7 +54,13 @@ jobs:
     - name: Convert to HTML with pandoc
       run: |
         pandoc --version
-        pandoc --metadata title='NewsPhoto' --embed-resources --standalone --template='template/newsphoto.html5' --css sources/styles/index.css sources/index.md --output sources/index.html
+        pandoc sources/index.md `
+              --metadata title='NewsPhoto' `
+              --embed-resources `
+              --standalone `
+              --template='template/newsphoto.html5' `
+              --css sources/styles/index.css `
+              --output sources/index.html
         Get-ChildItem -Path .\sources\ -Recurse
 
     - name: Generate screenshout
