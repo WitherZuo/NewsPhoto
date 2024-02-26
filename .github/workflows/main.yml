@@ -4,7 +4,6 @@ on:
     paths-ignore:
       - "README.md"
       - "LICENSE"
-      - ".github/project-structure.txt"
       - ".vscode/**"
       - "push/**"
       - "NewsPhoto.code-workspace"

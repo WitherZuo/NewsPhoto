@@ -2,7 +2,7 @@
 import requests
 
 # 获取必应图片的 JSON 文件
-def getBingJSON():
+def get_bing_json():
     # 请求头：使用火狐的用户代理字符串
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/114.0"}
@@ -19,7 +19,7 @@ def getBingJSON():
     return bingimage_data
 
 # 获取必应图片的标题和版权所有者
-def getBingTitle(bingimage_data):
+def get_bing_title(bingimage_data):
     # 拆分图片标题和版权所有者字符串
     bingimage_title = bingimage_data.get("copyright").split(" (")
 
@@ -35,7 +35,7 @@ def getBingTitle(bingimage_data):
     return title, copyright_owner
 
 # 获取必应图片到本地
-def getBingImage(bingimage_data):
+def get_bing_image(bingimage_data):
     # 获取图片地址，然后拼接
     """
     获取图片网址和详细信息
@@ -57,6 +57,6 @@ def getBingImage(bingimage_data):
 
 # 调用函数
 if __name__ == "__main__":
-    json_data = getBingJSON()
-    getBingTitle(json_data)
-    getBingImage(json_data)
+    json_data = get_bing_json()
+    get_bing_title(json_data)
+    get_bing_image(json_data)
