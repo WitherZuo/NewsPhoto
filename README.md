@@ -14,7 +14,6 @@ News Photo every day.
 ./NewsPhoto
 │   .gitattributes（用于控制 Git LFS 大文件存储特性的设置）
 │   .gitignore（配置应被 Git 忽略追踪的文件）
-│   bing.py（获取必应每日图片的数据，包括描述和图片自身）
 │   browser-autotest.py（浏览器自动化，从生成的页面截图）
 │   LICENSE（项目许可）
 │   main.py（项目主入口，生成所需的源文件：index.md）
@@ -22,7 +21,6 @@ News Photo every day.
 │   NewsPhoto.code-workspace（VS Code 工作区配置）
 │   README.md（项目自述）
 │   requirements.txt（项目的依赖项配置文件）
-│   today.py（获取和当前日期时间有关的信息，包括农历日期）
 │
 ├───.github（GitHub 相关）
 │   └───workflows（GitHub Actions 工作流）
@@ -30,6 +28,13 @@ News Photo every day.
 │
 ├───.vscode（VS Code 项目配置）
 │       tasks.json（项目中的可执行任务）
+│
+├───modules（项目功能模块）
+│       __init__.py（模块初始化文件）
+│       today.py（获取和当前日期时间有关的信息，包括农历日期）
+│       bing.py（获取必应每日图片的数据，包括描述和图片自身）
+│       zhdate.py（获取中国农历日期）
+│       constants.py（农历月份数据）
 │
 ├───push（可重用的任务）
 │       preview.ps1（用于一键生成 NewsPhoto 并预览）
