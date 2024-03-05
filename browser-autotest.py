@@ -2,7 +2,7 @@ from playwright.sync_api import sync_playwright
 import os
 
 file_name = "sources/NewsPhoto.png"
-url = "file:///"+os.getcwd()+r"\sources\index.html"
+url = "file:///" + os.getcwd() + r"\sources\index.html"
 print(url)
 
 if os.path.exists(file_name):

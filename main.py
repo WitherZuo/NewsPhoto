@@ -1,6 +1,6 @@
 # coding=utf-8
-from today import get_simple_date, get_full_date, get_weekday, get_zh_date
-from bing import get_bing_json, get_bing_title, get_bing_image
+from modules.today import get_simple_date, get_full_date, get_weekday, get_zh_date
+from modules.bing import get_bing_json, get_bing_title, get_bing_image
 import os
 import pangu
 import re
