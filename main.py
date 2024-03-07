@@ -35,7 +35,7 @@ greeting = "不是由 ChatGPT 生成的"
 # 写入头文件：header.md
 header_text = [
     "<header>  \n\n",
-    "![News Photo · 半日刊](sources/images/photo.jpg)  \n\n",
+    "![News Photo](sources/images/photo.jpg)  \n\n",
     "</header>  \n\n",
     "<section>  \n\n",
     "## " + today_simple_date + " · " + today_weekday + " · " + today_zhdate + "\n\n",
