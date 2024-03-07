@@ -44,8 +44,11 @@ venv.bak/
 
 # Unused
 sources/NewsPhoto.png
-sources/index.md
-sources/index.html
+sources/*.md
+sources/*.html
 sources/images/photo.jpg
+
+# VS Code workspace config file
+*.code-workspace
 
 *.swp
