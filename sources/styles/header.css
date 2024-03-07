@@ -23,7 +23,7 @@ header figure figcaption {
     position: absolute;
     top: 10px;
     left: 10px;
-    opacity: 0.8;
+    opacity: 1;
     text-align: center;
     font-size: 24px;
     background: #333;
