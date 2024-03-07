@@ -18,7 +18,6 @@ News Photo every day.
 │   LICENSE（项目许可）
 │   main.py（项目主入口，生成所需的源文件：index.md）
 │   news.txt（初始的新闻源稿，必需）
-│   NewsPhoto.code-workspace（VS Code 工作区配置）
 │   README.md（项目自述）
 │   requirements.txt（项目的依赖项配置文件）
 │
@@ -27,7 +26,9 @@ News Photo every day.
 │           main.yml（工作流任务配置）
 │
 ├───.vscode（VS Code 项目配置）
-│       tasks.json（项目中的可执行任务）
+│       tasks.json（工作区的可执行任务）
+│       extensions.json（工作区建议的扩展）
+│       settings.json（工作区建议的设置）
 │
 ├───modules（项目功能模块）
 │       __init__.py（模块初始化文件）
@@ -124,7 +125,7 @@ python browser-autotest.py
 
 生成图片。生成的图片位于 `sources` 目录下，名称为 `NewsPhoto.png`。
 
-⚠️（注：从 Release/Tag 页获取的源码包可能**不包含**字体文件，如果需要，可从仓库的 `sources/fonts` 目录下单独获取，放到本地指定位置即可 ）
+⚠️（注：请**使用 `git clone` 方式获取项目源代码到本地**而非通过 Releases 或 Tags 页面，由于项目使用了 Git LFS，使用后者获取源码可能无法获取字体文件导致显示异常！）
 
 ## 感谢：
 

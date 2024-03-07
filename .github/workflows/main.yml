@@ -6,7 +6,6 @@ on:
       - "LICENSE"
       - ".vscode/**"
       - "push/**"
-      - "NewsPhoto.code-workspace"
 
 jobs:
   generate_newsphoto:
