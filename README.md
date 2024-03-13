@@ -37,7 +37,7 @@ News Photo every day.
 │       zhdate.py（获取中国农历日期）
 │       constants.py（农历月份数据）
 │
-├───push（可重用的任务）
+├───scripts（可重用的任务）
 │       preview.ps1（用于一键生成 NewsPhoto 并预览）
 │       publish.ps1（用于一键上传 NewsPhoto 成品并生成 Release）
 │
