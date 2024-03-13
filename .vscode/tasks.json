@@ -8,7 +8,7 @@
             "detail": "一键预览生成的图片 / Preview generated image in one-click.",
             "type": "shell",
             "args": [],
-            "command": "pwsh.exe ./push/preview.ps1",
+            "command": "pwsh.exe ./scripts/preview.ps1",
             "problemMatcher": []
         },
         {
@@ -29,7 +29,7 @@
             "label": "Git：上传所有提交和标签 / Git: Push all commits and tags.",
             "detail": "上传所有提交和标签到远端仓库 / Push all commits and tags to remote.",
             "type": "shell",
-            "command": "pwsh.exe ./push/publish.ps1",
+            "command": "pwsh.exe ./scripts/publish.ps1",
             "problemMatcher": []
         }
     ]
