@@ -1,3 +1,3 @@
 pangu==4.0.6.1
-playwright==1.41.2
+playwright==1.42.0
 Requests==2.31.0
