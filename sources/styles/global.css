@@ -1,4 +1,8 @@
 /* 页面全局样式 */
+:root {
+    color-scheme: light dark;
+}
+
 @font-face {
     font-family: 'Mi Sans';
     src: url('../fonts/MiSans-Regular.woff2');

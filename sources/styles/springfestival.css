@@ -1,3 +1,9 @@
+/* 修复浅色模式和春节主题的文字颜色冲突 */
+body,
+header figure figcaption {
+	color: #fff !important;
+}
+
 /* 设置顶部图片样式 */
 header figure figcaption {
 	background: #ac0000 !important;
@@ -6,6 +12,11 @@ header figure figcaption {
 /* 设置主要内容区域样式 */
 section {
 	background: #ac0000 !important;
+}
+
+/* 新闻内容文本样式 */
+section p {
+	border-bottom: 1px solid #cccc00 !important;
 }
 
 /* 新闻内容标志开头设置 */
@@ -29,4 +40,8 @@ section p:nth-of-type(2)::before {
 /* 底部版权页样式 */
 footer {
 	background: #770000 !important;
+}
+
+footer blockquote {
+	border-left: 0.5em solid #fff !important;
 }
