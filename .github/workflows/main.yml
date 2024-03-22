@@ -56,8 +56,8 @@ jobs:
               --metadata title='NewsPhoto' `
               --embed-resources `
               --standalone `
-              --template='template/newsphoto.html5' `
-              --css sources/styles/index.css `
+              --template='templates/newsphoto.html5' `
+              --css sources/styles/light.css `
               --output sources/index.html
         Get-ChildItem -Path .\sources\ -Recurse
 
