@@ -1,9 +1,32 @@
-/* 设置主要内容区域样式-内边距 */
+/* 设置顶部图片样式 */
+header figure figcaption {
+	background: #ac0000 !important;
+}
+
+/* 设置主要内容区域样式 */
 section {
-	background: rgb(129, 0, 0) !important;
+	background: #ac0000 !important;
+}
+
+/* 新闻内容标志开头设置 */
+section p::before {
+	background: #cccc00 !important;
+	color: #222 !important;
+}
+
+/* “置顶新闻”样式 */
+section p:nth-of-type(2) {
+	background: #cccc00 !important;
+	color: #222 !important;
+	outline: 8px solid #cccc00 !important;
+}
+
+section p:nth-of-type(2)::before {
+	background: #222 !important;
+	color: #cccc00 !important;
 }
 
 /* 底部版权页样式 */
 footer {
-	background: rgb(100, 0, 0) !important;
+	background: #770000 !important;
 }
