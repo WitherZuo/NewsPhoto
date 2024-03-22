@@ -66,3 +66,25 @@ section p:nth-of-type(2)::before {
     background: #fff;
     color: #e81224;
 }
+
+@media (prefers-color-scheme: light) {
+    section {
+        background: #f5f5f5;
+    }
+
+    section p::before {
+        background: #b32727;
+        color: #f5f5f5;
+    }
+
+    section p:nth-of-type(2) {
+        background: #b32727;
+        color: #f5f5f5;
+        outline: 8px solid #b32727;
+    }
+
+    section p:nth-of-type(2)::before {
+        background: #f5f5f5;
+        color: #b32727;
+    }
+}

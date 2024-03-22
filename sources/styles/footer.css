@@ -12,7 +12,7 @@ footer p {
 
 footer blockquote {
     padding-right: 12px;
-    border-left: 0.5em #EEE solid;
+    border-left: 0.5em #fff solid;
 }
 
 footer blockquote p {
@@ -28,4 +28,14 @@ footer figure img[title="qrcode"] {
     width: 75px;
     right: 20px;
     bottom: 20px;
+}
+
+@media (prefers-color-scheme: light) {
+    footer {
+        background: #d0d0d0;
+    }
+
+    footer blockquote {
+        border-left: 0.5em #222 solid;
+    }
 }
