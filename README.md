@@ -2,9 +2,7 @@
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/WitherZuo/NewsPhoto/main.yml?style=for-the-badge&logo=github-actions&logoColor=white)  ![I-Love-GitHubActions](https://img.shields.io/badge/I%20%E2%9D%A4%20YOU-GITHUB%20ACTIONS-blue?style=for-the-badge&logo=github&logoColor=white)  ![Use-Pandoc](https://img.shields.io/badge/USE-Pandoc-red?style=for-the-badge&logo=markdown&logoColor=white)
 
-News Photo every day.
-
-这是一个生成新闻长图片的小项目，使用 Pandoc 作为转换核心。
+News Photo everyday. / 使用 Pandoc 生成新闻长图。
 
 ## 项目文件结构：
 <details>
@@ -113,7 +111,7 @@ python main.py
 pandoc --metadata title='NewsPhoto' --embed-resources --standalone --template='template/newsphoto.html5' --css sources/styles/index.css sources/index.md --output sources/index.html
 ```
 
-生成 `index.html` 文件。该文件同样位于 `sources` 目录下。
+生成 `index.html` 文件。该文件位于 `outputs` 目录下。
 
 ### 5. 生成图片
 
@@ -123,7 +121,7 @@ pandoc --metadata title='NewsPhoto' --embed-resources --standalone --template='t
 python browser-autotest.py
 ```
 
-生成图片。生成的图片位于 `sources` 目录下，名称为 `NewsPhoto.png`。
+生成图片。生成的图片位于 `outputs` 目录下，名称为 `NewsPhoto.png`。
 
 ⚠️（注：请**使用 `git clone` 方式获取项目源代码到本地**而非通过 Releases 或 Tags 页面，由于项目使用了 Git LFS，使用后者获取源码可能无法获取字体文件导致显示异常！）
 
