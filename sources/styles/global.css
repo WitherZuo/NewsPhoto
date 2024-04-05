@@ -1,8 +1,4 @@
 /* 页面全局样式 */
-:root {
-    color-scheme: light dark;
-}
-
 @font-face {
     font-family: 'Mi Sans';
     src: url('../fonts/MiSans-Regular.woff2');
@@ -33,14 +29,7 @@ h1.title {
 body {
     margin: 0 auto;
     width: 640px;
-    color: #fff;
     overflow-x: hidden;
     background: #000;
     counter-reset: list-item 0;
-}
-
-@media (prefers-color-scheme: light) {
-    body {
-        color: #222;
-    }
 }
