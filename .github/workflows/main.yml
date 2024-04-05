@@ -58,30 +58,31 @@ jobs:
               --standalone `
               --template='templates/newsphoto.html5' `
               --css sources/styles/light.css `
-              --output sources/index.html
+              --output outputs/index.html
         Get-ChildItem -Path .\sources\ -Recurse
+        Get-ChildItem -Path .\outputs\ -Recurse
 
     - name: Generate screenshout
       run: |
         python browser-autotest.py
-        Get-ChildItem -Path .\sources\
+        Get-ChildItem -Path .\outputs\
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: NewsPhoto_sourcecode
-        path: sources/index.html
+        path: outputs/index.html
 
     - name: Upload NewsPhoto
       uses: actions/upload-artifact@v4
       with:
         name: NewsPhoto
-        path: sources/NewsPhoto.png
+        path: outputs/NewsPhoto.png
 
     - name: Release
       uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
-          sources/index.html
-          sources/NewsPhoto.png
+          outputs/index.html
+          outputs/NewsPhoto.png

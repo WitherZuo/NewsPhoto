@@ -12,7 +12,7 @@ outdated_files = [
     "sources/index.md",
     "sources/footer.md",
     "sources/images/photo.jpg",
-    "sources/index.html",
+    "outputs/index.html",
 ]
 for outdated_file in outdated_files:
     if os.path.exists(outdated_file):

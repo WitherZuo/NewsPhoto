@@ -22,7 +22,7 @@
             "label": "Pandoc：转换为 HTML / Pandoc: Convert to HTML.",
             "detail": "使用 Pandoc 转换为 HTML / Coverting to HTML with Pandoc.",
             "type": "shell",
-            "command": "pandoc --metadata title='NewsPhoto' --embed-resources --standalone --template='templates/newsphoto.html5' --css sources/styles/index.css sources/index.md --output sources/index.html",
+            "command": "pandoc --metadata title='NewsPhoto' --embed-resources --standalone --template='templates/newsphoto.html5' --css sources/styles/index.css sources/index.md --output outputs/index.html",
             "problemMatcher": []
         },
         {
