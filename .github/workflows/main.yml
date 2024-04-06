@@ -1,11 +1,26 @@
 name: Create NewsPhoto
 on:
-  push:
-    paths-ignore:
-      - "README.md"
-      - "LICENSE"
-      - ".vscode/**"
-      - "push/**"
+  # push:
+  #   paths-ignore:
+  #     - "README.md"
+  #     - "LICENSE"
+  #     - ".vscode/**"
+  #     - "push/**"
+  workflow_dispatch:
+    inputs:
+      greeting:
+        description: 'Greeting text:'
+        required: true
+        type: string
+      style:
+        description: 'NewsPhoto style:'
+        required: true
+        default: 'light'
+        type: choice
+        options:
+          - light
+          - dark
+          - springfestival
 
 jobs:
   generate_newsphoto:
@@ -26,7 +41,7 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: '3.12'
 
     - name: Cache dependencies
       uses: actions/cache@v4
@@ -44,22 +59,23 @@ jobs:
         playwright install --with-deps chromium
         choco install -y pandoc
 
-    - name: Create markdown sources
+    - name: Create markdown sources and covert to HTML
       run: |
-        python main.py
-        Get-ChildItem -Path .\sources\ -Recurse
-
-    - name: Convert to HTML with pandoc
-      run: |
-        pandoc --version
-        pandoc sources/index.md `
-              --metadata title='NewsPhoto' `
-              --embed-resources `
-              --standalone `
-              --css sources/styles/light.css `
-              --output outputs/index.html
+        python main.py --greeting ${{ inputs.greeting }} --style ${{ inputs.style }}
         Get-ChildItem -Path .\sources\ -Recurse
         Get-ChildItem -Path .\outputs\ -Recurse
+
+    # - name: Convert to HTML with pandoc
+    #   run: |
+    #     pandoc --version
+    #     pandoc sources/index.md `
+    #           --metadata title='NewsPhoto' `
+    #           --embed-resources `
+    #           --standalone `
+    #           --css sources/styles/light.css `
+    #           --output outputs/index.html
+    #     Get-ChildItem -Path .\sources\ -Recurse
+    #     Get-ChildItem -Path .\outputs\ -Recurse
 
     - name: Generate screenshout
       run: |
