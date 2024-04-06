@@ -1,11 +1,5 @@
 name: Create NewsPhoto
 on:
-  # push:
-  #   paths-ignore:
-  #     - "README.md"
-  #     - "LICENSE"
-  #     - ".vscode/**"
-  #     - "push/**"
   workflow_dispatch:
     inputs:
       greeting:
@@ -64,18 +58,6 @@ jobs:
         python main.py --greeting ${{ inputs.greeting }} --style ${{ inputs.style }}
         Get-ChildItem -Path .\sources\ -Recurse
         Get-ChildItem -Path .\outputs\ -Recurse
-
-    # - name: Convert to HTML with pandoc
-    #   run: |
-    #     pandoc --version
-    #     pandoc sources/index.md `
-    #           --metadata title='NewsPhoto' `
-    #           --embed-resources `
-    #           --standalone `
-    #           --css sources/styles/light.css `
-    #           --output outputs/index.html
-    #     Get-ChildItem -Path .\sources\ -Recurse
-    #     Get-ChildItem -Path .\outputs\ -Recurse
 
     - name: Generate screenshout
       run: |
