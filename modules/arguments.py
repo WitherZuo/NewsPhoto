@@ -11,20 +11,20 @@ parser = argparse.ArgumentParser(description="News Photo: News Photo everyday!")
 parser.add_argument(
     "-g",
     "--greeting",
-    metavar="GREETING TEXT",
+    metavar="GREETING_TEXT",
     type=str,
     default="……",
-    nargs="?",
+    required=False,
     help="问候语文本，默认值：……",
 )
 parser.add_argument(
     "-s",
     "--style",
-    metavar="STYLE NAME",
+    metavar="STYLE_NAME",
     type=str,
     choices=["light", "dark", "springfestival"],
     default="light",
-    nargs="?",
+    required=False,
     help="生成 NewsPhoto 所用的样式 ( light | dark | springfestival )，默认值：light",
 )
 parser.add_argument(
