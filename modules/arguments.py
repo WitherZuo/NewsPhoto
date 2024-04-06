@@ -15,7 +15,7 @@ parser.add_argument(
     type=str,
     default="……",
     nargs="?",
-    help="Greeting text",
+    help="问候语文本，默认值：……",
 )
 parser.add_argument(
     "-s",
@@ -25,7 +25,7 @@ parser.add_argument(
     choices=["light", "dark", "springfestival"],
     default="light",
     nargs="?",
-    help="NewsPhoto style ( light | dark | springfestival )",
+    help="生成 NewsPhoto 所用的样式 ( light | dark | springfestival )，默认值：light",
 )
 parser.add_argument(
     "news_file",
@@ -33,5 +33,5 @@ parser.add_argument(
     type=str,
     default="./news.txt",
     nargs="?",
-    help="News file you want to use",
+    help="生成 NewsPhoto 所用的新闻稿，默认值：./news.txt",
 )
