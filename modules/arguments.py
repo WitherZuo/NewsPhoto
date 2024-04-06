@@ -2,7 +2,7 @@ import argparse
 
 """
 参数说明：
--g, --greeting：祝贺内容文本
+-g, --greeting：问候内容文本
 -s, --style：生成 NewsPhoto 所使用的样式，可选值：light | dark | springfestival
 news_file: 生成 NewsPhoto 所使用的新闻稿
 """
