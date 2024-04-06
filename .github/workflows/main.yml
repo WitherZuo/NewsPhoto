@@ -55,7 +55,7 @@ jobs:
 
     - name: Create markdown sources and covert to HTML
       run: |
-        python main.py --greeting ${{ inputs.greeting }} --style ${{ inputs.style }}
+        python main.py --greeting "${{ inputs.greeting }}" --style ${{ inputs.style }}
         Get-ChildItem -Path .\sources\ -Recurse
         Get-ChildItem -Path .\outputs\ -Recurse
 
