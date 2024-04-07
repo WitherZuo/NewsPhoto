@@ -110,7 +110,7 @@ jobs:
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: 'refs/tags/NewsPhoto-${{ steps.get_current_time.outputs }}',
+            ref: 'refs/tags/NewsPhoto-${{ steps.get_current_time.outputs.value }}',
             sha: context.sha
           })
 
@@ -120,17 +120,16 @@ jobs:
         path: outputs
         pattern: newsphoto*
         merge-multiple: true
-    
+
     - name: List all artifacts
       run: Get-ChildItem -Path .\outputs\
 
     - name: Create new NewsPhoto release
       run: |
-        gh release create "NewsPhoto-${{ steps.get_current_time.outputs }}" `
+        gh release create "NewsPhoto-${{ steps.get_current_time.outputs.value }}" `
         ".\outputs\NewsPhoto.png#NewsPhoto" `
         ".\outputs\index.html#NewsPhoto source code" `
-        --notes "NewsPhoto-${{ steps.get_current_time.outputs }}" `
+        --notes "NewsPhoto-${{ steps.get_current_time.outputs.value }}" `
         --verify-tag
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
