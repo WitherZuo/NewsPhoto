@@ -12,22 +12,8 @@
             "problemMatcher": []
         },
         {
-            "label": "生成 Markdown 资源 / Generate markdown source.",
-            "detail": "生成需要使用 Pandoc 后处理所需的 Markdown 资源 / Generate markdown source for post-processing with Pandoc.",
-            "type": "shell",
-            "command": "python main.py",
-            "problemMatcher": []
-        },
-        {
-            "label": "Pandoc：转换为 HTML / Pandoc: Convert to HTML.",
-            "detail": "使用 Pandoc 转换为 HTML / Coverting to HTML with Pandoc.",
-            "type": "shell",
-            "command": "pandoc --metadata title='NewsPhoto' --embed-resources --standalone --css sources/styles/index.css sources/index.md --output outputs/index.html",
-            "problemMatcher": []
-        },
-        {
-            "label": "Git：上传所有提交和标签 / Git: Push all commits and tags.",
-            "detail": "上传所有提交和标签到远端仓库 / Push all commits and tags to remote.",
+            "label": "Git：上传所有提交 / Git: Push all commits.",
+            "detail": "上传所有提交到远端仓库 / Push all commits to remote.",
             "type": "shell",
             "command": "pwsh.exe ./scripts/publish.ps1",
             "problemMatcher": []
