@@ -95,7 +95,9 @@ jobs:
 
     - name: Get current time
       id: get_current_time
-      run: Get-Date -UFormat '%Y%m%d-%H%M%S'
+      run: |
+        $current_time = Get-Date -UFormat '%Y%m%d-%H%M%S'
+        Write-Host "current_time=$current_time" >> $GITHUB_OUTPUT
 
     - name: Check out repository
       uses: actions/checkout@v4
@@ -110,7 +112,7 @@ jobs:
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: 'refs/tags/NewsPhoto-${{ steps.get_current_time.outputs.value }}',
+            ref: 'refs/tags/NewsPhoto-${{ steps.get_current_time.outputs.current_time }}',
             sha: context.sha
           })
 
@@ -126,10 +128,10 @@ jobs:
 
     - name: Create new NewsPhoto release
       run: |
-        gh release create "NewsPhoto-${{ steps.get_current_time.outputs.value }}" `
+        gh release create "NewsPhoto-${{ steps.get_current_time.outputs.current_time }}" `
         ".\outputs\NewsPhoto.png#NewsPhoto" `
         ".\outputs\index.html#NewsPhoto source code" `
-        --notes "NewsPhoto-${{ steps.get_current_time.outputs.value }}" `
+        --notes "NewsPhoto-${{ steps.get_current_time.outputs.current_time }}" `
         --verify-tag
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
