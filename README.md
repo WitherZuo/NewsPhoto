@@ -37,13 +37,13 @@ pip install -r requirements.txt
 # main.py 执行时可用的开关 / 参数：
 #
 # NEWS_FILE：
-# 生成 NewsPhoto 所使用的新闻稿文件路径。（默认值：./news.txt）
+# 生成 NewsPhoto 时所使用的新闻稿文件路径。（默认值：./news.txt）
 #
 # -g / --greeting GREETING_TEXT：
 # 问候内容文本。（默认值：……）
 #
 # -s / --style STYLE_NAME：
-# 生成 NewsPhoto 所使用的样式，可选值：light | dark | springfestival。（默认值：light）
+# 生成 NewsPhoto 时所使用的样式，可选值：light | dark | springfestival。（默认值：light）
 
 python main.py
 ```
