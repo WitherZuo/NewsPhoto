@@ -63,7 +63,7 @@ jobs:
         python save-as-image.py
         Get-ChildItem -Path .\outputs\
 
-    - name: Upload artifacts
+    - name: Upload NewsPhoto source code
       uses: actions/upload-artifact@v4
       with:
         name: newsphoto-sourcecode
@@ -75,10 +75,56 @@ jobs:
         name: newsphoto
         path: outputs/NewsPhoto.png
 
-    - name: Release
-      uses: softprops/action-gh-release@v2
-      if: startsWith(github.ref, 'refs/tags/')
+    # - name: Release
+    #   uses: softprops/action-gh-release@v2
+    #   if: startsWith(github.ref, 'refs/tags/')
+    #   with:
+    #     files: |
+    #       outputs/index.html
+    #       outputs/NewsPhoto.png
+
+  release-newsphoto:
+    name: Release NewsPhoto
+    runs-on: windows-latest
+    needs: generate_newsphoto
+    steps:
+    - name: Set up timezone to Asia/Shanghai
+      uses: WitherZuo/set-timezone@v1.0.0
       with:
-        files: |
-          outputs/index.html
-          outputs/NewsPhoto.png
+        timezoneWindows: "China Standard Time"
+
+    - name: Get current time
+      id: get_current_time
+      run: Get-Date -UFormat '%Y%m%d-%H%M%S'
+
+    - name: Create new tag
+      uses: actions/github-script@v5
+      with:
+        script: |
+          github.rest.git.createRef({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            ref: 'refs/tags/NewsPhoto-${{ steps.get_current_time.outputs }}',
+            sha: context.sha
+          })
+
+    - name: Download NewsPhoto and source code
+      uses: actions/download-artifact@v4
+      with:
+        path: newsphoto
+        pattern: newsphoto-*
+        merge-multiple: true
+    
+    - name: List all artifacts
+      run: Get-ChildItem -Path .\newsphoto\
+
+    - name: Create new NewsPhoto release
+      run: |
+        gh release create "NewsPhoto-${{ steps.get_current_time.outputs }}" `
+        ".\newsphoto\NewsPhoto.png#NewsPhoto" `
+        ".\newsphoto\index.html#NewsPhoto source code" `
+        --notes "NewsPhoto-${{ steps.get_current_time.outputs }}" `
+        --verify-tag
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
