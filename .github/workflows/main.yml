@@ -97,7 +97,7 @@ jobs:
       id: get_current_time
       run: |
         $current_time = Get-Date -UFormat '%Y%m%d-%H%M%S'
-        Write-Host "current_time=$current_time" >> $GITHUB_OUTPUT
+        Write-Output "current_time=$current_time" >> $GITHUB_OUTPUT
 
     - name: Check out repository
       uses: actions/checkout@v4
