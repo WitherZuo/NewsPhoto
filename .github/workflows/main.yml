@@ -75,14 +75,6 @@ jobs:
         name: newsphoto
         path: outputs/NewsPhoto.png
 
-    # - name: Release
-    #   uses: softprops/action-gh-release@v2
-    #   if: startsWith(github.ref, 'refs/tags/')
-    #   with:
-    #     files: |
-    #       outputs/index.html
-    #       outputs/NewsPhoto.png
-
   release-newsphoto:
     name: Release NewsPhoto
     runs-on: windows-latest
