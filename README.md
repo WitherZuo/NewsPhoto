@@ -15,10 +15,6 @@ News Photo everyday. / 使用 Pandoc 生成新闻长图。
 - [Python](https://www.python.org/downloads/)
 - [Pandoc](https://pandoc.org/installing.html)
 - [Playwright](https://playwright.dev/python/docs/intro#installing-playwright)
-    ```
-    # 安装并配置 Playwright 和 Chromium
-    playwright install chromium --with-deps
-    ```
 
 ### 2. 克隆项目
 ```bash
@@ -27,6 +23,9 @@ git clone https://github.com/WitherZuo/NewsPhoto.git
 
 # 安装所需第三方库
 pip install -r requirements.txt
+
+# 安装并配置 Playwright 和 Chromium
+playwright install chromium --with-deps
 ```
 
 ### 3. 生成网页
