@@ -26,7 +26,7 @@ function Get-StyleName {
 
     if ($style_name -notin $styles) {
         Write-Host '无效输入，请重试。'
-        Get-StyleName
+        $style_name = Get-StyleName
     }
     return $style_name
 }
