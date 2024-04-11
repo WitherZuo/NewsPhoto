@@ -8,10 +8,9 @@ News Photo everyday. / 使用 Pandoc 生成新闻长图。
 
 ### 1. 准备环境
 
-在测试项目、运行成品文件之前，请先安装并配置好**最新版本**的 `Git`、`Python`、`Playwright`、`Git LFS` 以及 `Pandoc`，执行如下命令来安装并配置所需要的环境，建议使用如 `venv` 这样的虚拟环境模块。
+在测试项目、运行成品文件之前，请先安装并配置好**最新版本**的 `Git`、`Python`、`Playwright`、以及 `Pandoc`，执行如下命令来安装并配置所需要的环境，建议使用如 `venv` 这样的虚拟环境模块。
 
 - [Git](https://git-scm.com/downloads)
-- [Git LFS](https://github.com/git-lfs/git-lfs#installing)
 - [Python](https://www.python.org/downloads/)
 - [Pandoc](https://pandoc.org/installing.html)
 - [Playwright](https://playwright.dev/python/docs/intro#installing-playwright)
