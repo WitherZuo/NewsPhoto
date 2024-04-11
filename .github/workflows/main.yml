@@ -95,7 +95,7 @@ jobs:
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: 'refs/tags/NewsPhoto-${{ steps.get_current_time.outputs.current_time }}',
+            ref: 'refs/tags/${{ steps.get_current_time.outputs.current_time }}',
             sha: context.sha
           })
 
@@ -111,9 +111,10 @@ jobs:
 
     - name: Create new NewsPhoto release
       run: |
-        gh release create "NewsPhoto-${{ steps.get_current_time.outputs.current_time }}" `
+        gh release create "${{ steps.get_current_time.outputs.current_time }}" `
         ".\outputs\NewsPhoto.png#NewsPhoto" `
         ".\outputs\index.html#NewsPhoto source code" `
+        --title "${{ steps.get_current_time.outputs.current_time }}" `
         --notes "NewsPhoto-${{ steps.get_current_time.outputs.current_time }}" `
         --verify-tag
       env:
