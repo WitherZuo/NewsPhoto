@@ -8,10 +8,9 @@ News Photo everyday. / 使用 Pandoc 生成新闻长图。
 
 ### 1. 准备环境
 
-在测试项目、运行成品文件之前，请先安装并配置好**最新版本**的 `Git`、`Python`、`Playwright`、`Git LFS` 以及 `Pandoc`，执行如下命令来安装并配置所需要的环境，建议使用如 `venv` 这样的虚拟环境模块。
+在测试项目、运行成品文件之前，请先安装并配置好**最新版本**的 `Git`、`Python`、`Playwright`、以及 `Pandoc`，执行如下命令来安装并配置所需要的环境，建议使用如 `venv` 这样的虚拟环境模块。
 
 - [Git](https://git-scm.com/downloads)
-- [Git LFS](https://github.com/git-lfs/git-lfs#installing)
 - [Python](https://www.python.org/downloads/)
 - [Pandoc](https://pandoc.org/installing.html)
 - [Playwright](https://playwright.dev/python/docs/intro#installing-playwright)
@@ -57,13 +56,12 @@ python main.py
 python save-as-image.py
 ```
 
-生成图片。生成的图片位于 `outputs` 目录下，名称为 `NewsPhoto.png`。
-
-⚠️（注：请**使用 `git clone` 方式获取项目源代码到本地**而非通过 Releases 或 Tags 页面，由于项目使用了 Git LFS，使用后者获取源码可能无法获取字体文件导致显示异常！）
+生成图片。生成的图片位于 `outputs` 目录下，名称为 `NewsPhoto.png`。  
 
 ## 感谢：
 
 - Pandoc：[Pandoc - About pandoc](https://pandoc.org/index.html)
 - GitHub Actions：[GitHub Actions](https://github.com/features/actions)
 - Playwright：[Playwright Python](https://playwright.dev/python/)
+- Mi Sans: [Mi Sans](https://hyperos.mi.com/font)
 - 项目依赖的其它第三方项目：pangu、zhdate
