@@ -114,6 +114,7 @@ jobs:
         gh release create "NewsPhoto-${{ steps.get_current_time.outputs.current_time }}" `
         ".\outputs\NewsPhoto.png#NewsPhoto" `
         ".\outputs\index.html#NewsPhoto source code" `
+        --title "${{ steps.get_current_time.outputs.current_time }}"
         --notes "NewsPhoto-${{ steps.get_current_time.outputs.current_time }}" `
         --verify-tag
       env:
