@@ -57,13 +57,12 @@ python main.py
 python save-as-image.py
 ```
 
-生成图片。生成的图片位于 `outputs` 目录下，名称为 `NewsPhoto.png`。
-
-⚠️（注：请**使用 `git clone` 方式获取项目源代码到本地**而非通过 Releases 或 Tags 页面，由于项目使用了 Git LFS，使用后者获取源码可能无法获取字体文件导致显示异常！）
+生成图片。生成的图片位于 `outputs` 目录下，名称为 `NewsPhoto.png`。  
 
 ## 感谢：
 
 - Pandoc：[Pandoc - About pandoc](https://pandoc.org/index.html)
 - GitHub Actions：[GitHub Actions](https://github.com/features/actions)
 - Playwright：[Playwright Python](https://playwright.dev/python/)
+- Mi Sans: [Mi Sans](https://hyperos.mi.com/font)
 - 项目依赖的其它第三方项目：pangu、zhdate
