@@ -1,5 +1,5 @@
 # coding=utf-8
-import time
+import sys
 from datetime import datetime
 from modules.zhdate import ZhDate
 
@@ -7,14 +7,27 @@ from modules.zhdate import ZhDate
 # 函数：简短日期
 def get_simple_date():
     # 获取当前日期时间，并格式化
-    simple_date = time.strftime("%Y {Y} %#m {M} %#d {D}").format(Y="年", M="月", D="日")
+    # Linux: https://stackoverflow.com/questions/9525944/python-datetime-formatting-without-zero-padding
+    if sys.platform.startswith("linux"):
+        simple_date = (
+            datetime.now()
+            .strftime("%Y {Y} %-m {M} %-d {D}")
+            .format(Y="年", M="月", D="日")
+        )
+    else:
+        simple_date = (
+            datetime.now()
+            .strftime("%Y {Y} %#m {M} %#d {D}")
+            .format(Y="年", M="月", D="日")
+        )
+
     return simple_date
 
 
 # 函数：完整日期带时区（UTC+8）
 def get_full_date():
     # 获取当前日期时间，并格式化
-    full_date = time.strftime("%Y-%m-%d %H:%M:%S")
+    full_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return full_date
 
 
