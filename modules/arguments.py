@@ -25,7 +25,7 @@ parser.add_argument(
     choices=["light", "dark", "springfestival"],
     default="light",
     required=False,
-    help=" Style used when generating NewsPhoto ( light | dark | springfestival, Default: light )",
+    help="Style used when generating NewsPhoto ( light | dark | springfestival, Default: light )",
 )
 parser.add_argument(
     "news_file",
