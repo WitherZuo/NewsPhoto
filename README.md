@@ -6,14 +6,11 @@ News Photo everyday. / 使用 Pandoc 生成新闻长图。
 
 ## 本地预览：
 
+[![Open in GitHub Codespaces](https://img.shields.io/badge/_-Open%20in%20GitHub%20Codespaces-%2324292e?style=for-the-badge&logo=github&logoColor=%23ffffff&labelColor=%232f363d&color=%2324292e)](https://codespaces.new/WitherZuo/NewsPhoto?quickstart=1)
+
 ### 1. 准备环境
 
-在测试项目、运行成品文件之前，请先安装并配置好**最新版本**的 `Git`、`Python`、`Playwright`、以及 `Pandoc`，执行如下命令来安装并配置所需要的环境，建议使用如 `venv` 这样的虚拟环境模块。
-
-- [Git](https://git-scm.com/downloads)
-- [Python](https://www.python.org/downloads/)
-- [Pandoc](https://pandoc.org/installing.html)
-- [Playwright](https://playwright.dev/python/docs/intro#installing-playwright)
+在测试项目、运行成品文件之前，请先安装并配置好**最新版本**的 [`Git`](https://git-scm.com/downloads)、[`Python`](https://www.python.org/downloads/)、[`Playwright`](https://playwright.dev/python/docs/intro#installing-playwright)、以及 [`Pandoc`](https://pandoc.org/installing.html)，执行如下命令来安装并配置所需要的环境，建议使用如 `venv` 这样的虚拟环境模块。
 
 ### 2. 克隆项目
 ```bash
@@ -66,6 +63,11 @@ python save-as-image.py
 ```
 
 生成图片。生成的图片位于 `outputs` 目录下，名称为 `NewsPhoto.png`。
+
+**或者也可以使用项目内的交互式生成脚本 `preview.sh`，该脚本位于 `scripts` 目录下。**
+
+- **Windows**：确保 `<Git 安装目录>\usr\bin\` 在 `PATH` 环境变量中，然后在项目根目录下，执行 `sh scripts\preview.sh`。
+- **macOS、Linux**：赋予脚本 `preview.sh` 执行权限，然后在项目根目录下，从当前 shell 中执行 `scripts/preview.sh`。
 
 ## 感谢：
 
