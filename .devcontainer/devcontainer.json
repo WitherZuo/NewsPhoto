@@ -1,6 +1,6 @@
 {
     "name": "NewsPhoto",
-    "image": "mcr.microsoft.com/devcontainers/python:dev-3.12-bookworm",
+    "image": "docker.io/library/python:3.12-bookworm",
     "features": {
         "ghcr.io/devcontainers/features/powershell:1": {},
         "ghcr.io/rocker-org/devcontainer-features/pandoc:1": {}
@@ -13,9 +13,10 @@
                 "ms-python.debugpy",
                 "charliermarsh.ruff"
             ],
-            "settings": {}
+            "settings": {
+                "python.defaultInterpreterPath": "python3"
+            }
         }
     },
-    "postCreateCommand": "pip3 install --no-cache-dir --user -r requirements.txt && playwright install chromium --with-deps",
-    "remoteUser": "vscode"
+    "postCreateCommand": "pip3 install --no-cache-dir -r requirements.txt && playwright install chromium --with-deps"
 }
