@@ -2,7 +2,6 @@
     "name": "NewsPhoto",
     "image": "docker.io/library/python:3.12-bookworm",
     "features": {
-        "ghcr.io/devcontainers/features/powershell:1": {},
         "ghcr.io/rocker-org/devcontainer-features/pandoc:1": {}
     },
     "customizations": {
@@ -14,9 +13,9 @@
                 "charliermarsh.ruff"
             ],
             "settings": {
-                "python.defaultInterpreterPath": "python3"
+                "python.defaultInterpreterPath": "python"
             }
         }
     },
-    "postCreateCommand": "pip3 install --no-cache-dir -r requirements.txt && playwright install chromium --with-deps"
+    "postCreateCommand": "pip install --no-cache-dir -r requirements.txt && playwright install chromium --with-deps"
 }
