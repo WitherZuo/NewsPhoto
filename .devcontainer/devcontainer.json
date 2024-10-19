@@ -1,8 +1,19 @@
 {
     "name": "NewsPhoto",
-    "image": "docker.io/library/python:3.12-bookworm",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
     "features": {
-        "ghcr.io/rocker-org/devcontainer-features/pandoc:1": {}
+        "ghcr.io/rocker-org/devcontainer-features/pandoc:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": true,
+            "configureZshAsDefaultShell": true,
+            "installOhMyZsh": true,
+            "installOhMyZshConfig": true
+        }
     },
     "customizations": {
         "vscode": {
@@ -17,5 +28,7 @@
             }
         }
     },
-    "postCreateCommand": "pip install --no-cache-dir -r requirements.txt && playwright install chromium --with-deps"
+    "postCreateCommand": "pip install -r requirements.txt && playwright install chromium --with-deps",
+    "containerUser": "dev",
+    "remoteUser": "dev"
 }
