@@ -22,12 +22,12 @@ jobs:
     name: Generate NewsPhoto
     runs-on: windows-latest
     steps:
-    - name: Set up timezone to Asia/Shanghai
+    - name: Set timezone to Asia/Shanghai
       uses: WitherZuo/set-timezone@v1.0.0
       with:
         timezoneWindows: "China Standard Time"
 
-    - name: Check out repository
+    - name: Checkout repository
       uses: actions/checkout@v4
       with:
         repository: WitherZuo/NewsPhoto
@@ -44,27 +44,27 @@ jobs:
         playwright install --with-deps chromium
         choco install -y pandoc
 
-    - name: Create markdown sources and covert to HTML
+    - name: Create markdown sources and convert to HTML
       run: |
         python main.py --greeting "${{ inputs.greeting }}" --style ${{ inputs.style }}
         Get-ChildItem -Path .\sources\
         Get-ChildItem -Path .\outputs\
 
-    - name: Generate screenshout
+    - name: Generate screenshot
       run: |
         python save-as-image.py
         Get-ChildItem -Path .\outputs\
 
-    - name: Upload NewsPhoto source code
+    - name: Upload NewsPhoto - Webpage
       uses: actions/upload-artifact@v4
       with:
-        name: newsphoto-sourcecode
-        path: outputs/index.html
+        name: newsphoto-webpage
+        path: outputs/NewsPhoto.html
 
-    - name: Upload NewsPhoto
+    - name: Upload NewsPhoto - Image
       uses: actions/upload-artifact@v4
       with:
-        name: newsphoto
+        name: newsphoto-image
         path: outputs/NewsPhoto.png
 
   release-newsphoto:
@@ -72,7 +72,7 @@ jobs:
     runs-on: windows-latest
     needs: generate_newsphoto
     steps:
-    - name: Set up timezone to Asia/Shanghai
+    - name: Set timezone to Asia/Shanghai
       uses: WitherZuo/set-timezone@v1.0.0
       with:
         timezoneWindows: "China Standard Time"
@@ -83,7 +83,7 @@ jobs:
         $current_time = Get-Date -UFormat '%Y%m%d-%H%M%S'
         "current_time=$current_time" >> $env:GITHUB_OUTPUT
 
-    - name: Check out repository
+    - name: Checkout repository
       uses: actions/checkout@v4
       with:
         repository: WitherZuo/NewsPhoto
@@ -99,7 +99,7 @@ jobs:
             sha: context.sha
           })
 
-    - name: Download NewsPhoto and source code
+    - name: Download NewsPhoto webpage and image
       uses: actions/download-artifact@v4
       with:
         path: outputs
@@ -112,8 +112,8 @@ jobs:
     - name: Create new NewsPhoto release
       run: |
         gh release create "${{ steps.get_current_time.outputs.current_time }}" `
-        ".\outputs\NewsPhoto.png#NewsPhoto" `
-        ".\outputs\index.html#NewsPhoto source code" `
+        ".\outputs\NewsPhoto.png#NewsPhoto - Image" `
+        ".\outputs\NewsPhoto.html#NewsPhoto - Webpage" `
         --title "${{ steps.get_current_time.outputs.current_time }}" `
         --notes "NewsPhoto-${{ steps.get_current_time.outputs.current_time }}" `
         --verify-tag

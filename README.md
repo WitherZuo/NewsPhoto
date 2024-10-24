@@ -32,7 +32,7 @@ playwright install chromium --with-deps
 python main.py
 ```
 
-生成 NewsPhoto 的网页版本：`index.html`。`index.html` 位于 `outputs` 目录下。
+生成 NewsPhoto 的网页版本：`NewsPhoto.html`。`NewsPhoto.html` 位于 `outputs` 目录下。
 
 <details>
 <summary><b>📌 可用的开关 / 参数（点此展开）</b></summary>
@@ -71,7 +71,7 @@ python save-as-image.py
 
 ## 感谢：
 
-- Pandoc：[Pandoc - About pandoc](https://pandoc.org/index.html)
+- Pandoc：[Pandoc - About pandoc](https://pandoc.org)
 - GitHub Actions：[GitHub Actions](https://github.com/features/actions)
 - Playwright：[Playwright Python](https://playwright.dev/python/)
 - Mi Sans: [Mi Sans](https://hyperos.mi.com/font)

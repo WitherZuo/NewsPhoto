@@ -2,7 +2,10 @@
 from modules.today import get_simple_date, get_full_date, get_weekday, get_zh_date
 from modules.bing import get_bing_json, get_bing_title, get_bing_image
 from modules.arguments import parser
-import os, pangu, re, subprocess
+import os
+import pangu
+import re
+import subprocess
 
 # 获取所有命令行参数
 args = parser.parse_args()
@@ -83,8 +86,8 @@ def convert_with_pandoc(style):
             "--embed-resources",
             "--standalone",
             f"--css={style_file}",
-            "sources/index.md",
-            "--output=outputs/index.html",
+            "sources/NewsPhoto.md",
+            "--output=outputs/NewsPhoto.html",
         ]
     )  # fmt: skip
 
@@ -94,10 +97,10 @@ if __name__ == "__main__":
     outdated_files = [
         "sources/header.md",
         "sources/content.md",
-        "sources/index.md",
         "sources/footer.md",
+        "sources/NewsPhoto.md",
         "sources/images/photo.jpg",
-        "outputs/index.html",
+        "outputs/NewsPhoto.html",
     ]
     for outdated_file in outdated_files:
         if os.path.exists(outdated_file):
@@ -114,7 +117,7 @@ if __name__ == "__main__":
     bing_title = get_bing_title(json_data)
     get_bing_image(json_data)
 
-    # 生成 index.md 的各个部分
+    # 生成 NewsPhoto.md 的各个部分
     write_header_md(
         greeting=args.greeting,
         today_simple_date=today_simple_date,
@@ -126,8 +129,8 @@ if __name__ == "__main__":
         style=args.style, bing_title=bing_title, today_full_date=today_full_date
     )
 
-    # 汇总后综合写入 index.md
-    index_md = open("sources/index.md", "a", encoding="utf_8")
+    # 汇总后综合写入 NewsPhoto.md
+    newsphoto_md = open("sources/NewsPhoto.md", "a", encoding="utf_8")
 
     header_md = open("sources/header.md", "r", encoding="utf_8")
     content_md = open("sources/content.md", "r", encoding="utf_8")
@@ -137,9 +140,9 @@ if __name__ == "__main__":
     content_source = content_md.read()
     footer_source = footer_md.read()
 
-    index_md.write(header_source + content_source + footer_source)
+    newsphoto_md.write(header_source + content_source + footer_source)
 
-    source_files = [header_md, content_md, footer_md, index_md]
+    source_files = [header_md, content_md, footer_md, newsphoto_md]
     for sources_file in source_files:
         sources_file.close()
 

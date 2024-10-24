@@ -43,7 +43,7 @@ env.bak/
 venv.bak/
 
 # Unused
-outputs/NewsPhoto.png
+outputs/*.png
 outputs/*.html
 sources/*.md
 sources/images/photo.jpg
