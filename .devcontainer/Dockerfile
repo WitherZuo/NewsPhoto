@@ -1,5 +1,5 @@
 # 使用 Python 镜像
-FROM docker.io/library/python:3.12-bookworm
+FROM docker.io/library/python:3.13-bookworm
 
 # 指定用户名和用户/组 ID
 ARG USERNAME=dev
