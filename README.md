@@ -1,12 +1,10 @@
 # News Photo
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/WitherZuo/NewsPhoto/main.yml?style=for-the-badge&logo=github-actions&logoColor=white) ![Use Pandoc](https://img.shields.io/badge/Pandoc-%23f5f5f5?style=for-the-badge&logo=markdown&logoColor=%23000&labelColor=%23ddd) ![I-Love-GitHubActions](https://img.shields.io/badge/I%20%E2%9D%A4%20YOU-GITHUB%20ACTIONS-blue?style=for-the-badge&logo=github&logoColor=white)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/WitherZuo/NewsPhoto/main.yml?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/WitherZuo/NewsPhoto/actions) [![Use Pandoc](https://img.shields.io/badge/Pandoc-%23f5f5f5?style=for-the-badge&logo=markdown&logoColor=%23000&labelColor=%23ddd)](https://pandoc.org) [![Open in GitHub Codespaces](https://img.shields.io/badge/_-Open%20in%20GitHub%20Codespaces-%2324292e?style=for-the-badge&logo=github&logoColor=%23ffffff&labelColor=%232f363d&color=%2324292e)](https://codespaces.new/WitherZuo/NewsPhoto?quickstart=1)
 
 News Photo everyday. / 使用 Pandoc 生成新闻长图。
 
 ## 本地预览：
-
-[![Open in GitHub Codespaces](https://img.shields.io/badge/_-Open%20in%20GitHub%20Codespaces-%2324292e?style=for-the-badge&logo=github&logoColor=%23ffffff&labelColor=%232f363d&color=%2324292e)](https://codespaces.new/WitherZuo/NewsPhoto?quickstart=1)
 
 ### 1. 准备环境
 
