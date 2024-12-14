@@ -41,7 +41,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-        playwright install --with-deps chromium
+        playwright install --no-shell --with-deps chromium
         choco install -y pandoc
 
     - name: Create markdown sources and convert to HTML

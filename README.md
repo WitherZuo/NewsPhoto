@@ -19,7 +19,7 @@ git clone https://github.com/WitherZuo/NewsPhoto.git
 pip install -r requirements.txt
 
 # 安装并配置 Playwright 和 Chromium
-playwright install chromium --with-deps
+playwright install chromium --with-deps --no-shell
 ```
 
 ### 3. 生成网页
