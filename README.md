@@ -8,18 +8,19 @@ News Photo everyday. / 使用 Pandoc 生成新闻长图。
 
 ### 1. 准备环境
 
-在测试项目、运行成品文件之前，请先安装并配置好**最新版本**的 [`Git`](https://git-scm.com/downloads)、[`Python`](https://www.python.org/downloads/)、[`Playwright`](https://playwright.dev/python/docs/intro#installing-playwright)、以及 [`Pandoc`](https://pandoc.org/installing.html)，执行如下命令来安装并配置所需要的环境，建议使用如 `venv` 这样的虚拟环境模块。
+在测试项目、运行成品文件之前，请先安装并配置好**最新版本**的 [`Git`](https://git-scm.com/downloads)、[`uv`](https://docs.astral.sh/uv/getting-started/installation/)、[`Playwright`](https://playwright.dev/python/docs/intro#installing-playwright)、以及 [`Pandoc`](https://pandoc.org/installing.html)。
 
 ### 2. 克隆项目
 ```bash
 # 克隆项目到本地
 git clone https://github.com/WitherZuo/NewsPhoto.git
+cd NewsPhoto
 
 # 安装所需第三方库
-pip install -r requirements.txt
+uv sync
 
 # 安装并配置 Playwright 和 Chromium
-playwright install chromium --with-deps --no-shell
+uv run playwright install chromium --with-deps --no-shell
 ```
 
 ### 3. 生成网页
@@ -27,7 +28,7 @@ playwright install chromium --with-deps --no-shell
 确保处于项目根目录中，然后在终端中输入
 
 ```bash
-python main.py
+uv run main.py
 ```
 
 生成 NewsPhoto 的网页版本：`NewsPhoto.html`。`NewsPhoto.html` 位于 `outputs` 目录下。
@@ -37,7 +38,7 @@ python main.py
 
 ```bash
 # 命令格式
-python main.py [-h] [-g GREETING_TEXT] [-s STYLE_NAME] [NEWS_FILE]
+uv run main.py [-h] [-g GREETING_TEXT] [-s STYLE_NAME] [NEWS_FILE]
 
 # 开关 / 参数说明：
 NEWS_FILE：
@@ -57,7 +58,7 @@ NEWS_FILE：
 在终端中输入
 
 ```bash
-python save-as-image.py
+uv run save-as-image.py
 ```
 
 生成图片。生成的图片位于 `outputs` 目录下，名称为 `NewsPhoto.png`。

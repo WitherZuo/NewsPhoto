@@ -24,11 +24,11 @@
                 "charliermarsh.ruff"
             ],
             "settings": {
-                "python.defaultInterpreterPath": "python"
+                "python.defaultInterpreterPath": "./.venv/bin/python"
             }
         }
     },
-    "postCreateCommand": "pip install -r requirements.txt && playwright install chromium --with-deps --no-shell",
+    "postCreateCommand": "uv sync && uv run playwright install chromium --with-deps --no-shell",
     "containerUser": "dev",
     "remoteUser": "dev"
 }

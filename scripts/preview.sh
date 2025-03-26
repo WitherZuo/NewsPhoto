@@ -45,5 +45,5 @@ get_greeting_text
 choose_theme
 
 # 生成内容
-python ./main.py --greeting "$greeting_text" --style $theme "$news_file"
-python ./save-as-image.py
+uv run ./main.py --greeting "$greeting_text" --style $theme "$news_file"
+uv run ./save-as-image.py

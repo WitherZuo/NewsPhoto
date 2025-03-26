@@ -1,5 +1,5 @@
 # 使用 Python 镜像
-FROM docker.io/library/python:3.13-bookworm
+FROM ghcr.io/astral-sh/uv:0.6.10-python3.13-bookworm
 
 # 指定用户名和用户/组 ID
 ARG USERNAME=dev

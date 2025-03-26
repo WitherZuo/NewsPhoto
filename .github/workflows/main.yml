@@ -32,27 +32,28 @@ jobs:
       with:
         repository: WitherZuo/NewsPhoto
 
-    - name: Setup Python
-      uses: actions/setup-python@v5
+    - name: Install uv and Python.
+      uses: astral-sh/setup-uv@v5
       with:
-        python-version: '3.13'
-        cache: 'pip'
+        version: "0.6.10"
+        enable-cache: true
+        cache-dependency-glob: "**/pyproject.toml"
 
     - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-        playwright install --no-shell --with-deps chromium
-        choco install -y pandoc
+      run: uv sync --no-dev
+
+    - name: Install Pandoc
+      run: choco install -y pandoc
 
     - name: Create markdown sources and convert to HTML
       run: |
-        python main.py --greeting "${{ inputs.greeting }}" --style ${{ inputs.style }}
+        uv run main.py --greeting "${{ inputs.greeting }}" --style ${{ inputs.style }}
         Get-ChildItem -Path .\sources\
         Get-ChildItem -Path .\outputs\
 
     - name: Generate screenshot
       run: |
-        python save-as-image.py
+        uv run save-as-image.py --browser chrome
         Get-ChildItem -Path .\outputs\
 
     - name: Upload NewsPhoto - Webpage
