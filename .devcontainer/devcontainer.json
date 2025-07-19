@@ -1,19 +1,8 @@
 {
     "name": "NewsPhoto",
     "build": {
-        "dockerfile": "Dockerfile",
+        "dockerfile": "Containerfile",
         "context": "."
-    },
-    "features": {
-        "ghcr.io/rocker-org/devcontainer-features/pandoc:1": {
-            "version": "latest"
-        },
-        "ghcr.io/devcontainers/features/common-utils:2": {
-            "installZsh": true,
-            "configureZshAsDefaultShell": true,
-            "installOhMyZsh": true,
-            "installOhMyZshConfig": true
-        }
     },
     "customizations": {
         "vscode": {
@@ -28,7 +17,7 @@
             }
         }
     },
-    "postCreateCommand": "uv sync && uv run playwright install chromium --with-deps --no-shell",
+    "postCreateCommand": "uv sync && uv run playwright install chromium-headless-shell --with-deps",
     "containerUser": "dev",
     "remoteUser": "dev"
 }
