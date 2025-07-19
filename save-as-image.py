@@ -35,21 +35,30 @@ args = parser.parse_args()
 browser_target = args.browser
 
 with sync_playwright() as p:
-    if browser_target == "chromium":
-        browser = p.chromium.launch(headless=True)
-    elif browser_target == "firefox":
-        browser = p.firefox.launch(headless=True)
-    elif browser_target == "webkit":
-        browser = p.webkit.launch(headless=True)
-    elif browser_target == "chrome":
-        browser = p.chromium.launch(channel="chrome", headless=True)
-    elif browser_target == "msedge":
-        browser = p.chromium.launch(channel="msedge", headless=True)
+    # 可用浏览器列表
+    
+    browser_launchers = {
+        "chromium": p.chromium.launch,
+        "firefox": p.firefox.launch,
+        "webkit": p.webkit.launch,
+        "chrome": p.chromium.launch,
+        "msedge": p.chromium.launch,
+    }
+
+    browser_target = args.browser.lower()
+    launch_func = browser_launchers.get(browser_target)
+
+    if launch_func:
+        if browser_target in ["chrome", "msedge"]:
+            browser = launch_func(channel=browser_target, headless=True)
+        else:
+            browser = launch_func(headless=True)
     else:
+        print(f"Unsupported browser: {browser_target}. Launching chromium instead.")
         browser = p.chromium.launch(headless=True)
 
     page = browser.new_page()
     page.goto(url)
-    page.locator("body").screenshot(path=file_name, type="jpeg", quality=100)
+    page.locator("body").screenshot(path=file_name, type="png")
     print(page.title())
     browser.close()

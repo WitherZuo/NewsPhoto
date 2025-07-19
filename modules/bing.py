@@ -7,7 +7,7 @@ import os
 def get_bing_json():
     # 请求头：使用火狐的用户代理字符串
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/114.0"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/141.0"
     }
 
     # 获取必应图片的 json 数据
@@ -55,13 +55,10 @@ def get_bing_image(bingimage_data):
 
     # 下载图片到本地
     bingimage = requests.get(bingimage_fullurl)
-    photo_location = os.path.abspath(
-        os.path.join(os.curdir, "sources", "images", "photo.jpg")
-    )
+    photo_location = os.path.join("sources", "images", "photo.jpg")
 
     with open(photo_location, "wb") as f:
         f.write(bingimage.content)
-        f.close()
 
 
 # 调用函数

@@ -7,6 +7,22 @@ import pangu
 import re
 import subprocess
 
+# 样式信息
+style_map = {
+    "light": {
+        "qrcode": "qrcode-normal.png",
+        "stylesheet": "light.css",
+    },
+    "dark": {
+        "qrcode": "qrcode-normal.png",
+        "stylesheet": "dark.css",
+    },
+    "springfestival": {
+        "qrcode": "qrcode-springfestival.png",
+        "stylesheet": "springfestival.css",
+    },
+}
+
 # 获取所有命令行参数
 args = parser.parse_args()
 
@@ -23,33 +39,28 @@ def write_header_md(greeting: str, today_simple_date, today_weekday, today_zhdat
         f"【 {greeting} 】\n\n",
     ]  # fmt: skip
 
-    f = open("sources/header.md", "w", encoding="utf_8")
-    f.writelines(header_text)
-    f.close()
+    with open("sources/header.md", "w", encoding="utf_8") as f:
+        f.writelines(header_text)
 
 
 # 函数：写入正文文件 content.md
 def write_content_md(file_path: str):
     # 处理正文文本 news.txt，写入到新的正文文件：content.md
-    a = open(file_path, "r", encoding="utf_8")
-    text = a.read()
+    with open(file_path, "r", encoding="utf_8") as a:
+        text = a.read()
+
     text_with_space = pangu.spacing(text)
     text_new = re.sub("\n", "  \n\n", text_with_space)
 
-    b = open("sources/content.md", "w", encoding="utf_8")
-    b.write(text_new + "\n\n")
-
-    b.close()
-    a.close()
+    with open("sources/content.md", "w", encoding="utf_8") as b:
+        b.write(text_new + "\n\n")
 
 
 # 函数：写入底部文件 footer.md
 def write_footer_md(style, bing_title, today_full_date):
     # 判断当前使用的样式，决定使用何种样式的二维码
-    if style == "light" or style == "dark":
-        qrcode = '![qrcode](sources/images/qrcode.png "qrcode")'
-    elif style == "springfestival":
-        qrcode = '![qrcode](sources/images/qrcode-springfestival.png "qrcode")'
+    style_info = style_map.get(style)
+    qrcode = f"![qrcode](sources/images/{style_info.get('qrcode')} 'qrcode')"
 
     # 写入底部文件：footer.md
     footer_text = [
@@ -63,20 +74,19 @@ def write_footer_md(style, bing_title, today_full_date):
         "</footer>",
     ]
 
-    c = open("sources/footer.md", "w", encoding="utf_8")
-    c.writelines(footer_text)
-    c.close()
+    with open("sources/footer.md", "w", encoding="utf_8") as c:
+        c.writelines(footer_text)
 
 
 # 函数：使用 Pandoc 导出文档
 def convert_with_pandoc(style):
     # 判断当前使用的样式，决定使用何种样式表
-    if style == "light":
-        style_file = "sources/styles/light.css"
-    elif style == "dark":
-        style_file = "sources/styles/dark.css"
-    elif style == "springfestival":
-        style_file = "sources/styles/springfestival.css"
+    style_info = style_map.get(style)
+    style_file = f"sources/styles/{style_info.get('stylesheet')}"
+
+    # 检查导出目录是否存在
+    if not os.path.exists('outputs'):
+        os.makedirs('outputs')
 
     subprocess.run(
         [
@@ -130,21 +140,17 @@ if __name__ == "__main__":
     )
 
     # 汇总后综合写入 NewsPhoto.md
-    newsphoto_md = open("sources/NewsPhoto.md", "a", encoding="utf_8")
+    with (
+        open("sources/NewsPhoto.md", "a", encoding="utf_8") as newsphoto_md,
+        open("sources/header.md", "r", encoding="utf_8") as header_md,
+        open("sources/content.md", "r", encoding="utf_8") as content_md,
+        open("sources/footer.md", "r", encoding="utf_8") as footer_md,
+    ):
+        header_source = header_md.read()
+        content_source = content_md.read()
+        footer_source = footer_md.read()
 
-    header_md = open("sources/header.md", "r", encoding="utf_8")
-    content_md = open("sources/content.md", "r", encoding="utf_8")
-    footer_md = open("sources/footer.md", "r", encoding="utf_8")
-
-    header_source = header_md.read()
-    content_source = content_md.read()
-    footer_source = footer_md.read()
-
-    newsphoto_md.write(header_source + content_source + footer_source)
-
-    source_files = [header_md, content_md, footer_md, newsphoto_md]
-    for sources_file in source_files:
-        sources_file.close()
+        newsphoto_md.write(header_source + content_source + footer_source)
 
     # 将 Markdown 文档转换为 HTML 格式
     convert_with_pandoc(style=args.style)
