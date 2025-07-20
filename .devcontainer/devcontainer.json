@@ -20,5 +20,5 @@
     "postCreateCommand": "uv sync && uv run playwright install chromium-headless-shell --with-deps",
     "containerUser": "dev",
     "remoteUser": "dev",
-    "overrideCommand": false
+    // "overrideCommand": false
 }
