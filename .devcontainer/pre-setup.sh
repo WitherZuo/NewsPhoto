@@ -19,7 +19,7 @@ if [ "${architecture}" != "amd64" ] && [ "${architecture}" != "arm64" ]; then
 fi
 version=$(curl -s https://api.github.com/repos/jgm/pandoc/releases/latest | jq -r '.tag_name')
 
-curl -o pandoc.deb https://github.com/jgm/pandoc/releases/download/${version}/pandoc-${version}-1-${architecture}.deb
+curl -Lo pandoc.deb https://github.com/jgm/pandoc/releases/download/${version}/pandoc-${version}-1-${architecture}.deb
 dpkg -i pandoc.deb && rm pandoc.deb
 
 # 清理缓存
