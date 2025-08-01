@@ -23,9 +23,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - name: Set timezone to Asia/Shanghai
-      uses: WitherZuo/set-timezone@v1.0.0
-      with:
-        timezoneWindows: "China Standard Time"
+      run: tzutil /s "China Standard Time"
 
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -33,11 +31,10 @@ jobs:
         repository: WitherZuo/NewsPhoto
 
     - name: Install uv and Python.
-      uses: astral-sh/setup-uv@v5
+      uses: astral-sh/setup-uv@v6
       with:
-        version: "0.8.0"
+        version: "0.8.4"
         enable-cache: true
-        cache-dependency-glob: "**/pyproject.toml"
 
     - name: Install dependencies
       run: uv sync --no-dev
@@ -69,10 +66,8 @@ jobs:
     needs: generate_newsphoto
     steps:
     - name: Set timezone to Asia/Shanghai
-      uses: WitherZuo/set-timezone@v1.0.0
-      with:
-        timezoneWindows: "China Standard Time"
-
+      run: tzutil /s "China Standard Time"
+      
     - name: Get current time
       id: get_current_time
       run: |
