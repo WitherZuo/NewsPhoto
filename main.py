@@ -1,7 +1,7 @@
 # coding=utf-8
 from modules.today import get_simple_date, get_full_date, get_weekday, get_zh_date
 from modules.bing import get_bing_json, get_bing_title, get_bing_image
-from modules.arguments import parser
+from modules.arguments import get_parser
 import os
 import pangu
 import re
@@ -24,6 +24,7 @@ style_map = {
 }
 
 # 获取所有命令行参数
+parser = get_parser()
 args = parser.parse_args()
 
 
@@ -85,8 +86,8 @@ def convert_with_pandoc(style):
     style_file = f"sources/styles/{style_info.get('stylesheet')}"
 
     # 检查导出目录是否存在
-    if not os.path.exists('outputs'):
-        os.makedirs('outputs')
+    if not os.path.exists("outputs"):
+        os.makedirs("outputs")
 
     subprocess.run(
         [
@@ -102,7 +103,8 @@ def convert_with_pandoc(style):
     )  # fmt: skip
 
 
-if __name__ == "__main__":
+# 主函数
+def main():
     # 清理过时文件
     outdated_files = [
         "sources/header.md",
@@ -154,3 +156,7 @@ if __name__ == "__main__":
 
     # 将 Markdown 文档转换为 HTML 格式
     convert_with_pandoc(style=args.style)
+
+
+if __name__ == "__main__":
+    main()

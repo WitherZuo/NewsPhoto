@@ -1,64 +1,87 @@
-from playwright.sync_api import sync_playwright
-import os
+# coding=utf-8
 import argparse
+from pathlib import Path
+from playwright.sync_api import sync_playwright
 
-"""
-参数说明：
--b, --browser：Playwright 运行调用的浏览器
-"""
-parser = argparse.ArgumentParser(description="Save as image")
 
-parser.add_argument(
-    "-b",
-    "--browser",
-    metavar="BROWSER",
-    type=str,
-    choices=["chromium", "firefox", "webkit", "msedge", "chrome"],
-    default="chromium",
-    required=False,
-    help="The browser used for Playwright. ( chromium | firefox | webkit | msedge | chrome, Default: chromium )",
-)
+def get_parser():
+    """
+    参数说明：
+    -b, --browser：Playwright 运行调用的浏览器
+    """
+    parser = argparse.ArgumentParser(description="Save as image")
+    parser.add_argument(
+        "-b",
+        "--browser",
+        metavar="BROWSER",
+        type=str,
+        choices=["chromium", "firefox", "webkit", "msedge", "chrome"],
+        default="chromium",
+        help="The browser used for Playwright. (chromium | firefox | webkit | msedge | chrome, Default: chromium)",
+    )
+    return parser
 
-"""
-文件名 NewsPhoto.png，所在位置为 outputs 目录下，打印文件本地 URL
-"""
-file_name = "outputs/NewsPhoto.png"
-url = "file:///" + os.getcwd() + r"\outputs\NewsPhoto.html"
-print(url)
 
-# 存在旧文件则删除
-if os.path.exists(file_name):
-    os.unlink(file_name)
+# 函数：获取目标文件位置，为 URI 地址
+def get_target_url(file_path: Path) -> str:
+    return file_path.resolve().as_uri()
 
-# 处理浏览器平台参数
-args = parser.parse_args()
-browser_target = args.browser
 
-with sync_playwright() as p:
-    # 可用浏览器列表
-    
-    browser_launchers = {
-        "chromium": p.chromium.launch,
-        "firefox": p.firefox.launch,
-        "webkit": p.webkit.launch,
-        "chrome": p.chromium.launch,
-        "msedge": p.chromium.launch,
-    }
+# 函数：检测目标文件是否存在，如果存在即删除
+def delete_if_exists(path: Path):
+    if path.exists():
+        path.unlink()
 
-    browser_target = args.browser.lower()
-    launch_func = browser_launchers.get(browser_target)
 
-    if launch_func:
-        if browser_target in ["chrome", "msedge"]:
-            browser = launch_func(channel=browser_target, headless=True)
+# 函数：将页面保存为图片
+def save_as_image(browser_name: str, html_path: Path, output_path: Path):
+    url = get_target_url(html_path)
+    print(f"Loading: {url}")
+
+    with sync_playwright() as p:
+        # 浏览器映射表
+        launchers = {
+            "chromium": p.chromium.launch,
+            "firefox": p.firefox.launch,
+            "webkit": p.webkit.launch,
+            "chrome": p.chromium.launch,
+            "msedge": p.chromium.launch,
+        }
+
+        browser_name = browser_name.lower()
+        launch = launchers.get(browser_name)
+
+        if launch:
+            if browser_name in ["chrome", "msedge"]:
+                browser = launch(channel=browser_name, headless=True)
+            else:
+                browser = launch(headless=True)
         else:
-            browser = launch_func(headless=True)
-    else:
-        print(f"Unsupported browser: {browser_target}. Launching chromium instead.")
-        browser = p.chromium.launch(headless=True)
+            print(
+                f"Unsupported browser: {browser_name}. Falling back to chromium."
+            )
+            browser = p.chromium.launch(headless=True)
 
-    page = browser.new_page()
-    page.goto(url)
-    page.locator("body").screenshot(path=file_name, type="png")
-    print(page.title())
-    browser.close()
+        page = browser.new_page()
+        page.goto(url)
+        page.locator("body").screenshot(path=output_path, type="png")
+        print(f"Page title: {page.title()}")
+        browser.close()
+
+
+# 主函数
+def main():
+    parser = get_parser()
+    args = parser.parse_args()
+
+    html_path = Path("outputs/NewsPhoto.html")
+    image_path = Path("outputs/NewsPhoto.png")
+
+    delete_if_exists(path=image_path)
+    save_as_image(
+        browser_name=args.browser, html_path=html_path, output_path=image_path
+    )
+
+
+if __name__ == "__main__":
+    main()
