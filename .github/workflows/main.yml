@@ -2,6 +2,10 @@ name: Create NewsPhoto
 on:
   workflow_dispatch:
     inputs:
+      news_txt:
+        description: 'Raw url of news source:'
+        required: true
+        type: string
       greeting:
         description: 'Greeting text:'
         required: false
@@ -18,29 +22,35 @@ on:
           - springfestival
 
 jobs:
-  generate_newsphoto:
-    name: Generate NewsPhoto
+  create_and_release_newsphoto:
+    name: Create & Release NewsPhoto
     runs-on: windows-latest
     steps:
-    - name: Set timezone to Asia/Shanghai
-      run: tzutil /s "China Standard Time"
+    - name: Set timezone (UTC+8) and get current time
+      id: get_current_time
+      run: |
+        tzutil /s "China Standard Time"
+        $current_time = Get-Date -UFormat '%Y%m%d-%H%M%S'
+        "current_time=$current_time" >> $env:GITHUB_OUTPUT
 
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
         repository: WitherZuo/NewsPhoto
 
-    - name: Install uv and Python.
+    - name: Install uv and Python
       uses: astral-sh/setup-uv@v6
       with:
         version: "0.8.4"
         enable-cache: true
 
     - name: Install dependencies
-      run: uv sync --no-dev
+      run: |
+        uv sync --no-dev
+        choco install -y pandoc
 
-    - name: Install Pandoc
-      run: choco install -y pandoc
+    - name: Get news source
+      run: Invoke-WebRequest ${{ inputs.news_txt }} -OutFile .\news.txt
 
     - name: Create markdown sources and convert to HTML
       run: uv run --no-sync main.py --greeting "${{ inputs.greeting }}" --style ${{ inputs.style }}
@@ -60,25 +70,6 @@ jobs:
         name: newsphoto-image
         path: outputs/NewsPhoto.png
 
-  release-newsphoto:
-    name: Release NewsPhoto
-    runs-on: windows-latest
-    needs: generate_newsphoto
-    steps:
-    - name: Set timezone to Asia/Shanghai
-      run: tzutil /s "China Standard Time"
-      
-    - name: Get current time
-      id: get_current_time
-      run: |
-        $current_time = Get-Date -UFormat '%Y%m%d-%H%M%S'
-        "current_time=$current_time" >> $env:GITHUB_OUTPUT
-
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        repository: WitherZuo/NewsPhoto
-
     - name: Create new tag
       uses: actions/github-script@v7
       with:
@@ -89,13 +80,6 @@ jobs:
             ref: 'refs/tags/${{ steps.get_current_time.outputs.current_time }}',
             sha: context.sha
           })
-
-    - name: Download NewsPhoto webpage and image
-      uses: actions/download-artifact@v4
-      with:
-        path: outputs
-        pattern: newsphoto*
-        merge-multiple: true
 
     - name: Create new NewsPhoto release
       run: |
