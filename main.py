@@ -1,5 +1,11 @@
 # coding=utf-8
-from modules.today import get_simple_date, get_full_date, get_weekday, get_zh_date
+from modules.today import (
+    get_simple_date,
+    get_full_date,
+    get_weekday,
+    get_zh_date,
+    get_timezone,
+)
 from modules.bing import get_bing_json, get_bing_title, get_bing_image
 from modules.arguments import get_parser
 import os
@@ -29,7 +35,9 @@ args = parser.parse_args()
 
 
 # 函数：写入头文件 header.md
-def write_header_md(greeting: str, today_simple_date, today_weekday, today_zhdate):
+def write_header_md(
+    greeting: str, today_simple_date, today_weekday, today_zhdate
+):
     # 写入头文件：header.md
     header_text = [
         "<header>  \n\n",
@@ -58,7 +66,7 @@ def write_content_md(file_path: str):
 
 
 # 函数：写入底部文件 footer.md
-def write_footer_md(style, bing_title, today_full_date):
+def write_footer_md(style, bing_title, today_full_date, timezone):
     # 判断当前使用的样式，决定使用何种样式的二维码
     style_info = style_map.get(style)
     qrcode = f"![qrcode](sources/images/{style_info.get('qrcode')} 'qrcode')"
@@ -70,7 +78,7 @@ def write_footer_md(style, bing_title, today_full_date):
         f"**{bing_title[0]}**<br>",
         f"**{bing_title[1]}**  \n\n",
         f"> 最后更新: {today_full_date} / UTC+8<br>",
-        f"最后修订: {today_full_date} / UTC+8  \n\n",
+        f"最后修订: {today_full_date} / {timezone}  \n\n",
         f"{qrcode}  \n\n",
         "</footer>",
     ]
@@ -119,6 +127,7 @@ def main():
             os.unlink(outdated_file)
 
     # 获取所需要的日期时间值
+    today_timezone = get_timezone()
     today_simple_date = get_simple_date()
     today_full_date = get_full_date()
     today_weekday = get_weekday(today_full_date)
@@ -138,7 +147,10 @@ def main():
     )
     write_content_md(file_path=args.news_file)
     write_footer_md(
-        style=args.style, bing_title=bing_title, today_full_date=today_full_date
+        style=args.style,
+        bing_title=bing_title,
+        today_full_date=today_full_date,
+        timezone=today_timezone,
     )
 
     # 汇总后综合写入 NewsPhoto.md

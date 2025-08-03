@@ -13,6 +13,17 @@ DATE_FORMATS = {
 }
 
 
+# 函数：获取当前时区
+def get_timezone():
+    # 获取当前时区偏移量（单位：小时）
+    utc_offset = datetime.now().astimezone().utcoffset()
+    utc_offset_hours = utc_offset.total_seconds() / 3600  # 转换为小时
+    timezone = (
+        f"UTC{'+' if utc_offset_hours >= 0 else ''}{int(utc_offset_hours)}"
+    )
+    return timezone
+
+
 # 函数：简短日期
 def get_simple_date():
     platform = sys.platform.lower()
@@ -25,7 +36,7 @@ def get_simple_date():
     return simple_date
 
 
-# 函数：完整日期带时区（UTC+8）
+# 函数：完整日期
 def get_full_date():
     # 获取当前日期时间，并格式化
     full_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -69,12 +80,14 @@ def get_zh_date():
 
 # 主函数
 def main():
+    timezone = get_timezone()
     simple_date = get_simple_date()
     full_date = get_full_date()
     weekday = get_weekday(full_date)
     zh_date = get_zh_date()
 
     # 打印返回结果
+    print("时区:", timezone)
     print("简短日期:", simple_date)
     print("完整日期:", full_date)
     print("星期:", weekday)
