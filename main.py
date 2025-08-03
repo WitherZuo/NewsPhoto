@@ -1,13 +1,7 @@
 # coding=utf-8
-from modules.today import (
-    get_simple_date,
-    get_full_date,
-    get_weekday,
-    get_zh_date,
-    get_timezone,
-)
-from modules.bing import get_bing_json, get_bing_title, get_bing_image
-from modules.arguments import get_parser
+import modules.today as Today
+import modules.bing as Bing
+import modules.arguments as MainArgs
 import os
 import pangu
 import re
@@ -30,7 +24,7 @@ style_map = {
 }
 
 # 获取所有命令行参数
-parser = get_parser()
+parser = MainArgs.get_parser()
 args = parser.parse_args()
 
 
@@ -127,16 +121,16 @@ def main():
             os.unlink(outdated_file)
 
     # 获取所需要的日期时间值
-    today_timezone = get_timezone()
-    today_simple_date = get_simple_date()
-    today_full_date = get_full_date()
-    today_weekday = get_weekday(today_full_date)
-    today_zhdate = get_zh_date()
+    today_timezone = Today.get_timezone()
+    today_simple_date = Today.get_simple_date()
+    today_full_date = Today.get_full_date()
+    today_weekday = Today.get_weekday(today_full_date)
+    today_zhdate = Today.get_zh_date()
 
     # 获取必应图片
-    json_data = get_bing_json()
-    bing_title = get_bing_title(json_data)
-    get_bing_image(json_data)
+    json_data = Bing.get_bing_json()
+    bing_title = Bing.get_bing_title(json_data)
+    Bing.get_bing_image(json_data)
 
     # 生成 NewsPhoto.md 的各个部分
     write_header_md(

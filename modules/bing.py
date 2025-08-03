@@ -59,15 +59,3 @@ def get_bing_image(bingimage_data):
 
     with open(photo_location, "wb") as f:
         f.write(bingimage.content)
-
-
-# 主函数
-def main():
-    json_data = get_bing_json()
-    get_bing_title(json_data)
-    get_bing_image(json_data)
-
-
-# 调用函数
-if __name__ == "__main__":
-    main()

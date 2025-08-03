@@ -76,24 +76,3 @@ def get_zh_date():
     except Exception as e:
         print(f"Error fetching Chinese date: {e}")
         return "无法获取农历"
-
-
-# 主函数
-def main():
-    timezone = get_timezone()
-    simple_date = get_simple_date()
-    full_date = get_full_date()
-    weekday = get_weekday(full_date)
-    zh_date = get_zh_date()
-
-    # 打印返回结果
-    print("时区:", timezone)
-    print("简短日期:", simple_date)
-    print("完整日期:", full_date)
-    print("星期:", weekday)
-    print("农历日期:", zh_date)
-
-
-# 调用函数并输出结果
-if __name__ == "__main__":
-    main()
