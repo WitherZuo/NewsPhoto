@@ -71,7 +71,7 @@ def write_footer_md(style, bing_title, today_full_date, timezone):
         "<footer>  \n\n",
         f"**{bing_title[0]}**<br>",
         f"**{bing_title[1]}**  \n\n",
-        f"> 最后更新: {today_full_date} / UTC+8<br>",
+        f"> 最后更新: {today_full_date} / {timezone}<br>",
         f"最后修订: {today_full_date} / {timezone}  \n\n",
         f"{qrcode}  \n\n",
         "</footer>",
