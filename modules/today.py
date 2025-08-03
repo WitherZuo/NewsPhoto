@@ -16,8 +16,12 @@ DATE_FORMATS = {
 # 函数：简短日期
 def get_simple_date():
     platform = sys.platform.lower()
-    format_str = DATE_FORMATS.get(platform, "%Y {Y} %#m {M} %#d {D}")  # 默认格式
-    simple_date = datetime.now().strftime(format_str).format(Y="年", M="月", D="日")
+    format_str = DATE_FORMATS.get(
+        platform, "%Y {Y} %#m {M} %#d {D}"
+    )  # 默认格式
+    simple_date = (
+        datetime.now().strftime(format_str).format(Y="年", M="月", D="日")
+    )
     return simple_date
 
 
@@ -35,7 +39,15 @@ def get_weekday(full_date):
         full_date, "%Y-%m-%d %H:%M:%S"
     )  # 按指定格式转为 datetime 对象
     weekday_index = today.weekday()  # 获取对应星期的索引值
-    weekdays = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+    weekdays = [
+        "星期一",
+        "星期二",
+        "星期三",
+        "星期四",
+        "星期五",
+        "星期六",
+        "星期日",
+    ]
     weekday = weekdays[weekday_index]
     return weekday
 
@@ -55,8 +67,8 @@ def get_zh_date():
         return "无法获取农历"
 
 
-# 调用函数并输出结果
-if __name__ == "__main__":
+# 主函数
+def main():
     simple_date = get_simple_date()
     full_date = get_full_date()
     weekday = get_weekday(full_date)
@@ -67,3 +79,8 @@ if __name__ == "__main__":
     print("完整日期:", full_date)
     print("星期:", weekday)
     print("农历日期:", zh_date)
+
+
+# 调用函数并输出结果
+if __name__ == "__main__":
+    main()
