@@ -44,7 +44,6 @@ venv.bak/
 
 # Unused
 outputs/
-sources/*.md
 sources/images/photo.jpg
 
 # VS Code workspace config file

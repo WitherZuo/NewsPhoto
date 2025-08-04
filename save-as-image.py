@@ -65,7 +65,7 @@ def save_as_image(browser_name: str, html_path: Path, output_path: Path):
         page = browser.new_page()
         page.goto(url)
         page.locator("body").screenshot(path=output_path, type="png")
-        print(f"Page title: {page.title()}")
+        print(f"{page.title()}")
         browser.close()
 
 
