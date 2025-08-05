@@ -1,6 +1,7 @@
 # coding=utf-8
-import requests
 import os
+
+import requests
 
 
 # 获取必应图片的 JSON 文件

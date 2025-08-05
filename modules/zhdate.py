@@ -9,6 +9,7 @@ by: Wither Zuo (openworld189@gmail.com)
 
 from datetime import datetime, timedelta
 from itertools import accumulate
+
 from .constants import CHINESENEWYEAR, CHINESEYEARCODE
 
 

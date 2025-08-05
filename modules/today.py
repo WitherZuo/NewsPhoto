@@ -1,8 +1,10 @@
 # coding=utf-8
 import sys
 from datetime import datetime
+
 from modules.zhdate import ZhDate
 
+now_datetime = datetime.now()
 
 # 根据操作系统决定日期格式
 # Linux: https://stackoverflow.com/questions/9525944/python-datetime-formatting-without-zero-padding
@@ -16,7 +18,7 @@ DATE_FORMATS = {
 # 函数：获取当前时区
 def get_timezone():
     # 获取当前时区偏移量（单位：小时）
-    utc_offset = datetime.now().astimezone().utcoffset()
+    utc_offset = now_datetime.astimezone().utcoffset()
     utc_offset_hours = utc_offset.total_seconds() / 3600  # 转换为小时
     timezone = (
         f"UTC{'+' if utc_offset_hours >= 0 else ''}{int(utc_offset_hours)}"
@@ -30,8 +32,8 @@ def get_simple_date():
     format_str = DATE_FORMATS.get(
         platform, "%Y {Y} %#m {M} %#d {D}"
     )  # 默认格式
-    simple_date = (
-        datetime.now().strftime(format_str).format(Y="年", M="月", D="日")
+    simple_date = now_datetime.strftime(format_str).format(
+        Y="年", M="月", D="日"
     )
     return simple_date
 
@@ -39,7 +41,7 @@ def get_simple_date():
 # 函数：完整日期
 def get_full_date():
     # 获取当前日期时间，并格式化
-    full_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    full_date = now_datetime.strftime("%Y-%m-%d %H:%M:%S")
     return full_date
 
 

@@ -1,11 +1,13 @@
 # coding=utf-8
-import modules.today as Today
-import modules.bing as Bing
-import modules.arguments as MainArgs
 import os
-import pangu
 import re
 import subprocess
+
+import pangu
+
+import modules.arguments as MainArgs
+import modules.bing as Bing
+import modules.today as Today
 
 # 样式信息
 style_map = {
