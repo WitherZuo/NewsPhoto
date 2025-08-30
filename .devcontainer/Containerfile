@@ -1,4 +1,4 @@
-FROM ghcr.io/astral-sh/uv:0.8.4-python3.13-bookworm-slim
+FROM ghcr.io/astral-sh/uv:0.8.14-python3.13-trixie-slim
 
 # 设置非交互环境
 ENV DEBIAN_FRONTEND=noninteractive

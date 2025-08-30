@@ -1,4 +1,6 @@
 #!/bin/bash
+set -euo pipefail
+
 echo "NewsPhoto 交互式生成"
 echo -e "欢迎使用 NewsPhoto 交互式生成，可按 CTRL+C 在任意步骤退出。\n"
 
