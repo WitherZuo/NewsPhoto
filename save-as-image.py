@@ -1,10 +1,25 @@
 # coding=utf-8
 import argparse
+import os
+import sys
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
 
+# 函数：获取脚本的基础路径，设置 Playwright 浏览器标记
+def get_base_path():
+    if getattr(sys, "frozen", False):
+        base_path = os.path.dirname(sys.executable)
+        os.environ["PLAYWRIGHT_BROWSERS_PATH"] = os.path.join(
+            base_path, "browser"
+        )
+    else:
+        base_path = os.path.dirname(__file__)
+    return base_path
+
+
+# 函数：获取命令行参数解析器
 def get_parser():
     """
     参数说明：
@@ -18,7 +33,7 @@ def get_parser():
         type=str,
         choices=["chromium", "firefox", "webkit", "msedge", "chrome"],
         default="chromium",
-        help="The browser used for Playwright. (chromium | firefox | webkit | msedge | chrome, Default: chromium)",
+        help="The browser used for Playwright. (chromium* | firefox | webkit | msedge | chrome)",
     )
     return parser
 
@@ -29,13 +44,13 @@ def get_target_url(file_path: Path) -> str:
 
 
 # 函数：检测目标文件是否存在，如果存在即删除
-def delete_if_exists(path: Path):
-    if path.exists():
-        path.unlink()
+def delete_if_exists(path: str):
+    if os.path.exists(path):
+        os.unlink(path)
 
 
 # 函数：将页面保存为图片
-def save_as_image(browser_name: str, html_path: Path, output_path: Path):
+def save_as_image(browser_name: str, html_path: Path, output_path: str):
     url = get_target_url(html_path)
     print(f"Loading: {url}")
 
@@ -72,12 +87,17 @@ def save_as_image(browser_name: str, html_path: Path, output_path: Path):
 
 # 主函数
 def main():
+    # 获取命令行参数
     parser = get_parser()
     args = parser.parse_args()
 
-    html_path = Path("outputs/NewsPhoto.html")
-    image_path = Path("outputs/NewsPhoto.png")
+    # 获取基础路径
+    base_path = get_base_path()
+    output_dir = os.path.join(base_path, "outputs")
+    html_path = Path(os.path.join(output_dir, "NewsPhoto.html"))
+    image_path = os.path.join(output_dir, "NewsPhoto.png")
 
+    # 生成图片
     delete_if_exists(path=image_path)
     save_as_image(
         browser_name=args.browser, html_path=html_path, output_path=image_path

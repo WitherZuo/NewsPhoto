@@ -56,7 +56,7 @@ def get_bing_image(bingimage_data):
 
     # 下载图片到本地
     bingimage = requests.get(bingimage_fullurl)
-    photo_location = os.path.join("sources", "images", "photo.jpg")
+    photo_location = os.path.join("outputs", "photo.jpg")
 
     with open(photo_location, "wb") as f:
         f.write(bingimage.content)

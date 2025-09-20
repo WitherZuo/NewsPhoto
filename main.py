@@ -2,6 +2,7 @@
 import os
 import re
 import subprocess
+import sys
 
 import pangu
 
@@ -30,6 +31,15 @@ parser = MainArgs.get_parser()
 args = parser.parse_args()
 
 
+# 函数：获取脚本的基础路径
+def get_base_path():
+    if getattr(sys, "frozen", False):
+        base_path = os.path.dirname(sys.executable)
+    else:
+        base_path = os.path.dirname(__file__)
+    return base_path
+
+
 # 函数：生成头部内容
 def write_header_md(
     greeting: str, today_simple_date, today_weekday, today_zhdate
@@ -37,7 +47,7 @@ def write_header_md(
     # 写入头文件：header.md
     header_text = [
         "<header>  \n\n",
-        "![News Photo](sources/images/photo.jpg)  \n\n",
+        "![News Photo](outputs/photo.jpg)  \n\n",
         "</header>  \n\n",
         "<section>  \n\n",
         f"## {today_simple_date} · {today_weekday} · {today_zhdate}\n\n",
@@ -87,10 +97,6 @@ def convert_with_pandoc(style):
     style_info = style_map.get(style)
     style_file = f"sources/styles/{style_info.get('stylesheet')}"
 
-    # 检查导出目录是否存在
-    if not os.path.exists("outputs"):
-        os.makedirs("outputs")
-
     subprocess.run(
         [
             "pandoc",
@@ -107,15 +113,17 @@ def convert_with_pandoc(style):
 
 # 主函数
 def main():
-    # 清理过时文件
-    outdated_files = [
-        "outputs/NewsPhoto.md",
-        "sources/images/photo.jpg",
-        "outputs/NewsPhoto.html",
-    ]
-    for outdated_file in outdated_files:
-        if os.path.exists(outdated_file):
-            os.unlink(outdated_file)
+    # 获取基础路径
+    base_path = get_base_path()
+
+    # 检查导出目录是否存在，存在则清空，不存在则创建
+    output_dir = os.path.join(base_path, "outputs")
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    else:
+        for filename in os.listdir(output_dir):
+            file_path = os.path.join(output_dir, filename)
+            os.remove(file_path)
 
     # 获取所需要的日期时间值
     today_timezone = Today.get_timezone()
@@ -145,7 +153,8 @@ def main():
     )
 
     # 汇总后综合写入 NewsPhoto.md
-    with open("outputs/NewsPhoto.md", "a", encoding="utf_8") as newsphoto_md:
+    newsphoto_md_path = os.path.join(output_dir, "NewsPhoto.md")
+    with open(newsphoto_md_path, "a", encoding="utf_8") as newsphoto_md:
         newsphoto_md.writelines(header)
         newsphoto_md.write(content)
         newsphoto_md.writelines(footer)

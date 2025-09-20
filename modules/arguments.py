@@ -27,7 +27,7 @@ def get_parser():
         choices=["light", "dark", "springfestival"],
         default="light",
         required=False,
-        help="NewsPhoto style ( light | dark | springfestival, Default: light )",
+        help="NewsPhoto style ( light* | dark | springfestival )",
     )
     parser.add_argument(
         "news_file",
