@@ -46,7 +46,7 @@ def get_target_url(file_path: Path) -> str:
 # 函数：检测目标文件是否存在，如果存在即删除
 def delete_if_exists(path: str):
     if os.path.exists(path):
-        os.unlink(path)
+        os.remove(path)
 
 
 # 函数：将页面保存为图片
