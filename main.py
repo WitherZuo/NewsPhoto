@@ -26,19 +26,6 @@ style_map = {
     },
 }
 
-# 获取所有命令行参数
-parser = MainArgs.get_parser()
-args = parser.parse_args()
-
-
-# 函数：获取脚本的基础路径
-def get_base_path():
-    if getattr(sys, "frozen", False):
-        base_path = os.path.dirname(sys.executable)
-    else:
-        base_path = os.path.dirname(__file__)
-    return base_path
-
 
 # 函数：生成头部内容
 def write_header_md(
@@ -113,8 +100,15 @@ def convert_with_pandoc(style):
 
 # 主函数
 def main():
+    # 获取所有命令行参数
+    parser = MainArgs.get_parser()
+    args = parser.parse_args()
+
     # 获取基础路径
-    base_path = get_base_path()
+    if getattr(sys, "frozen", False):
+        base_path = os.path.dirname(sys.executable)
+    else:
+        base_path = os.path.dirname(__file__)
 
     # 检查导出目录是否存在，存在则清空，不存在则创建
     output_dir = os.path.join(base_path, "outputs")

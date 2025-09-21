@@ -7,18 +7,6 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 
-# 函数：获取脚本的基础路径，设置 Playwright 浏览器标记
-def get_base_path():
-    if getattr(sys, "frozen", False):
-        base_path = os.path.dirname(sys.executable)
-        os.environ["PLAYWRIGHT_BROWSERS_PATH"] = os.path.join(
-            base_path, "browser"
-        )
-    else:
-        base_path = os.path.dirname(__file__)
-    return base_path
-
-
 # 函数：获取命令行参数解析器
 def get_parser():
     """
@@ -91,8 +79,16 @@ def main():
     parser = get_parser()
     args = parser.parse_args()
 
+    # 获取脚本的基础路径，设置 Playwright 浏览器标记
+    if getattr(sys, "frozen", False):
+        base_path = os.path.dirname(sys.executable)
+        os.environ["PLAYWRIGHT_BROWSERS_PATH"] = os.path.join(
+            base_path, "browser"
+        )
+    else:
+        base_path = os.path.dirname(__file__)
+
     # 获取基础路径
-    base_path = get_base_path()
     output_dir = os.path.join(base_path, "outputs")
     html_path = Path(os.path.join(output_dir, "NewsPhoto.html"))
     image_path = os.path.join(output_dir, "NewsPhoto.png")
