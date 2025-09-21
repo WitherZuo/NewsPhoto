@@ -52,7 +52,7 @@ def get_weekday(full_date):
         full_date, "%Y-%m-%d %H:%M:%S"
     )  # 按指定格式转为 datetime 对象
     weekday_index = today.weekday()  # 获取对应星期的索引值
-    weekdays = [
+    weekdays = (
         "星期一",
         "星期二",
         "星期三",
@@ -60,7 +60,7 @@ def get_weekday(full_date):
         "星期五",
         "星期六",
         "星期日",
-    ]
+    )
     weekday = weekdays[weekday_index]
     return weekday
 

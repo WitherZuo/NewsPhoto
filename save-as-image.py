@@ -19,7 +19,7 @@ def get_parser():
         "--browser",
         metavar="BROWSER",
         type=str,
-        choices=["chromium", "firefox", "webkit", "msedge", "chrome"],
+        choices=("chromium", "firefox", "webkit", "msedge", "chrome"),
         default="chromium",
         help="The browser used for Playwright. (chromium* | firefox | webkit | msedge | chrome)",
     )

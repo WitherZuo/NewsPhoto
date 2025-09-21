@@ -17,17 +17,17 @@ def get_parser():
         type=str,
         default="……",
         required=False,
-        help="Greeting text ( Default: …… )",
+        help="Greeting text. (Default: ……)",
     )
     parser.add_argument(
         "-s",
         "--style",
         metavar="STYLE_NAME",
         type=str,
-        choices=["light", "dark", "springfestival"],
+        choices=("light", "dark", "springfestival"),
         default="light",
         required=False,
-        help="NewsPhoto style ( light* | dark | springfestival )",
+        help="NewsPhoto style. (light* | dark | springfestival)",
     )
     parser.add_argument(
         "news_file",
@@ -35,7 +35,7 @@ def get_parser():
         type=str,
         default="./news.txt",
         nargs="?",
-        help="Raw file of news source ( Default: ./news.txt )",
+        help="Raw file of news source. (Default: ./news.txt)",
     )
 
     return parser
