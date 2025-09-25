@@ -80,7 +80,7 @@ def main():
     args = parser.parse_args()
 
     # 获取脚本的基础路径，设置 Playwright 浏览器标记
-    if getattr(sys, "frozen", False):
+    if "__compiled__" in globals():
         base_path = os.path.dirname(sys.executable)
         os.environ["PLAYWRIGHT_BROWSERS_PATH"] = os.path.join(
             base_path, "browser"

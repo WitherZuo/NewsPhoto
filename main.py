@@ -105,7 +105,7 @@ def main():
     args = parser.parse_args()
 
     # 获取基础路径
-    if getattr(sys, "frozen", False):
+    if "__compiled__" in globals():
         base_path = os.path.dirname(sys.executable)
     else:
         base_path = os.path.dirname(__file__)
