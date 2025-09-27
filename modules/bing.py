@@ -28,7 +28,7 @@ def get_bing_json():
 # 获取必应图片的标题和版权所有者
 def get_bing_title(bingimage_data):
     # 拆分图片标题和版权所有者字符串
-    bingimage_title = bingimage_data.get("copyright").split(" (")
+    bingimage_title = bingimage_data.get("copyright").split(" (© ")
 
     # 将分离的字符串处理后写入变量
     """
@@ -36,7 +36,7 @@ def get_bing_title(bingimage_data):
     bingimage_title[1]：图片所有者；
     """
     title = bingimage_title[0]
-    copyright_owner = bingimage_title[1].replace(")", "")
+    copyright_owner = "© " + bingimage_title[1].replace(")", "")
 
     # 返回处理后的图片标题和所有者
     return title, copyright_owner
