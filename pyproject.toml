@@ -3,7 +3,7 @@ name = "newsphoto"
 version = "1.0.0"
 description = "NewsPhoto everyday."
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "pangu>=4.0.6.1",
     "playwright>=1.51.0",
