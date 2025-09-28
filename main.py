@@ -31,6 +31,7 @@ style_map = {
 def write_header_md(
     greeting: str, today_simple_date, today_weekday, today_zhdate
 ):
+    print("Generating the header of NewsPhoto...")
     # 写入头文件：header.md
     header_text = [
         "<header>  \n\n",
@@ -46,6 +47,7 @@ def write_header_md(
 
 # 函数：生成正文新闻
 def write_content_md(file_path: str):
+    print("Generating the main content of NewsPhoto...")
     # 处理正文文本 news.txt，写入到新的正文文件：content.md
     with open(file_path, "r", encoding="utf_8") as a:
         text = a.read()
@@ -59,6 +61,7 @@ def write_content_md(file_path: str):
 
 # 函数：生成底部内容
 def write_footer_md(style, bing_title, today_full_date, timezone):
+    print("Generating the footer of NewsPhoto...")
     # 判断当前使用的样式，决定使用何种样式的二维码
     style_info = style_map.get(style)
     qrcode = f"![qrcode](sources/images/{style_info.get('qrcode')} 'qrcode')"
@@ -80,6 +83,7 @@ def write_footer_md(style, bing_title, today_full_date, timezone):
 
 # 函数：使用 Pandoc 导出文档
 def convert_with_pandoc(style):
+    print(r"Converting NewsPhoto to HTML with Pandoc...")
     # 判断当前使用的样式，决定使用何种样式表
     style_info = style_map.get(style)
     style_file = f"sources/styles/{style_info.get('stylesheet')}"
@@ -113,12 +117,15 @@ def main():
     # 检查导出目录是否存在，存在则清空，不存在则创建
     output_dir = os.path.join(base_path, "outputs")
     if not os.path.exists(output_dir):
+        print("Creating output folder...")
         os.makedirs(output_dir)
     else:
+        print("Cleaning up output folder...")
         for filename in os.listdir(output_dir):
             file_path = os.path.join(output_dir, filename)
             os.remove(file_path)
 
+    print("\nPreparing necessary info...")
     # 获取所需要的日期时间值
     today_timezone = Today.get_timezone()
     today_simple_date = Today.get_simple_date()
@@ -147,6 +154,7 @@ def main():
     )
 
     # 汇总后综合写入 NewsPhoto.md
+    print("\nGenerating NewsPhoto...")
     newsphoto_md_path = os.path.join(output_dir, "NewsPhoto.md")
     with open(newsphoto_md_path, "a", encoding="utf_8") as newsphoto_md:
         newsphoto_md.writelines(header)

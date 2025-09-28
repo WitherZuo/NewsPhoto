@@ -26,22 +26,26 @@ def get_parser():
     return parser
 
 
-# 函数：获取目标文件位置，为 URI 地址
-def get_target_url(file_path: Path) -> str:
-    return file_path.resolve().as_uri()
-
-
 # 函数：检测目标文件是否存在，如果存在即删除
 def delete_if_exists(path: str):
+    print("Cleaning up output folder...")
     if os.path.exists(path):
         os.remove(path)
 
 
+# 函数：获取目标文件位置，为 URI 地址
+def get_target_url(file_path: Path) -> str:
+    print("- Getting NewsPhoto HTML...")
+    return file_path.resolve().as_uri()
+
+
 # 函数：将页面保存为图片
 def save_as_image(browser_name: str, html_path: Path, output_path: str):
+    print("\nPreparing necessary info...")
     url = get_target_url(html_path)
-    print(f"Loading: {url}")
+    print(f"- Loading: {url}")
 
+    print(r"- Checking browser(s)...")
     with sync_playwright() as p:
         # 浏览器映射表
         launchers = {
@@ -66,6 +70,7 @@ def save_as_image(browser_name: str, html_path: Path, output_path: str):
             )
             browser = p.chromium.launch(headless=True)
 
+        print("\nGenerating NewsPhoto image...")
         page = browser.new_page()
         page.goto(url)
         page.locator("body").screenshot(path=output_path, type="png")

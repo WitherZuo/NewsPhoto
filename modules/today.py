@@ -17,6 +17,7 @@ DATE_FORMATS = {
 
 # 函数：获取当前时区
 def get_timezone():
+    print("- Getting the local timezone...")
     # 获取当前时区偏移量（单位：小时）
     utc_offset = now_datetime.astimezone().utcoffset()
     utc_offset_hours = utc_offset.total_seconds() / 3600  # 转换为小时
@@ -28,6 +29,7 @@ def get_timezone():
 
 # 函数：简短日期
 def get_simple_date():
+    print("- Getting the short time and date...")
     platform = sys.platform.lower()
     format_str = DATE_FORMATS.get(
         platform, "%Y {Y} %#m {M} %#d {D}"
@@ -40,6 +42,7 @@ def get_simple_date():
 
 # 函数：完整日期
 def get_full_date():
+    print("- Getting the full time and date...")
     # 获取当前日期时间，并格式化
     full_date = now_datetime.strftime("%Y-%m-%d %H:%M:%S")
     return full_date
@@ -47,6 +50,7 @@ def get_full_date():
 
 # 函数：中文化星期几
 def get_weekday(full_date):
+    print("- Getting the weekday...")
     # 获取星期几，中文化表示
     today = datetime.strptime(
         full_date, "%Y-%m-%d %H:%M:%S"
@@ -67,6 +71,7 @@ def get_weekday(full_date):
 
 # 函数：农历日期
 def get_zh_date():
+    print("- Getting Chinese date...")
     try:
         # 获取农历日期
         zhdate_full = ZhDate.today().chinese()
@@ -77,4 +82,4 @@ def get_zh_date():
         return zhdate_today
     except Exception as e:
         print(f"Error fetching Chinese date: {e}")
-        return "无法获取农历"
+        return "Failed to fetch Chinese date."
