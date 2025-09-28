@@ -4,7 +4,7 @@ set -euo pipefail
 # 安装依赖
 apt-get update
 apt-get install -y --no-install-recommends \
-ca-certificates curl git build-essential sudo gpg
+ca-certificates curl git build-essential sudo gpg patchelf
 
 # 安装 fish
 echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/4/Debian_13/ /' | tee /etc/apt/sources.list.d/shells:fish:release:4.list
