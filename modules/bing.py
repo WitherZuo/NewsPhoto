@@ -22,9 +22,7 @@ def retryable(max_retries=MAX_RETRIES, delay=RETRY_DELAY):
                 try:
                     return func(*args, **kwargs)
                 except Exception as e:
-                    print(
-                        f"{func.__name__}: Failed after {attempt} attempt(s): {e}"
-                    )
+                    print(f"Failed after {attempt} attempt(s): {e}")
                     if attempt < max_retries:
                         time.sleep(delay)
             sys.exit(1)

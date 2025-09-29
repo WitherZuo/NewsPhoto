@@ -27,82 +27,113 @@ def get_parser():
 
 
 # 函数：检测目标文件是否存在，如果存在即删除
-def delete_if_exists(path: str):
+def delete_if_exists(file_path: str):
     print("Cleaning up output folder...")
-    if os.path.exists(path):
-        os.remove(path)
+    try:
+        if os.path.exists(file_path):
+            os.remove(file_path)
+    except Exception as e:
+        print(f"Error occurred while deleting file {file_path}: {e}")
+        sys.exit(1)
 
 
 # 函数：获取目标文件位置，为 URI 地址
 def get_target_url(file_path: Path) -> str:
     print("- Getting NewsPhoto HTML...")
-    return file_path.resolve().as_uri()
+    # 检查目标文件是否存在，不存在则退出
+    try:
+        if file_path.resolve().exists():
+            return file_path.resolve().as_uri()
+        else:
+            print(f"File not found: {file_path.resolve()}.")
+            sys.exit(1)
+    except Exception as e:
+        print(f"Error occurred while getting target URL: {e}")
+        sys.exit(1)
 
 
 # 函数：将页面保存为图片
 def save_as_image(browser_name: str, html_path: Path, output_path: str):
     print("\nPreparing necessary info...")
+    # 获取 NewsPhoto 页面
     url = get_target_url(html_path)
-    print(f"- Loading: {url}")
 
+    # 检测浏览器
     print(r"- Checking browser(s)...")
-    with sync_playwright() as p:
-        # 浏览器映射表
-        launchers = {
-            "chromium": p.chromium.launch,
-            "firefox": p.firefox.launch,
-            "webkit": p.webkit.launch,
-            "chrome": p.chromium.launch,
-            "msedge": p.chromium.launch,
-        }
+    try:
+        with sync_playwright() as p:
+            # 浏览器映射表
+            launchers = {
+                "chromium": p.chromium.launch,
+                "firefox": p.firefox.launch,
+                "webkit": p.webkit.launch,
+                "chrome": p.chromium.launch,
+                "msedge": p.chromium.launch,
+            }
 
-        browser_name = browser_name.lower()
-        launch = launchers.get(browser_name)
+            browser_name = browser_name.lower()
+            launch = launchers.get(browser_name)
 
-        if launch:
-            if browser_name in ["chrome", "msedge"]:
-                browser = launch(channel=browser_name, headless=True)
+            # 识别浏览器
+            if launch:
+                if browser_name in ["chrome", "msedge"]:
+                    browser = launch(channel=browser_name, headless=True)
+                else:
+                    browser = launch(headless=True)
             else:
-                browser = launch(headless=True)
-        else:
-            print(
-                f"Unsupported browser: {browser_name}. Falling back to chromium."
-            )
-            browser = p.chromium.launch(headless=True)
+                print(
+                    f"Unsupported browser: {browser_name}. Falling back to chromium."
+                )
+                browser = p.chromium.launch(headless=True)
 
-        print("\nGenerating NewsPhoto image...")
-        page = browser.new_page()
-        page.goto(url)
-        page.locator("body").screenshot(path=output_path, type="png")
-        print(f"{page.title()}")
-        browser.close()
+            # 导出为图片
+            print("\nGenerating NewsPhoto image...")
+            # 加载 NewsPhoto 页面，生成 NewsPhoto 图片
+            print(f"- Loading: {url}")
+            page = browser.new_page()
+            page.goto(url)
+            page.locator("body").screenshot(path=output_path, type="png")
+            print(f"{page.title()}")
+            browser.close()
+    except Exception as e:
+        print(f"Error occurred while saving as image: {e}")
+        sys.exit(1)
 
 
 # 主函数
 def main():
-    # 获取命令行参数
-    parser = get_parser()
-    args = parser.parse_args()
+    try:
+        # 获取命令行参数
+        parser = get_parser()
+        args = parser.parse_args()
 
-    # 获取脚本的基础路径，设置 Playwright 浏览器标记
-    if "__compiled__" in globals():
-        base_path = os.path.dirname(sys.executable)
-        os.environ["PLAYWRIGHT_BROWSERS_PATH"] = os.path.join(
-            base_path, "browser"
+        # 获取脚本的基础路径，设置 Playwright 浏览器标记
+        if "__compiled__" in globals():
+            base_path = os.path.dirname(sys.executable)
+            os.environ["PLAYWRIGHT_BROWSERS_PATH"] = os.path.join(
+                base_path, "browser"
+            )
+        else:
+            base_path = os.path.dirname(__file__)
+
+        # 获取基础路径
+        output_dir = os.path.join(base_path, "outputs")
+        html_path = Path(os.path.join(output_dir, "NewsPhoto.html"))
+        image_path = os.path.join(output_dir, "NewsPhoto.png")
+
+        # 生成图片
+        delete_if_exists(file_path=image_path)
+        save_as_image(
+            browser_name=args.browser,
+            html_path=html_path,
+            output_path=image_path,
         )
-    else:
-        base_path = os.path.dirname(__file__)
-
-    # 获取基础路径
-    output_dir = os.path.join(base_path, "outputs")
-    html_path = Path(os.path.join(output_dir, "NewsPhoto.html"))
-    image_path = os.path.join(output_dir, "NewsPhoto.png")
-
-    # 生成图片
-    delete_if_exists(path=image_path)
-    save_as_image(
-        browser_name=args.browser, html_path=html_path, output_path=image_path
-    )
+    except KeyboardInterrupt:
+        print("\nProcess interrupted by user. Exiting...")
+        sys.exit(130)
+    except Exception as e:
+        print(f"Error occurred while saving NewsPhoto as image: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

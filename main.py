@@ -49,8 +49,12 @@ def write_header_md(
 def write_content_md(file_path: str):
     print("Generating the main content of NewsPhoto...")
     # 处理正文文本 news.txt，写入到新的正文文件：content.md
-    with open(file_path, "r", encoding="utf_8") as a:
-        text = a.read()
+    try:
+        with open(file_path, "r", encoding="utf_8") as a:
+            text = a.read()
+    except Exception as e:
+        print(f"Error occurred while reading {file_path}: {e}")
+        sys.exit(1)
 
     text_with_space = pangu.spacing(text)
     text_new = re.sub("\n", "  \n\n", text_with_space)
@@ -88,81 +92,110 @@ def convert_with_pandoc(style):
     style_info = style_map.get(style)
     style_file = f"sources/styles/{style_info.get('stylesheet')}"
 
-    subprocess.run(
-        [
-            "pandoc",
-            "--metadata",
-            "title=NewsPhoto",
-            "--embed-resources",
-            "--standalone",
-            f"--css={style_file}",
-            "outputs/NewsPhoto.md",
-            "--output=outputs/NewsPhoto.html",
-        ]
-    )  # fmt: skip
+    # 运行 pandoc --version 检测 Pandoc 安装状态
+    try:
+        subprocess.run(
+            ["pandoc", "--version"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+    except Exception:
+        print(
+            "We cannot find Pandoc, please install it from https://pandoc.org."
+        )
+        sys.exit(1)
+
+    # 运行 Pandoc 转换
+    try:
+        subprocess.run(
+            [
+                "pandoc",
+                "--metadata",
+                "title=NewsPhoto",
+                "--embed-resources",
+                "--standalone",
+                f"--css={style_file}",
+                "outputs/NewsPhoto.md",
+                "--output=outputs/NewsPhoto.html",
+            ],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+    except Exception as e:
+        print(f"Error occurred while converting with Pandoc: {e}")
+        sys.exit(1)
 
 
 # 主函数
 def main():
-    # 获取所有命令行参数
-    parser = MainArgs.get_parser()
-    args = parser.parse_args()
+    try:
+        # 获取所有命令行参数
+        parser = MainArgs.get_parser()
+        args = parser.parse_args()
 
-    # 获取基础路径
-    if "__compiled__" in globals():
-        base_path = os.path.dirname(sys.executable)
-    else:
-        base_path = os.path.dirname(__file__)
+        # 获取基础路径
+        if "__compiled__" in globals():
+            base_path = os.path.dirname(sys.executable)
+        else:
+            base_path = os.path.dirname(__file__)
 
-    # 检查导出目录是否存在，存在则清空，不存在则创建
-    output_dir = os.path.join(base_path, "outputs")
-    if not os.path.exists(output_dir):
-        print("Creating output folder...")
-        os.makedirs(output_dir)
-    else:
-        print("Cleaning up output folder...")
-        for filename in os.listdir(output_dir):
-            file_path = os.path.join(output_dir, filename)
-            os.remove(file_path)
+        # 检查导出目录是否存在，存在则清空，不存在则创建
+        output_dir = os.path.join(base_path, "outputs")
+        if not os.path.exists(output_dir):
+            print("Creating output folder...")
+            os.makedirs(output_dir)
+        else:
+            print("Cleaning up output folder...")
+            for filename in os.listdir(output_dir):
+                file_path = os.path.join(output_dir, filename)
+                os.remove(file_path)
 
-    print("\nPreparing necessary info...")
-    # 获取所需要的日期时间值
-    today_timezone = Today.get_timezone()
-    today_simple_date = Today.get_simple_date()
-    today_full_date = Today.get_full_date()
-    today_weekday = Today.get_weekday(today_full_date)
-    today_zhdate = Today.get_zh_date()
+        print("\nPreparing necessary info...")
+        # 获取所需要的日期时间值
+        today_timezone = Today.get_timezone()
+        today_simple_date = Today.get_simple_date()
+        today_full_date = Today.get_full_date()
+        today_weekday = Today.get_weekday(today_full_date)
+        today_zhdate = Today.get_zh_date()
 
-    # 获取必应图片
-    json_data = Bing.get_bing_json()
-    bing_title = Bing.get_bing_title(json_data)
-    Bing.get_bing_image(json_data)
+        # 获取必应图片
+        json_data = Bing.get_bing_json()
+        bing_title = Bing.get_bing_title(json_data)
+        Bing.get_bing_image(json_data)
 
-    # 生成 NewsPhoto.md 的各个部分
-    header = write_header_md(
-        greeting=args.greeting,
-        today_simple_date=today_simple_date,
-        today_weekday=today_weekday,
-        today_zhdate=today_zhdate,
-    )
-    content = write_content_md(file_path=args.news_file)
-    footer = write_footer_md(
-        style=args.style,
-        bing_title=bing_title,
-        today_full_date=today_full_date,
-        timezone=today_timezone,
-    )
+        # 生成 NewsPhoto.md 的各个部分
+        header = write_header_md(
+            greeting=args.greeting,
+            today_simple_date=today_simple_date,
+            today_weekday=today_weekday,
+            today_zhdate=today_zhdate,
+        )
+        content = write_content_md(file_path=args.news_file)
+        footer = write_footer_md(
+            style=args.style,
+            bing_title=bing_title,
+            today_full_date=today_full_date,
+            timezone=today_timezone,
+        )
 
-    # 汇总后综合写入 NewsPhoto.md
-    print("\nGenerating NewsPhoto...")
-    newsphoto_md_path = os.path.join(output_dir, "NewsPhoto.md")
-    with open(newsphoto_md_path, "a", encoding="utf_8") as newsphoto_md:
-        newsphoto_md.writelines(header)
-        newsphoto_md.write(content)
-        newsphoto_md.writelines(footer)
+        # 汇总后综合写入 NewsPhoto.md
+        print("\nGenerating NewsPhoto...")
+        newsphoto_md_path = os.path.join(output_dir, "NewsPhoto.md")
+        with open(newsphoto_md_path, "a", encoding="utf_8") as newsphoto_md:
+            newsphoto_md.writelines(header)
+            newsphoto_md.write(content)
+            newsphoto_md.writelines(footer)
 
-    # 将 Markdown 文档转换为 HTML 格式
-    convert_with_pandoc(style=args.style)
+        # 将 Markdown 文档转换为 HTML 格式
+        convert_with_pandoc(style=args.style)
+    except KeyboardInterrupt:
+        print("\nProcess interrupted by user. Exiting...")
+        sys.exit(130)
+    except Exception as e:
+        print(f"Error occurred while generating NewsPhoto: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
