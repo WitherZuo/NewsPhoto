@@ -1,6 +1,5 @@
 # coding=utf-8
 import os
-import re
 import subprocess
 import sys
 
@@ -42,7 +41,7 @@ def write_header_md(
         f"【 {greeting} 】\n\n",
     ]  # fmt: skip
 
-    return header_text
+    return "".join(header_text)
 
 
 # 函数：生成正文新闻
@@ -57,7 +56,7 @@ def write_content_md(file_path: str):
         sys.exit(1)
 
     text_with_space = pangu.spacing(text)
-    text_new = re.sub("\n", "  \n\n", text_with_space)
+    text_new = text_with_space.replace("\n", "  \n\n")
     content_text = text_new + "\n\n"
 
     return content_text
@@ -82,7 +81,7 @@ def write_footer_md(style, bing_title, today_full_date, timezone):
         "</footer>",
     ]
 
-    return footer_text
+    return "".join(footer_text)
 
 
 # 函数：使用 Pandoc 导出文档
@@ -122,6 +121,7 @@ def convert_with_pandoc(style):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
+            check=True,
         )
     except Exception as e:
         print(f"Error occurred while converting with Pandoc: {e}")
@@ -184,9 +184,7 @@ def main():
         print("\nGenerating NewsPhoto...")
         newsphoto_md_path = os.path.join(output_dir, "NewsPhoto.md")
         with open(newsphoto_md_path, "a", encoding="utf_8") as newsphoto_md:
-            newsphoto_md.writelines(header)
-            newsphoto_md.write(content)
-            newsphoto_md.writelines(footer)
+            newsphoto_md.write(header + content + footer)
 
         # 将 Markdown 文档转换为 HTML 格式
         convert_with_pandoc(style=args.style)

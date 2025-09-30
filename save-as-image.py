@@ -28,7 +28,7 @@ def get_parser():
 
 # 函数：检测目标文件是否存在，如果存在即删除
 def delete_if_exists(file_path: str):
-    print("Cleaning up output folder...")
+    print("Cleaning up output image...")
     try:
         if os.path.exists(file_path):
             os.remove(file_path)
