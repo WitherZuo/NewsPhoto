@@ -85,7 +85,7 @@ def write_footer_md(style, bing_title, today_full_date, timezone):
 
 
 # 函数：使用 Pandoc 导出文档
-def convert_with_pandoc(style):
+def convert_with_pandoc(input_file, output_file, style):
     print(r"Converting NewsPhoto to HTML with Pandoc...")
     # 判断当前使用的样式，决定使用何种样式表
     style_info = style_map.get(style)
@@ -115,8 +115,8 @@ def convert_with_pandoc(style):
                 "--embed-resources",
                 "--standalone",
                 f"--css={style_file}",
-                "outputs/NewsPhoto.md",
-                "--output=outputs/NewsPhoto.html",
+                f"{input_file}",
+                f"--output={output_file}",
             ],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -187,7 +187,12 @@ def main():
             newsphoto_md.write(header + content + footer)
 
         # 将 Markdown 文档转换为 HTML 格式
-        convert_with_pandoc(style=args.style)
+        newsphoto_html_path = os.path.join(output_dir, "NewsPhoto.html")
+        convert_with_pandoc(
+            input_file=newsphoto_md_path,
+            output_file=newsphoto_html_path,
+            style=args.style,
+        )
     except KeyboardInterrupt:
         print("\nProcess interrupted by user. Exiting...")
         sys.exit(130)
