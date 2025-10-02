@@ -63,10 +63,12 @@ uv run save-as-image.py
 
 生成图片。生成的图片位于 `outputs` 目录下，名称为 `NewsPhoto.png`。
 
-**或者也可以使用项目内的交互式生成脚本 `preview.sh`，该脚本位于 `scripts` 目录下。**
+**或者也可以使用项目内的交互式生成脚本 `preview.py`，该脚本位于 `scripts` 目录下。**
 
-- **Windows**：确保 `<Git 安装目录>\usr\bin\` 在 `PATH` 环境变量中，然后在项目根目录下，执行 `sh scripts\preview.sh`。
-- **macOS、Linux**：赋予脚本 `preview.sh` 执行权限，然后在项目根目录下，从当前 shell 中执行 `scripts/preview.sh`。
+```bash
+# 确保处于项目根目录中
+uv run ./scripts/preview.py
+```
 
 ## 感谢：
 
