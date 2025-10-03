@@ -12,9 +12,15 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "imageio>=2.37.0",
     "nuitka>=2.7.16",
+    "poethepoet>=0.37.0",
     "ruff>=0.11.2",
 ]
+
+[tool.poe.tasks]
+preview = "uv run scripts/preview.py"
+build = "uv run scripts/build.py"
 
 [tool.ruff]
 line-length = 79
