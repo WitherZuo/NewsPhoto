@@ -54,7 +54,7 @@ def main():
     greeting_text = get_greeting_text()
     theme = choose_theme()
 
-    # 调用外部命令，相当于 shell 脚本中的 uv run
+    # 调用 uv run 生成 NewsPhoto
     subprocess.run(
         [
             "uv",
