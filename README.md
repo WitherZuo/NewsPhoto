@@ -67,7 +67,7 @@ uv run save-as-image.py
 
 ```bash
 # 确保处于项目根目录中
-uv run ./scripts/preview.py
+uv run poe preview
 ```
 
 ## 感谢：
