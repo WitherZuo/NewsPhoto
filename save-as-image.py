@@ -28,11 +28,11 @@ def get_parser():
 
 
 # 函数：检测目标文件是否存在，如果存在即删除
-def delete_if_exists(file_path: str):
+def delete_if_exists(file_path: Path):
     print("Cleaning up output image...")
     try:
-        if os.path.exists(file_path):
-            os.remove(file_path)
+        if Path(file_path).exists():
+            Path(file_path).unlink()
     except Exception as e:
         print(f"Error occurred while deleting file {file_path}: {e}")
         sys.exit(1)
@@ -54,7 +54,7 @@ def get_target_url(file_path: Path) -> str:
 
 
 # 函数：将页面保存为图片
-def save_as_image(browser_name: str, html_path: Path, output_path: str):
+def save_as_image(browser_name: str, html_path: Path, output_path: Path):
     print("\nPreparing necessary info...")
     # 获取 NewsPhoto 页面
     url = get_target_url(html_path)
@@ -110,17 +110,17 @@ def main():
 
         # 获取脚本的基础路径，设置 Playwright 浏览器标记
         if "__compiled__" in globals():
-            base_path = os.path.dirname(sys.executable)
-            os.environ["PLAYWRIGHT_BROWSERS_PATH"] = os.path.join(
-                base_path, "browser"
+            base_path = Path(sys.executable).parent
+            os.environ["PLAYWRIGHT_BROWSERS_PATH"] = str(
+                base_path / "browser"
             )
         else:
-            base_path = os.path.dirname(__file__)
+            base_path = Path(__file__).parent
 
         # 获取基础路径
-        output_dir = os.path.join(base_path, "outputs")
-        html_path = Path(os.path.join(output_dir, "NewsPhoto.html"))
-        image_path = os.path.join(output_dir, "NewsPhoto.png")
+        output_dir = base_path / "outputs"
+        html_path = output_dir / "NewsPhoto.html"
+        image_path = output_dir / "NewsPhoto.png"
 
         # 生成图片
         delete_if_exists(file_path=image_path)

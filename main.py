@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import os
 import subprocess
 import sys
+from pathlib import Path
 
 import pangu
 
@@ -46,7 +46,7 @@ def write_header_md(
 
 
 # 函数：生成正文新闻
-def write_content_md(file_path: str):
+def write_content_md(file_path: Path):
     print("Generating the main content of NewsPhoto...")
     # 处理正文文本 news.txt，写入到新的正文文件：content.md
     try:
@@ -138,20 +138,20 @@ def main():
 
         # 获取基础路径
         if "__compiled__" in globals():
-            base_path = os.path.dirname(sys.executable)
+            base_path = Path(sys.executable).parent
         else:
-            base_path = os.path.dirname(__file__)
+            base_path = Path(__file__).parent
 
         # 检查导出目录是否存在，存在则清空，不存在则创建
-        output_dir = os.path.join(base_path, "outputs")
-        if not os.path.exists(output_dir):
+        output_dir = base_path / "outputs"
+        if not output_dir.exists():
             print("Creating output folder...")
-            os.makedirs(output_dir)
+            output_dir.mkdir()
         else:
             print("Cleaning up output folder...")
-            for filename in os.listdir(output_dir):
-                file_path = os.path.join(output_dir, filename)
-                os.remove(file_path)
+            for filename in output_dir.iterdir():
+                file_path = output_dir / filename
+                file_path.unlink()
 
         print("\nPreparing necessary info...")
         # 获取所需要的日期时间值
@@ -183,12 +183,12 @@ def main():
 
         # 汇总后综合写入 NewsPhoto.md
         print("\nGenerating NewsPhoto...")
-        newsphoto_md_path = os.path.join(output_dir, "NewsPhoto.md")
+        newsphoto_md_path = output_dir / "NewsPhoto.md"
         with open(newsphoto_md_path, "a", encoding="utf_8") as newsphoto_md:
             newsphoto_md.write(header + content + footer)
 
         # 将 Markdown 文档转换为 HTML 格式
-        newsphoto_html_path = os.path.join(output_dir, "NewsPhoto.html")
+        newsphoto_html_path = output_dir / "NewsPhoto.html"
         convert_with_pandoc(
             input_file=newsphoto_md_path,
             output_file=newsphoto_html_path,

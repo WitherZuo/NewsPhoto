@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import os
 import sys
 import time
 from functools import wraps
+from pathlib import Path
 
 import requests
 
@@ -91,7 +91,7 @@ def get_bing_image(bingimage_data):
 
     # 下载图片到本地
     bingimage = requests.get(bingimage_fullurl, timeout=20)
-    photo_location = os.path.join("outputs", "photo.jpg")
+    photo_location = Path("outputs") / "photo.jpg"
 
     with open(photo_location, "wb") as f:
         f.write(bingimage.content)
