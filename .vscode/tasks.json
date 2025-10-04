@@ -8,14 +8,14 @@
             "detail": "一键预览生成的图片 / Preview generated image in one-click.",
             "type": "shell",
             "args": [],
-            "command": "pwsh.exe ./scripts/preview.sh",
+            "command": "uv run poe preview",
             "problemMatcher": []
         },
         {
-            "label": "Git：上传所有提交 / Git: Push all commits.",
-            "detail": "上传所有提交到远端仓库 / Push all commits to remote.",
+            "label": "生成可执行程序文件 / Create executable files.",
+            "detail": "生成可直接运行的程序文件 / Create executable files for ready-to-run.",
             "type": "shell",
-            "command": "pwsh.exe ./scripts/publish.sh",
+            "command": "uv run poe build",
             "problemMatcher": []
         }
     ]
