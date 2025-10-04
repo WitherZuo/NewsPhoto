@@ -112,7 +112,7 @@ def main():
         if "__compiled__" in globals():
             base_path = os.path.dirname(sys.executable)
             os.environ["PLAYWRIGHT_BROWSERS_PATH"] = os.path.join(
-                base_path, "ms-playwright"
+                base_path, "browser"
             )
         else:
             base_path = os.path.dirname(__file__)

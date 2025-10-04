@@ -2,15 +2,14 @@
 # -*- coding: utf-8 -*-
 import platform
 import re
-import shutil
 import subprocess
 import sys
 from importlib import import_module
 from pathlib import Path
+from shutil import copytree, rmtree, which
 
 # 添加本地模块路径
 sys.path.append(".")
-
 # 处理模块名称与导入名称不一致的情况
 module_alias = {
     "pillow": "PIL",
@@ -19,7 +18,6 @@ module_alias = {
     "pyyaml": "yaml",
     "typing-extensions": "typing_extensions",
 }
-
 # 本地模块列表
 self_modules = [
     "modules",
@@ -29,7 +27,6 @@ self_modules = [
     "modules.constants",
     "modules.zhdate",
 ]
-
 # 编译产物输出目录名
 output_dirname = "dist"
 # 定义 requirements.txt 文件路径
@@ -90,14 +87,9 @@ def build_with_nuitka(
     print(f"\n正在编译：{input_file}")
     print(f"执行命令：{' '.join(cmd)}\n")
     subprocess.run(cmd, check=True)
-
     if include_browser:
-        print("\n正在复制浏览器文件...")
-        shutil.copytree(
-            browser_path,
-            Path(output_dirname) / "ms-playwright",
-            dirs_exist_ok=True,
-        )
+        print("正在复制浏览器文件...")
+        copytree(browser_path, Path(output_dirname) / "browser")
 
     return cmd
 
@@ -105,7 +97,7 @@ def build_with_nuitka(
 # 函数：检查 uv 是否安装
 def check_uv():
     print("检查本机是否安装 uv...")
-    uv_install = shutil.which("uv")
+    uv_install = which("uv")
     if uv_install != None:
         print(f"uv 已安装：{uv_install}\n")
     else:
@@ -182,14 +174,11 @@ def main():
     try:
         # 检查 uv 是否安装
         check_uv()
-
         # 删除上一次输出目录，创建新的输出目录
-        shutil.rmtree("dist", ignore_errors=True)
+        rmtree("dist", ignore_errors=True)
         Path("dist").mkdir()
-
         # 生成 requirements.txt 文件
         create_requirements_txt(output_file=requirements_txt)
-
         # 获取外部已安装模块列表
         installed_modules = get_installed_modules(
             module_list_file=requirements_txt
@@ -201,7 +190,6 @@ def main():
             raise RuntimeError(
                 "发现有导入失败的模块，请通过 uv sync 刷新项目依赖"
             )
-
         # 获取 Nuitka 编译命令并执行
         build_with_nuitka(
             input_file="main.py",
@@ -214,6 +202,9 @@ def main():
             icon_file="icons/icon-dark.png",
             include_browser=True,
         )
+        # 复制资源文件
+        print("\n正在复制资源文件...")
+        copytree(Path("sources"), Path(output_dirname) / "sources")
     except KeyboardInterrupt:
         raise ("用户中断了操作，正在退出")
     except Exception as e:
