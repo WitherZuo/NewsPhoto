@@ -110,7 +110,7 @@ def main():
 
         # 获取脚本的基础路径，设置 Playwright 浏览器标记
         if "__compiled__" in globals():
-            base_path = Path(sys.executable).parent
+            base_path = Path(__compiled__.containing_dir) # type: ignore
             os.environ["PLAYWRIGHT_BROWSERS_PATH"] = str(
                 base_path / "browser"
             )
