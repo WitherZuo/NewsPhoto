@@ -28,9 +28,7 @@ style_map = {
 
 
 # 函数：生成头部内容
-def write_header_md(
-    greeting: str, today_simple_date, today_weekday, today_zhdate
-):
+def write_header_md(greeting: str, today_simple_date, today_weekday, today_zhdate):
     print("Generating the header of NewsPhoto...")
     # 写入头文件：header.md
     header_text = [
@@ -101,9 +99,7 @@ def convert_with_pandoc(input_file, output_file, style):
             text=True,
         )
     except Exception:
-        print(
-            "We cannot find Pandoc, please install it from https://pandoc.org."
-        )
+        print("We cannot find Pandoc, please install it from https://pandoc.org.")
         sys.exit(1)
 
     # 运行 Pandoc 转换
@@ -138,7 +134,7 @@ def main():
 
         # 获取基础路径
         if "__compiled__" in globals():
-            base_path = Path(__compiled__.containing_dir) # type: ignore
+            base_path = Path(__compiled__.containing_dir)  # type: ignore
         else:
             base_path = Path(__file__).parent
 

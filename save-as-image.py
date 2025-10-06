@@ -82,9 +82,7 @@ def save_as_image(browser_name: str, html_path: Path, output_path: Path):
                 else:
                     browser = launch(headless=True)
             else:
-                print(
-                    f"Unsupported browser: {browser_name}. Falling back to chromium."
-                )
+                print(f"Unsupported browser: {browser_name}. Falling back to chromium.")
                 browser = p.chromium.launch(headless=True)
 
             # 导出为图片
@@ -110,10 +108,8 @@ def main():
 
         # 获取脚本的基础路径，设置 Playwright 浏览器标记
         if "__compiled__" in globals():
-            base_path = Path(__compiled__.containing_dir) # type: ignore
-            os.environ["PLAYWRIGHT_BROWSERS_PATH"] = str(
-                base_path / "browser"
-            )
+            base_path = Path(__compiled__.containing_dir)  # type: ignore
+            os.environ["PLAYWRIGHT_BROWSERS_PATH"] = str(base_path / "browser")
         else:
             base_path = Path(__file__).parent
 

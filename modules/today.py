@@ -22,9 +22,7 @@ def get_timezone():
     # 获取当前时区偏移量（单位：小时）
     utc_offset = now_datetime.astimezone().utcoffset()
     utc_offset_hours = utc_offset.total_seconds() / 3600  # 转换为小时
-    timezone = (
-        f"UTC{'+' if utc_offset_hours >= 0 else ''}{int(utc_offset_hours)}"
-    )
+    timezone = f"UTC{'+' if utc_offset_hours >= 0 else ''}{int(utc_offset_hours)}"
     return timezone
 
 
@@ -32,12 +30,8 @@ def get_timezone():
 def get_simple_date():
     print("- Getting the short time and date...")
     platform = sys.platform.lower()
-    format_str = DATE_FORMATS.get(
-        platform, "%Y {Y} %#m {M} %#d {D}"
-    )  # 默认格式
-    simple_date = now_datetime.strftime(format_str).format(
-        Y="年", M="月", D="日"
-    )
+    format_str = DATE_FORMATS.get(platform, "%Y {Y} %#m {M} %#d {D}")  # 默认格式
+    simple_date = now_datetime.strftime(format_str).format(Y="年", M="月", D="日")
     return simple_date
 
 

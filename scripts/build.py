@@ -34,9 +34,7 @@ requirements_txt = Path().resolve() / output_dirname / "requirements.txt"
 
 
 # 返回 Nuitka 编译命令并执行
-def build_with_nuitka(
-    input_file, output_file, icon_file, include_browser=False
-):
+def build_with_nuitka(input_file, output_file, icon_file, include_browser=False):
     # 通过 uv 运行 nuitka，所有平台的公共参数
     base_cmd = [
         "uv",
@@ -101,9 +99,7 @@ def check_uv():
     if uv_install != None:
         print(f"uv 已安装：{uv_install}\n")
     else:
-        raise FileNotFoundError(
-            "本机上没有找到 uv。本项目由 uv 管理，请先安装 uv 后重试"
-        )
+        raise FileNotFoundError("未找到 uv。本项目由 uv 管理，请先安装 uv 后重试")
 
 
 # 函数：生成 requirements.txt 文件
@@ -180,16 +176,12 @@ def main():
         # 生成 requirements.txt 文件
         create_requirements_txt(output_file=requirements_txt)
         # 获取外部已安装模块列表
-        installed_modules = get_installed_modules(
-            module_list_file=requirements_txt
-        )
+        installed_modules = get_installed_modules(module_list_file=requirements_txt)
         # 合并外部已安装模块列表和本地模块列表，为所有模块列表
         all_modules = installed_modules + self_modules
         # 检查所有模块的导入情况，出现导入失败的模块，则退出
         if check_modules(module=all_modules)[1]:
-            raise RuntimeError(
-                "发现有导入失败的模块，请通过 uv sync 刷新项目依赖"
-            )
+            raise RuntimeError("发现有导入失败的模块，请通过 uv sync 刷新项目依赖")
         # 获取 Nuitka 编译命令并执行
         build_with_nuitka(
             input_file="main.py",

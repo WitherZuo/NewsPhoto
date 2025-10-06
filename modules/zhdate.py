@@ -63,9 +63,7 @@ class ZhDate:
             datetime.strptime(CHINESENEWYEAR[lunar_year - 1900], "%Y%m%d") - dt
         ).total_seconds() > 0
         # 当时农历新年时的日期对象
-        newyear_dt = datetime.strptime(
-            CHINESENEWYEAR[lunar_year - 1900], "%Y%m%d"
-        )
+        newyear_dt = datetime.strptime(CHINESENEWYEAR[lunar_year - 1900], "%Y%m%d")
         # 查询日期距离当年的春节差了多久
         days_passed = (dt - newyear_dt).days
         # 被查询日期的年份码
@@ -175,15 +173,11 @@ class ZhDate:
     def __add__(self, another):
         if not isinstance(another, int):
             raise TypeError("加法只支持整数天数相加")
-        return ZhDate.from_datetime(
-            self.to_datetime() + timedelta(days=another)
-        )
+        return ZhDate.from_datetime(self.to_datetime() + timedelta(days=another))
 
     def __sub__(self, another):
         if isinstance(another, int):
-            return ZhDate.from_datetime(
-                self.to_datetime() - timedelta(days=another)
-            )
+            return ZhDate.from_datetime(self.to_datetime() - timedelta(days=another))
         elif isinstance(another, ZhDate):
             return (self.to_datetime() - another.to_datetime()).days
         elif isinstance(another, datetime):
@@ -222,9 +216,7 @@ class ZhDate:
 
         # 有闰月标志
         if leap:
-            if (
-                year_code & 0xF
-            ) != month:  # 年度闰月和校验闰月不一致的话，返回校验失败
+            if (year_code & 0xF) != month:  # 年度闰月和校验闰月不一致的话，返回校验失败
                 return False
             elif (
                 day == 30
