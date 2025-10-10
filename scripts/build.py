@@ -70,7 +70,6 @@ def build_with_nuitka(input_file, output_file, icon_file, include_browser=False)
             args = [
                 f"--output-filename={output_file}",
                 "--lto=yes",
-                # f"--linux-icon={icon_file}",
             ]
             browser_path = Path.home() / ".cache" / "ms-playwright"
         # 不支持的操作系统
