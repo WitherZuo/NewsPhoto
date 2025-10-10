@@ -12,7 +12,6 @@ from shutil import copytree, rmtree, which
 sys.path.append(".")
 # 处理模块名称与导入名称不一致的情况
 module_alias = {
-    # "pillow": "PIL",
     "charset-normalizer": "charset_normalizer",
     "ordered-set": "ordered_set",
     "pyyaml": "yaml",
