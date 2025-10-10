@@ -12,7 +12,7 @@ from shutil import copytree, rmtree, which
 sys.path.append(".")
 # 处理模块名称与导入名称不一致的情况
 module_alias = {
-    "pillow": "PIL",
+    # "pillow": "PIL",
     "charset-normalizer": "charset_normalizer",
     "ordered-set": "ordered_set",
     "pyyaml": "yaml",
@@ -56,14 +56,14 @@ def build_with_nuitka(input_file, output_file, icon_file, include_browser=False)
             args = [
                 f"--output-filename={output_file}.exe",
                 "--lto=yes",
-                f"--windows-icon-from-ico={icon_file}",
+                f"--windows-icon-from-ico={icon_file}.ico",
             ]
             browser_path = Path.home() / "AppData" / "Local" / "ms-playwright"
         # macOS 特定参数
         case "darwin":
             args = [
                 f"--output-filename={output_file}",
-                f"--macos-app-icon={icon_file}",
+                f"--macos-app-icon={icon_file}.icns",
             ]
             browser_path = Path.home() / "Library" / "Caches" / "ms-playwright"
         # Linux 特定参数
@@ -71,7 +71,7 @@ def build_with_nuitka(input_file, output_file, icon_file, include_browser=False)
             args = [
                 f"--output-filename={output_file}",
                 "--lto=yes",
-                f"--linux-icon={icon_file}",
+                # f"--linux-icon={icon_file}",
             ]
             browser_path = Path.home() / ".cache" / "ms-playwright"
         # 不支持的操作系统
@@ -186,12 +186,12 @@ def main():
         build_with_nuitka(
             input_file="main.py",
             output_file="newsphoto",
-            icon_file="icons/icon-light.png",
+            icon_file="icons/icon-light",
         )
         build_with_nuitka(
             input_file="save-as-image.py",
             output_file="save-as-image",
-            icon_file="icons/icon-dark.png",
+            icon_file="icons/icon-dark",
             include_browser=True,
         )
         # 复制资源文件
