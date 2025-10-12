@@ -42,7 +42,6 @@ header {
 /* 设置顶部图片样式 */
 header figure {
     position: relative;
-    width: 640px;
     height: 246px;
 }
 
@@ -65,7 +64,7 @@ header figure figcaption {
 
 /* 设置主要内容区域样式-内边距 */
 section {
-    padding: 20px;
+    padding: 28px;
 }
 
 /* 强制居中当前时间标题和节气文本 */
@@ -126,7 +125,7 @@ section p:nth-of-type(2) {
 /* 底部版权页样式 */
 footer {
     position: relative;
-    padding: 20px;
+    padding: 20px 28px 28px;
 }
 
 footer p {
@@ -151,6 +150,6 @@ footer figure figcaption {
 footer figure img[title="qrcode"] {
     position: absolute;
     width: 75px;
-    right: 20px;
-    bottom: 20px;
+    right: 28px;
+    bottom: 28px;
 }
