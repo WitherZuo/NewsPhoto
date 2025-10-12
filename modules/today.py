@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import sys
 from datetime import datetime
 
 from modules.zhdate import ZhDate
 
+# 获取当前日期时间对象，并视情况前置补零
 now_datetime = datetime.now()
 
-# 根据操作系统决定日期格式
-# Linux: https://stackoverflow.com/questions/9525944/python-datetime-formatting-without-zero-padding
-DATE_FORMATS = {
-    "linux": "%Y {Y} %-m {M} %-d {D}",
-    "win32": "%Y {Y} %#m {M} %#d {D}",
-    "darwin": "%Y {Y} %-m {M} %-d {D}",  # macOS
-}
+year = now_datetime.year
+month = now_datetime.month
+day = now_datetime.day
+hour = now_datetime.hour
+minute = f"{now_datetime.minute:02d}"
+second = f"{now_datetime.second:02d}"
 
 
 # 函数：获取当前时区
@@ -29,9 +28,7 @@ def get_timezone():
 # 函数：简短日期
 def get_simple_date():
     print("- Getting the short time and date...")
-    platform = sys.platform.lower()
-    format_str = DATE_FORMATS.get(platform, "%Y {Y} %#m {M} %#d {D}")  # 默认格式
-    simple_date = now_datetime.strftime(format_str).format(Y="年", M="月", D="日")
+    simple_date = f"{year} 年 {month} 月 {day} 日"
     return simple_date
 
 
@@ -39,18 +36,15 @@ def get_simple_date():
 def get_full_date():
     print("- Getting the full time and date...")
     # 获取当前日期时间，并格式化
-    full_date = now_datetime.strftime("%Y-%m-%d %H:%M:%S")
+    full_date = f"{year}/{month}/{day} {hour}:{minute}:{second}"
     return full_date
 
 
 # 函数：中文化星期几
-def get_weekday(full_date):
+def get_weekday():
     print("- Getting the weekday...")
     # 获取星期几，中文化表示
-    today = datetime.strptime(
-        full_date, "%Y-%m-%d %H:%M:%S"
-    )  # 按指定格式转为 datetime 对象
-    weekday_index = today.weekday()  # 获取对应星期的索引值
+    weekday_index = now_datetime.weekday()  # 获取对应星期的索引值
     weekdays = (
         "星期一",
         "星期二",

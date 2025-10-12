@@ -74,8 +74,8 @@ def write_footer_md(style, bing_title, today_full_date, timezone):
         "<footer>  \n\n",
         f"**{bing_title[0]}**<br>",
         f"**{bing_title[1]}**  \n\n",
-        f"> 最后更新: {today_full_date} / {timezone}<br>",
-        f"最后修订: {today_full_date} / {timezone}  \n\n",
+        f"> 更新于: {today_full_date} / {timezone}<br>",
+        f"修订于: {today_full_date} / {timezone}  \n\n",
         f"{qrcode}  \n\n",
         "</footer>",
     ]
@@ -154,7 +154,7 @@ def main():
         today_timezone = Today.get_timezone()
         today_simple_date = Today.get_simple_date()
         today_full_date = Today.get_full_date()
-        today_weekday = Today.get_weekday(today_full_date)
+        today_weekday = Today.get_weekday()
         today_zhdate = Today.get_zh_date()
 
         # 获取必应图片
