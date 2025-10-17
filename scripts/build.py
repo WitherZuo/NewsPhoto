@@ -127,7 +127,7 @@ def get_installed_modules(module_list_file):
     with open(module_list_file, "r", encoding="utf-8") as requirements:
         # 读取每一行模块定义，取模块名称部分，处理别名后添加到已安装模块列表
         for line in requirements.readlines():
-            module = re.split(r"[=<>~!]", line, 1)[0]
+            module = re.split(r"[=<>~!]", line, maxsplit=1)[0]
             if module in module_alias:
                 module = module_alias[module]
             installed_modules.append(module)
