@@ -4,7 +4,7 @@ import platform
 import re
 import subprocess
 import sys
-from importlib import import_module
+from importlib.util import find_spec
 from pathlib import Path
 from shutil import copytree, rmtree, which
 
@@ -141,17 +141,18 @@ def check_modules(module):
     # 遍历所有模块，尝试导入
     for installed_module in module:
         print(f"尝试导入模块：{installed_module}...")
-        try:
-            result = import_module(installed_module)
-            print(result)
-            print(f"🟢 模块 {installed_module} 已安装，且可以被导入。\n")
-            # 导入成功，添加到已导入模块列表
-            imported_modules.append(installed_module)
-        except (ImportError, ModuleNotFoundError) as e:
-            print(e)
+        # 查找模块定义，并输出检查结果
+        result = find_spec(installed_module)
+        print(result)
+        # 如果为 None 则未找到模块
+        if result == None:
             print(f"🔴 模块 {installed_module} 无法被导入！\n")
             # 导入失败，添加到导入失败模块列表
             failed_modules.append(installed_module)
+        else:
+            print(f"🟢 模块 {installed_module} 已安装，且可以被导入。\n")
+            # 导入成功，添加到已导入模块列表
+            imported_modules.append(installed_module)
 
     # 输出导入成功和失败的模块列表
     print(f"• 这些模块导入成功：{', '.join(imported_modules)}")
