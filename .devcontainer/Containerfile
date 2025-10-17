@@ -15,7 +15,7 @@ RUN <<EOF
     set -euox pipefail
     
     apt-get update
-    apt-get install ca-certificates curl git build-essential sudo gpg patchelf ccache -y --no-install-recommends 
+    apt-get install ca-certificates curl git build-essential sudo gpg patchelf ccache python3-dev -y --no-install-recommends 
     
     echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/4/Debian_13/ /' | tee /etc/apt/sources.list.d/shells:fish:release:4.list
     curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:4/Debian_13/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/shells_fish_release_4.gpg > /dev/null
