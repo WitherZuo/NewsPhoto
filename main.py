@@ -134,7 +134,7 @@ def main():
 
         # 获取基础路径
         if "__compiled__" in globals():
-            base_path = Path(__compiled__.containing_dir)  # type: ignore
+            base_path = Path(sys.argv[0]).parent
         else:
             base_path = Path(__file__).parent
 
