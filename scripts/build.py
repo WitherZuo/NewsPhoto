@@ -39,11 +39,10 @@ def build_with_nuitka(input_file, output_file, icon_file, include_browser=False)
         "uv",
         "run",
         "nuitka",
-        "--onefile",
+        "--mode=onefile",
         f"{input_file}",
         "--remove-output",
         f"--output-dir={output_dirname}",
-        "--assume-yes-for-downloads",
     ]
     # 特定系统的参数
     platform_args = []
@@ -56,21 +55,19 @@ def build_with_nuitka(input_file, output_file, icon_file, include_browser=False)
                 f"--output-filename={output_file}.exe",
                 "--lto=yes",
                 f"--windows-icon-from-ico={icon_file}.ico",
+                "--msvc=latest"
             ]
             browser_path = Path.home() / "AppData" / "Local" / "ms-playwright"
         # macOS 特定参数
         case "darwin":
             args = [
                 f"--output-filename={output_file}",
-                f"--macos-app-icon={icon_file}.icns",
+                f"--macos-app-icon={icon_file}.icns"
             ]
             browser_path = Path.home() / "Library" / "Caches" / "ms-playwright"
         # Linux 特定参数
         case "linux":
-            args = [
-                f"--output-filename={output_file}",
-                "--lto=yes",
-            ]
+            args = [f"--output-filename={output_file}", "--lto=yes"]
             browser_path = Path.home() / ".cache" / "ms-playwright"
         # 不支持的操作系统
         case _:
