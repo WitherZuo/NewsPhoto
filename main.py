@@ -66,7 +66,10 @@ def write_footer_md(style, bing_title, today_full_date, timezone):
     print("Generating the footer of NewsPhoto...")
     # 判断当前使用的样式，决定使用何种样式的二维码
     style_info = style_map.get(style)
-    qrcode = f"![qrcode](sources/images/{style_info.get('qrcode')} 'qrcode')"
+    qrcode_file = (
+        Path(__file__).parent / "sources" / "images" / style_info.get("qrcode")
+    )
+    qrcode = f"![qrcode]({qrcode_file} 'qrcode')"
 
     # 写入底部文件：footer.md
     footer_text = [
@@ -88,7 +91,9 @@ def convert_with_pandoc(input_file, output_file, style):
     print(r"Converting NewsPhoto to HTML with Pandoc...")
     # 判断当前使用的样式，决定使用何种样式表
     style_info = style_map.get(style)
-    style_file = f"sources/styles/{style_info.get('stylesheet')}"
+    style_file = (
+        Path(__file__).parent / "sources" / "styles" / style_info.get("stylesheet")
+    )
 
     # 运行 pandoc --version 检测 Pandoc 安装状态
     try:

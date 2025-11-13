@@ -33,7 +33,9 @@ requirements_txt = Path().resolve() / output_dirname / "requirements.txt"
 
 
 # 返回 Nuitka 编译命令并执行
-def build_with_nuitka(input_file, output_file, icon_file, include_browser=False):
+def build_with_nuitka(
+    input_file, output_file, icon_file, include_sources=False, include_browser=False
+):
     # 通过 uv 运行 nuitka，所有平台的公共参数
     base_cmd = [
         "uv",
@@ -44,6 +46,9 @@ def build_with_nuitka(input_file, output_file, icon_file, include_browser=False)
         "--remove-output",
         f"--output-dir={output_dirname}",
     ]
+    if include_sources:
+        base_cmd.append("--include-data-dir=sources=sources")
+
     # 特定系统的参数
     platform_args = []
     system = platform.system().lower()
@@ -55,14 +60,14 @@ def build_with_nuitka(input_file, output_file, icon_file, include_browser=False)
                 f"--output-filename={output_file}.exe",
                 "--lto=yes",
                 f"--windows-icon-from-ico={icon_file}.ico",
-                "--msvc=latest"
+                "--msvc=latest",
             ]
             browser_path = Path.home() / "AppData" / "Local" / "ms-playwright"
         # macOS 特定参数
         case "darwin":
             args = [
                 f"--output-filename={output_file}",
-                f"--macos-app-icon={icon_file}.icns"
+                f"--macos-app-icon={icon_file}.icns",
             ]
             browser_path = Path.home() / "Library" / "Caches" / "ms-playwright"
         # Linux 特定参数
@@ -80,6 +85,7 @@ def build_with_nuitka(input_file, output_file, icon_file, include_browser=False)
     print(f"\n正在编译：{input_file}")
     print(f"执行命令：{' '.join(cmd)}\n")
     subprocess.run(cmd, check=True)
+
     if include_browser:
         print("正在复制浏览器文件...")
         copytree(browser_path, Path(output_dirname) / "browser")
@@ -183,6 +189,7 @@ def main():
             input_file="main.py",
             output_file="newsphoto",
             icon_file="icons/icon-light",
+            include_sources=True,
         )
         build_with_nuitka(
             input_file="save-as-image.py",
@@ -191,8 +198,8 @@ def main():
             include_browser=True,
         )
         # 复制资源文件
-        print("\n正在复制资源文件...")
-        copytree(Path("sources"), Path(output_dirname) / "sources")
+        # print("\n正在复制资源文件...")
+        # copytree(Path("sources"), Path(output_dirname) / "sources")
     except KeyboardInterrupt:
         raise ("用户中断了操作，正在退出")
     except Exception as e:
