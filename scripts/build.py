@@ -36,7 +36,7 @@ requirements_txt = Path().resolve() / output_dirname / "requirements.txt"
 def build_with_nuitka(
     input_file, output_file, icon_file, include_sources=False, include_browser=False
 ):
-    # 通过 uv 运行 nuitka，所有平台的公共参数
+    # 通过 uv 运行 nuitka，所有平台的公共参数，如果 include_sources 为 True，则包含 sources 目录
     base_cmd = [
         "uv",
         "run",
@@ -197,9 +197,6 @@ def main():
             icon_file="icons/icon-dark",
             include_browser=True,
         )
-        # 复制资源文件
-        # print("\n正在复制资源文件...")
-        # copytree(Path("sources"), Path(output_dirname) / "sources")
     except KeyboardInterrupt:
         raise ("用户中断了操作，正在退出")
     except Exception as e:
