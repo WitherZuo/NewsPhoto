@@ -11,6 +11,7 @@ import modules.bing as Bing
 import modules.today as Today
 
 # 样式信息
+sources_folder = Path(__file__).parent / "sources"
 style_map = {
     "light": {
         "qrcode": "qrcode-normal.png",
@@ -28,12 +29,14 @@ style_map = {
 
 
 # 函数：生成头部内容
-def write_header_md(greeting: str, today_simple_date, today_weekday, today_zhdate):
+def write_header_md(
+    greeting: str, today_simple_date, today_weekday, today_zhdate, header_image
+):
     print("Generating the header of NewsPhoto...")
     # 写入头文件：header.md
     header_text = [
         "<header>  \n\n",
-        "![News Photo](outputs/photo.jpg)  \n\n",
+        f"![News Photo]({header_image} 'header_image')  \n\n",
         "</header>  \n\n",
         "<section>  \n\n",
         f"## {today_simple_date} · {today_weekday} · {today_zhdate}\n\n",
@@ -66,9 +69,7 @@ def write_footer_md(style, bing_title, today_full_date, timezone):
     print("Generating the footer of NewsPhoto...")
     # 判断当前使用的样式，决定使用何种样式的二维码
     style_info = style_map.get(style)
-    qrcode_file = (
-        Path(__file__).parent / "sources" / "images" / style_info.get("qrcode")
-    )
+    qrcode_file = sources_folder / "images" / style_info.get("qrcode")
     qrcode = f"![qrcode]({qrcode_file} 'qrcode')"
 
     # 写入底部文件：footer.md
@@ -91,9 +92,7 @@ def convert_with_pandoc(input_file, output_file, style):
     print(r"Converting NewsPhoto to HTML with Pandoc...")
     # 判断当前使用的样式，决定使用何种样式表
     style_info = style_map.get(style)
-    style_file = (
-        Path(__file__).parent / "sources" / "styles" / style_info.get("stylesheet")
-    )
+    style_file = sources_folder / "styles" / style_info.get("stylesheet")
 
     # 运行 pandoc --version 检测 Pandoc 安装状态
     try:
@@ -165,7 +164,9 @@ def main():
         # 获取必应图片
         json_data = Bing.get_bing_json()
         bing_title = Bing.get_bing_title(json_data)
-        Bing.get_bing_image(json_data)
+
+        bing_image_path = output_dir / "photo.jpg"
+        Bing.get_bing_image(json_data, save_path=bing_image_path)
 
         # 生成 NewsPhoto.md 的各个部分
         header = write_header_md(
@@ -173,6 +174,7 @@ def main():
             today_simple_date=today_simple_date,
             today_weekday=today_weekday,
             today_zhdate=today_zhdate,
+            header_image=bing_image_path,
         )
         content = write_content_md(file_path=args.news_file)
         footer = write_footer_md(

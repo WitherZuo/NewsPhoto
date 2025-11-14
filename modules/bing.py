@@ -77,7 +77,7 @@ def get_bing_title(bingimage_data):
 
 # 获取必应图片到本地
 @retryable()
-def get_bing_image(bingimage_data):
+def get_bing_image(bingimage_data, save_path: Path):
     print("- Downloading the Bing image...")
     # 获取图片地址，然后拼接
     """
@@ -91,7 +91,7 @@ def get_bing_image(bingimage_data):
 
     # 下载图片到本地
     bingimage = requests.get(bingimage_fullurl, timeout=20)
-    photo_location = Path("outputs") / "photo.jpg"
+    photo_location = save_path
 
     with open(photo_location, "wb") as f:
         f.write(bingimage.content)
