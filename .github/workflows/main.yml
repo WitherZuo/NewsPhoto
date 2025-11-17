@@ -3,16 +3,16 @@ on:
   workflow_dispatch:
     inputs:
       news_txt:
-        description: 'Raw url of news source:'
+        description: '新闻源 URL'
         required: true
         type: string
       greeting:
-        description: 'Greeting text:'
+        description: '问候语'
         required: false
         default: '……'
         type: string
       style:
-        description: 'NewsPhoto style:'
+        description: '主题样式'
         required: true
         default: 'light'
         type: choice
