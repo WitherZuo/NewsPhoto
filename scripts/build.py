@@ -187,13 +187,13 @@ def main():
         # 获取 Nuitka 编译命令并执行
         build_with_nuitka(
             input_file="main.py",
-            output_file="newsphoto",
+            output_file="np-gen",
             icon_file="icons/icon-light",
             include_sources=True,
         )
         build_with_nuitka(
             input_file="save-as-image.py",
-            output_file="save-as-image",
+            output_file="np-save",
             icon_file="icons/icon-dark",
             include_browser=True,
         )

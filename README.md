@@ -94,6 +94,10 @@ NEWS_FILE：
 ```bash
 # 确保处于项目根目录中
 uv run poe build
+
+# 完成后结果
+main.py -> dist/np-gen.exe (Windows), dist/np-gen (macOS / Linux)
+save-as-image.py -> dist/np-save.exe (Windows), dist/np-save (macOS / Linux)
 ```
 
 打包生成可执行文件。生成的文件位于 `dist` 目录下，且包含所需的浏览器组件。
