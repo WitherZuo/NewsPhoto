@@ -10,8 +10,8 @@ News Photo everyday. / 使用 Pandoc 生成新闻长图。
 
 ### 1. 准备环境
 
-- [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
-- [`Pandoc`](https://pandoc.org/installing.html)
+- uv: [Installation | uv](https://docs.astral.sh/uv/getting-started/installation/)
+- Pandoc: [Pandoc - Installing pandoc](https://pandoc.org/installing.html)
 
 ### 2. 克隆项目
 
