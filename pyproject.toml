@@ -18,6 +18,7 @@ dev = [
 ]
 
 [tool.poe.tasks]
+post-install = "uv run playwright install chromium-headless-shell --with-deps"
 preview = "uv run scripts/preview.py"
 build = "uv run scripts/build.py"
 

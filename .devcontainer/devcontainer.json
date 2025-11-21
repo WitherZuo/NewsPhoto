@@ -32,7 +32,15 @@
             }
         }
     },
-    "postCreateCommand": "uv sync && uv run playwright install chromium-headless-shell --with-deps",
+    "mounts": [
+        {
+            "source": "${localWorkspaceFolderBasename}-venv",
+            "target": "${containerWorkspaceFolder}/.venv",
+            "type": "volume"
+        }
+    ],
+    "updateContentCommand": "uv sync",
+    "postCreateCommand": "uv run poe post-install",
     "containerUser": "dev",
     "remoteUser": "dev"
 }

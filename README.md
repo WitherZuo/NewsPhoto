@@ -24,7 +24,7 @@ cd NewsPhoto
 uv sync
 
 # 安装并配置 Playwright 和 Chromium
-uv run playwright install chromium-headless-shell --with-deps
+uv run poe post-install
 ```
 
 ### 3. 生成网页和图片
