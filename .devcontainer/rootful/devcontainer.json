@@ -1,0 +1,46 @@
+{
+    "name": "NewsPhoto (Docker / Rootful Podman)",
+    "build": {
+        "dockerfile": "../Containerfile",
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "charliermarsh.ruff"
+            ],
+            "settings": {
+                "editor.tabSize": 4,
+                "editor.autoIndent": "advanced",
+                "editor.formatOnPaste": true,
+                "editor.formatOnSave": true,
+                "python.defaultInterpreterPath": "./.venv/bin/python",
+                "python.terminal.activateEnvInCurrentTerminal": true,
+                "python.terminal.activateEnvironment": true,
+                "python.analysis.completeFunctionParens": true,
+                "ruff.enable": true,
+                "ruff.lint.enable": true,
+                "[python]": {
+                    "editor.codeActionsOnSave": {
+                        "source.fixAll": "always",
+                        "source.organizeImports": "always"
+                    },
+                    "editor.defaultFormatter": "charliermarsh.ruff"
+                }
+            }
+        }
+    },
+    "mounts": [
+        {
+            "source": "${localWorkspaceFolderBasename}-venv",
+            "target": "${containerWorkspaceFolder}/.venv",
+            "type": "volume"
+        }
+    ],
+    "updateContentCommand": "uv sync",
+    "postCreateCommand": "uv run poe post-install",
+    "containerUser": "dev",
+    "remoteUser": "dev"
+}

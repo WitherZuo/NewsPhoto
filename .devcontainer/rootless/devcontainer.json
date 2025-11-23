@@ -1,8 +1,8 @@
 {
-    "name": "NewsPhoto",
+    "name": "NewsPhoto (Rootless Podman)",
     "build": {
-        "dockerfile": "Containerfile",
-        "context": "."
+        "dockerfile": "../Containerfile",
+        "context": ".."
     },
     "customizations": {
         "vscode": {
@@ -38,6 +38,11 @@
             "target": "${containerWorkspaceFolder}/.venv",
             "type": "volume"
         }
+    ],
+    "runArgs": [
+        "--security-opt",
+        "label=disable",
+        "--userns=keep-id"
     ],
     "updateContentCommand": "uv sync",
     "postCreateCommand": "uv run poe post-install",
