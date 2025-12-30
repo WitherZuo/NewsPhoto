@@ -126,6 +126,8 @@ class ZhDate:
 
         if self.lunar_month == 1:
             zh_month += "正"
+        elif self.lunar_month == 11:
+            zh_month += "冬"
         elif self.lunar_month == 12:
             zh_month += "腊"
         elif self.lunar_month <= 10:
