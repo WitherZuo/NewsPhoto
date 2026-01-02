@@ -45,6 +45,7 @@ def build_with_nuitka(
         f"{input_file}",
         "--remove-output",
         f"--output-dir={output_dirname}",
+        "--assume-yes-for-downloads"
     ]
     if include_sources:
         base_cmd.append("--include-data-dir=sources=sources")
