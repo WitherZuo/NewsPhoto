@@ -4,8 +4,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pangu
-
 import modules.arguments as MainArgs
 import modules.bing as Bing
 import modules.today as Today
@@ -57,9 +55,7 @@ def write_content_md(file_path: Path):
         print(f"Error occurred while reading {file_path}: {e}")
         sys.exit(1)
 
-    text_with_space = pangu.spacing(text)
-    text_new = text_with_space.replace("\n", "  \n\n")
-    content_text = text_new + "\n\n"
+    content_text = text.replace("\n", "  \n\n") + "\n\n"
 
     return content_text
 
@@ -89,7 +85,7 @@ def write_footer_md(style, bing_title, today_full_date, timezone):
 
 # 函数：使用 Pandoc 导出文档
 def convert_with_pandoc(input_file, output_file, style):
-    print(r"Converting NewsPhoto to HTML with Pandoc...")
+    print("Converting NewsPhoto to HTML with Pandoc...")
     # 判断当前使用的样式，决定使用何种样式表
     style_info = style_map.get(style)
     style_file = sources_folder / "styles" / style_info.get("stylesheet")

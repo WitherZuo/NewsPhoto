@@ -28,7 +28,7 @@ def get_timezone():
 # 函数：简短日期
 def get_simple_date():
     print("- Getting the short time and date...")
-    simple_date = f"{year} 年 {month} 月 {day} 日"
+    simple_date = f"{year}年{month}月{day}日"
     return simple_date
 
 

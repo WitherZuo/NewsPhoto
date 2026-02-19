@@ -32,6 +32,7 @@ body {
     overflow-x: hidden;
     background: #000;
     counter-reset: list-item 0;
+    text-autospace: normal;
 }
 
 /* 顶部样式 */
