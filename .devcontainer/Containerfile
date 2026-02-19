@@ -1,51 +1,64 @@
-FROM ghcr.io/astral-sh/uv:0.9.28-python3.13-trixie-slim
+ARG UV_VERSION
+ARG PYTHON_VERSION
+ARG DEBIAN_VERSION
+
+FROM ghcr.io/astral-sh/uv:${UV_VERSION}-python${PYTHON_VERSION}-${DEBIAN_VERSION}-slim
 
 # 设置非交互环境，指定用户名和用户/组 ID 和其它设定
-ENV DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 
 ARG USERNAME=dev
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 ENV UV_LINK_MODE=copy
-ARG SHELL=/usr/bin/fish
-ARG GITHUB_URL=https://github.com
 
 # 安装基础依赖
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates \
-    curl \
-    git \
-    build-essential \
-    sudo \
-    gpg \
-    patchelf \
-    ccache \
-    python3-dev && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN <<EOF
+    set -euox pipefail
+    apt update && apt install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        git \
+        build-essential \
+        sudo \
+        gpg \
+        patchelf \
+        ccache \
+        python3-dev
+    apt clean && rm -rf /var/lib/apt/lists/*
+EOF
 
 # 安装 fish
-RUN set -euox pipefail; \
-    echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/4/Debian_13/ /' \
-    | tee /etc/apt/sources.list.d/shells:fish:release:4.list; \
-    curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:4/Debian_13/Release.key \
-    | gpg --dearmor | tee /etc/apt/trusted.gpg.d/shells_fish_release_4.gpg > /dev/null; \
-    apt-get update && apt-get install fish -y --no-install-recommends; \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN <<EOF
+    set -euox pipefail
+    OS_VERSION_ID=$(grep -E '^VERSION_ID=' /etc/os-release | cut -d '"' -f 2)
+    echo "deb http://download.opensuse.org/repositories/shells:/fish:/release:/4/Debian_${OS_VERSION_ID}/ /" \
+    | tee /etc/apt/sources.list.d/shells:fish:release:4.list
+    curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:4/Debian_${OS_VERSION_ID}/Release.key \
+    | gpg --dearmor | tee /etc/apt/trusted.gpg.d/shells_fish_release_4.gpg > /dev/null
+    apt update && apt install fish -y --no-install-recommends
+    apt clean && rm -rf /var/lib/apt/lists/*
+EOF
 
 # 安装 Pandoc
-RUN set -euox pipefail; \
-    ARCH="$(dpkg --print-architecture)"; \
-    VERSION=$(git ls-remote --tags ${GITHUB_URL}/jgm/pandoc.git \
+RUN <<EOF
+    set -euox pipefail
+    ARCH="$(dpkg --print-architecture)"
+    GITHUB_REPO_URL="https://github.com/jgm/pandoc"
+    VERSION=$(git ls-remote --tags ${GITHUB_REPO_URL}.git \
     | grep -o 'refs/tags/[0-9].*' | sed 's/refs\/tags\///' | sort -V | tail -n1); \
-    curl -Lo pandoc.deb ${GITHUB_URL}/jgm/pandoc/releases/download/${VERSION}/pandoc-${VERSION}-1-${ARCH}.deb; \
-    dpkg -i pandoc.deb && rm pandoc.deb; \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    curl -Lo ./pandoc.deb ${GITHUB_REPO_URL}/releases/download/${VERSION}/pandoc-${VERSION}-1-${ARCH}.deb
+    apt install ./pandoc.deb && rm ./pandoc.deb
+    apt clean && rm -rf /var/lib/apt/lists/*
+EOF
 
 # 创建用户、加入组、赋予 sudo 权限
-RUN groupadd --gid ${USER_GID} ${USERNAME}; \
-    useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME}; \
-    echo "${USERNAME} ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/${USERNAME}; \
-    chmod 0440 /etc/sudoers.d/${USERNAME}; \
-    chsh -s ${SHELL} ${USERNAME}; \
-    chsh -s ${SHELL} root
+RUN <<EOF
+    set -euox pipefail
+    groupadd --gid ${USER_GID} ${USERNAME}
+    useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} -s $(which fish)
+    usermod root -s $(which fish)
+    echo "${USERNAME} ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/${USERNAME}
+    chmod 0440 /etc/sudoers.d/${USERNAME}
+EOF
