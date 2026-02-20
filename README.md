@@ -101,3 +101,26 @@ save-as-image.py -> dist/np-save.exe (Windows), dist/np-save (macOS / Linux)
 ```
 
 打包生成可执行文件。生成的文件位于 `dist` 目录下，且包含所需的浏览器组件。
+
+## 注意事项
+
+如果在部分 Linux 环境上运行脚本（或打包后的文件）时报错，错误内容为：
+
+```
+'ascii' codec can't encode characters in position ...: ordinal not in range(128)
+```
+
+此问题和默认语言编码有关，请将以下内容添加到当前使用的 Shell 的配置文件中：
+
+- Bash / Zsh:
+```bash
+export LANG=“en_US.UTF-8”
+export PYTHONIOENCODING=utf-8
+```
+- Fish:
+```sh
+set -gx LANG en_US.UTF-8
+set -gx PYTHONIOENCODING utf-8
+```
+
+然后重新加载配置文件。

@@ -14,7 +14,7 @@ def get_parser():
     参数说明：
     -b, --browser：Playwright 运行调用的浏览器
     """
-    parser = argparse.ArgumentParser(description="Save as image")
+    parser = argparse.ArgumentParser(description="News Photo: News Photo everyday!")
     parser.add_argument(
         "-b",
         "--browser",
