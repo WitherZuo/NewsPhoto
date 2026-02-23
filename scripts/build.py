@@ -11,6 +11,30 @@ spec_path = "scripts"
 output_dirname = "dist"
 
 
+# 函数：检查 uv 是否安装
+def check_uv():
+    print("检查本机是否安装 uv...")
+    uv_install = which("uv")
+    if uv_install != None:
+        print(f"uv 已安装：{uv_install}")
+    else:
+        raise FileNotFoundError("未找到 uv。本项目由 uv 管理，请先安装 uv 后重试")
+
+
+# 函数：检查 upx 是否安装
+def check_upx():
+    print("检查本机是否安装 upx...")
+    upx_exe = which("upx")
+    if upx_exe != None:
+        print(f"upx 已安装：{upx_exe}")
+    else:
+        print(
+            "未找到 upx，跳过程序压缩。建议安装 upx 来减小最终产物体积，安装方法请参考：https://upx.github.io/"
+        )
+
+    return upx_exe
+
+
 # 返回 PyInstaller 生成命令并执行
 def build_with_pyinstaller(spec_file, include_browser=False):
     # 获取构建配置文件路径
@@ -32,6 +56,7 @@ def build_with_pyinstaller(spec_file, include_browser=False):
     match system:
         # Windows
         case "win32":
+            check_upx()
             browser_path = Path.home() / "AppData" / "Local" / "ms-playwright"
         # macOS
         case "darwin":
@@ -43,9 +68,10 @@ def build_with_pyinstaller(spec_file, include_browser=False):
         case _:
             raise RuntimeError(f"不支持的操作系统：{system}")
 
-    # 执行编译命令，如果 include_browser 为 True，则复制浏览器到 dist 目录
-    print(f"\n正在编译：{spec_file}")
+    # 执行生成命令，如果 include_browser 为 True，则复制浏览器到 dist 目录
+    print(f"\n正在生成：{spec_file}")
     print(f"执行命令：{' '.join(pyinstaller_cmd)}\n")
+
     subprocess.run(pyinstaller_cmd, check=True)
 
     if include_browser:
@@ -53,16 +79,6 @@ def build_with_pyinstaller(spec_file, include_browser=False):
         copytree(browser_path, Path(output_dirname) / "browser")
 
     return pyinstaller_cmd
-
-
-# 函数：检查 uv 是否安装
-def check_uv():
-    print("检查本机是否安装 uv...")
-    uv_install = which("uv")
-    if uv_install != None:
-        print(f"uv 已安装：{uv_install}")
-    else:
-        raise FileNotFoundError("未找到 uv。本项目由 uv 管理，请先安装 uv 后重试")
 
 
 # 主函数

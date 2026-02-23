@@ -81,6 +81,11 @@ NEWS_FILE：
 
 ## 打包为可执行文件
 
+> [!TIP]
+> **对 Windows 用户：**  
+>  
+> 建议使用 UPX 压缩生成的可执行文件以减小体积。PyInstaller 在 Windows 上默认支持这一行为。请访问 [此页面](https://github.com/upx/upx/releases/latest)，根据您设备的系统架构下载对应的压缩包，解压后将 UPX 可执行文件的所在路径加入到 PATH 中。
+
 在**项目根目录**中打开终端，输入：
 
 ```bash
