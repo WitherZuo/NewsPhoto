@@ -10,6 +10,7 @@ import modules.today as Today
 
 # 样式信息
 sources_folder = Path(__file__).parent / "sources"
+
 style_map = {
     "light": {
         "qrcode": "qrcode-normal.png",
@@ -31,10 +32,13 @@ def write_header_md(
     greeting: str, today_simple_date, today_weekday, today_zhdate, header_image
 ):
     print("Generating the header of NewsPhoto...")
+
+    # 获取头图的绝对路径，转换为 POSIX 格式
+    header_image_url = Path(header_image).resolve().as_posix()
     # 写入头文件：header.md
     header_text = [
         "<header>  \n\n",
-        f"![News Photo]({header_image} 'header_image')  \n\n",
+        f"![News Photo]({header_image_url} 'header_image')  \n\n",
         "</header>  \n\n",
         "<section>  \n\n",
         f"## {today_simple_date} · {today_weekday} · {today_zhdate}\n\n",
@@ -66,8 +70,9 @@ def write_footer_md(style, bing_title, today_full_date, timezone):
     # 判断当前使用的样式，决定使用何种样式的二维码
     style_info = style_map.get(style)
     qrcode_file = sources_folder / "images" / style_info.get("qrcode")
-    qrcode = f"![qrcode]({qrcode_file} 'qrcode')"
 
+    # 获取二维码的绝对路径，转换为 POSIX 格式
+    qrcode_file_url=Path(qrcode_file).resolve().as_posix()
     # 写入底部文件：footer.md
     footer_text = [
         "</section>  \n\n",
@@ -76,7 +81,7 @@ def write_footer_md(style, bing_title, today_full_date, timezone):
         f"**{bing_title[1]}**  \n\n",
         f"> 更新于: {today_full_date} / {timezone}<br>",
         f"修订于: {today_full_date} / {timezone}  \n\n",
-        f"{qrcode}  \n\n",
+        f"![qrcode]({qrcode_file_url} 'qrcode')  \n\n",
         "</footer>",
     ]
 
@@ -89,6 +94,9 @@ def convert_with_pandoc(input_file, output_file, style):
     # 判断当前使用的样式，决定使用何种样式表
     style_info = style_map.get(style)
     style_file = sources_folder / "styles" / style_info.get("stylesheet")
+
+    # 获取样式表的绝对路径，转换为 POSIX 格式
+    style_file_url = Path(style_file).resolve().as_posix()
 
     # 运行 pandoc --version 检测 Pandoc 安装状态
     try:
@@ -111,7 +119,7 @@ def convert_with_pandoc(input_file, output_file, style):
                 "title=NewsPhoto",
                 "--embed-resources",
                 "--standalone",
-                f"--css={style_file}",
+                f"--css={style_file_url}",
                 f"{input_file}",
                 f"--output={output_file}",
             ],
@@ -133,8 +141,8 @@ def main():
         args = parser.parse_args()
 
         # 获取基础路径
-        if "__compiled__" in globals():
-            base_path = Path(sys.argv[0]).parent
+        if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+            base_path = Path(sys.executable).parent
         else:
             base_path = Path(__file__).parent
 

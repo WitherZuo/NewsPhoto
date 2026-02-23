@@ -81,15 +81,7 @@ NEWS_FILE：
 
 ## 打包为可执行文件
 
-> [!NOTE]
-> 请参阅 [Nuitka 的说明](https://nuitka.net/user-documentation/user-manual.html#c-compiler) 设置编译器。
-
-> [!CAUTION]
-> **Windows 平台必须使用 MSVC 作为编译器**。请安装 Visual Studio Build Tools，在“单个组件”中选择以下组件：
-> - 适用于 x64/x86 的 MSVC 生成工具(最新版) **或** 适用于 ARM64/ARM64EC 的 MSVC 生成工具(最新版)
-> - 最新版本的 Windows SDK
-
-配置完成后，在**项目根目录**中打开终端，输入：
+在**项目根目录**中打开终端，输入：
 
 ```bash
 # 确保处于项目根目录中
