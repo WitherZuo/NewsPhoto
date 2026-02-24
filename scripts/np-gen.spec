@@ -22,7 +22,7 @@ elif os_name == "darwin" or os_name == "linux":
         ["../main.py"],
         pathex=[],
         binaries=[],
-        datas=[("../sources", "sources")],
+        datas=[("../sources", "./sources")],
         hiddenimports=[],
         hookspath=[],
         hooksconfig={},

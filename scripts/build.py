@@ -7,7 +7,7 @@ from shutil import copytree, rmtree, which
 
 # 构建配置目录
 spec_path = "scripts"
-# 编译产物输出目录名
+# 最终产物输出目录名
 output_dirname = "dist"
 
 
