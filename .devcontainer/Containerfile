@@ -22,12 +22,8 @@ RUN <<EOF
         ca-certificates \
         curl \
         git \
-        build-essential \
         sudo \
-        gpg \
-        patchelf \
-        ccache \
-        python3-dev
+        gpg
     apt clean && rm -rf /var/lib/apt/lists/*
 EOF
 
