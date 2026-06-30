@@ -33,6 +33,8 @@ body {
     background: #000;
     counter-reset: list-item 0;
     text-autospace: normal;
+    text-spacing-trim: normal;
+    text-wrap: pretty;
 }
 
 /* 顶部样式 */

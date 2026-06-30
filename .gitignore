@@ -44,6 +44,7 @@ venv.bak/
 
 # Unused
 outputs/
+news.txt
 
 # VS Code workspace config file
 *.code-workspace
