@@ -1,13 +1,13 @@
 /* 页面全局样式 */
 @font-face {
-    font-family: 'Mi Sans';
-    src: url('../fonts/MiSans-Regular.woff2');
+    font-family: 'HarmonyOS Sans SC';
+    src: url('../fonts/HarmonyOSSansSC-Regular.woff2');
     font-weight: normal;
 }
 
 @font-face {
-    font-family: 'Mi Sans';
-    src: url('../fonts/MiSans-Semibold.woff2');
+    font-family: 'HarmonyOS Sans SC';
+    src: url('../fonts/HarmonyOSSansSC-SemiBold.woff2');
     font-weight: bold;
 }
 
@@ -17,7 +17,8 @@
     list-style: none;
     line-height: 1.5;
     box-sizing: border-box;
-    font-family: 'Mi Sans';
+    font-family: 'HarmonyOS Sans SC';
+
 }
 
 /* 不显示页面一级标题 */
@@ -34,6 +35,7 @@ body {
     counter-reset: list-item 0;
     text-autospace: normal;
     text-spacing-trim: normal;
+    font-feature-settings: "chws";
     text-wrap: pretty;
 }
 
